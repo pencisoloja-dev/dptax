@@ -1,0 +1,7 @@
+{
+  "name": "dptax-backend",
+  "description": "Backend para el formulario de DP Tax Preparation",
+  "require": {
+    "phpmailer/phpmailer": "^6.9"
+  }
+}
