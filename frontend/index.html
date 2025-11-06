@@ -8,11 +8,11 @@
   <link rel="apple-touch-icon" href="favicon.png">
   <script src="https://cdn.tailwindcss.com"></script>
 
-  <!-- <script src="https://cdn.tailwindcss.com"></script> --> <!-- Duplicado, eliminado -->
+  <!-- <script src="https://cdn.tailwindcss.com"></script> --> <!-- Duplicate removed -->
   <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;600;700;800&display=swap" rel="stylesheet">
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
   
-  <!-- 1. SCRIPT DE WEB3FORMS (YA ESTABA BIEN) -->
+  <!-- 1. WEB3FORMS SCRIPT -->
   <script src="https://web3forms.com/client/script.js" async defer></script>
 
   <style>
@@ -58,8 +58,6 @@
 
 <body class="text-gray-800">
 
-  <!-- ... (Todo el Header, Hero, Servicios, Fundadora, Proceso, Clientes, FAQ se queda igual) ... -->
-  
   <header class="bg-white fixed w-full top-0 shadow-md z-50 border-b-2 border-accent/30">
     <div class="max-w-7xl mx-auto px-6 flex justify-between items-center h-20">
       <a href="#inicio" class="text-2xl font-extrabold text-[var(--primary)]">
@@ -494,7 +492,7 @@
     </div>
 
     <!-- ========================================================== -->
-    <!-- 2. FORMULARIO ACTUALIZADO A WEB3FORMS -->
+    <!-- 2. FORMULARIO FINAL CONFIGURADO PARA WEB3FORMS -->
     <!-- ========================================================== -->
     <form action="https://api.web3forms.com/submit" method="POST" id="contact-form-web3">
 
@@ -535,8 +533,14 @@
       </div>
 
       <!-- ========================================================== -->
-      <!-- 3. HCAPTCHA RE-ACTIVADO (con el atributo data-captcha="true") -->
-      <div class="h-captcha mb-6" data-captcha="true"></div>
+      <!-- HCAPTCHA CORREGIDO (USANDO EL SITEKEY ESPECÍFICO DE WEB3FORMS) -->
+      <div class="h-captcha mb-2" 
+           data-sitekey="50b2fe65-b00b-4b9e-ad62-3ba471098be2">
+      </div>
+      <!-- Nuevo campo de error para el Captcha (oculto por defecto) -->
+      <p id="captcha-error" class="text-sm font-semibold text-red-400 hidden mb-4" data-i18n="form_hcaptcha_error">
+          Por favor, completa la verificación hCaptcha.
+      </p>
       <!-- ========================================================== -->
 
 
@@ -556,7 +560,7 @@
 </footer>
 
 <!-- ========================================================== -->
-<!-- 4. SCRIPT FINAL CORREGIDO (FAQ DENTRO DE DOMCONTENTLOADED) -->
+<!-- 4. SCRIPT FINAL CORREGIDO (VALIDACIÓN DE CAPTCHA AMIGABLE) -->
 <!-- ========================================================== -->
 <script>
   // --- Objeto de Traducciones (Completo) ---
@@ -585,7 +589,7 @@
       p1_title:"Initial Consultation", p1_desc:"We assess your tax situation and assign an expert.",
       p2_title:"Secure Documents",    p2_desc:"Easily upload your W-2s, 1099s, and other documents.",
       p3_title:"Preparation & Review", p3_desc:"We prepare your return and review it with you.",
-      p4_title:"Final e-Filing", p4_desc:"We e-file your return with the IRS and track it.",
+      p4_title:"Final e-Filing", p4_p4_desc:"We e-file your return with the IRS and track it.",
       testimonials_title:"What Our Clients Say",
       t1_text:"\"Excellent service — reliable and professional. Highly recommended!\"",
       t2_text:"\"Fantastic service! They made the whole process quick and stress-free.\"",
@@ -725,7 +729,7 @@
       sms_note:"Pueden aplicarse tarifas de mensajes y datos.",
       btn_send:"Enviar Mensaje",
       footer_copy:"© 2024 DP Tax Preparation. Todos los derechos reservados.",
-      form_processing:"Processing...",
+      form_processing:"Procesando...",
       form_success:"✅ ¡Mensaje enviado con éxito! Nos pondremos en contacto pronto.",
       form_error:"❌ Error al enviar. Inténtalo nuevamente.",
       form_hcaptcha_error: "Por favor, completa la verificación hCaptcha.",
@@ -761,6 +765,12 @@
     const submitBtn = document.getElementById('submit-button');
     if (submitBtn && translations[lang].btn_send){
       submitBtn.textContent = translations[lang].btn_send;
+    }
+    
+    // Sincronizar el mensaje de error del Captcha
+    const captchaErrorEl = document.getElementById('captcha-error');
+    if(captchaErrorEl) {
+        captchaErrorEl.textContent = translations[lang].form_hcaptcha_error || "Por favor, completa la verificación hCaptcha.";
     }
   }
 
@@ -803,23 +813,33 @@
     setupLangControls();
     applyLanguage(saved);
 
-    // --- Validación de hCaptcha (Opcional pero recomendado) ---
-    // Esto es para evitar que envíen el formulario sin marcar el captcha
+    // --- Validación de hCaptcha (Mejorada para no usar alert) ---
     const web3Form = document.getElementById('contact-form-web3');
+    const captchaError = document.getElementById('captcha-error');
+
     web3Form?.addEventListener('submit', function(e) {
-      const hCaptcha = web3Form.querySelector('textarea[name=h-captcha-response]');
-      if (hCaptcha && !hCaptcha.value) {
-          e.preventDefault();
-          // Usa tu sistema de traducción si quieres, por ahora un alert simple
-          alert("Please complete the hCaptcha verification."); 
+      // Intenta encontrar el valor de respuesta de hCaptcha
+      const hCaptchaInput = web3Form.querySelector('textarea[name="h-captcha-response"]');
+      
+      // Si el campo de respuesta existe y está vacío
+      if (hCaptchaInput && !hCaptchaInput.value) {
+          e.preventDefault(); // Detiene el envío
+          if(captchaError) {
+              captchaError.classList.remove('hidden'); // Muestra el error
+          }
           return;
       }
+      
+      // Si el captcha está lleno o no existe el campo, oculta el error (por si acaso)
+      if(captchaError) {
+          captchaError.classList.add('hidden');
+      }
+
+      // Si el formulario pasa esta validación, Web3Forms lo enviará.
     });
 
   });
 
- // --- BLOQUE DE AJAX SUBMIT ELIMINADO ---
- 
 </script>
 </body>
 </html>
