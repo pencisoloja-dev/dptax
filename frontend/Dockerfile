@@ -26,5 +26,6 @@ COPY index.php ./
 # Exponer puerto
 EXPOSE 8080
 
-# Iniciar servidor
-CMD ["php", "-S", "0.0.0.0:8080", "index.php"]
+# --- ESTA ES LA LÍNEA CORREGIDA ---
+# Iniciar servidor ejecutando api.php directamente
+CMD ["php", "-S", "0.0.0.0:8080", "api.php"]
