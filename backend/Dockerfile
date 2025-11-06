@@ -1,30 +1,21 @@
-FROM php:8.1-cli-alpine
+FROM php:8.1-apache-bullseye
 
-# Instalar extensiones PHP directamente desde los repositorios de Alpine
-RUN apk add --no-cache \
-    # Extensiones PHP necesarias
-    php81-zip \
-    php81-dom \
-    php81-xml \
-    php81-mbstring \
-    php81-openssl \
-    php81-curl \
-    php81-phar \
-    php81-tokenizer \
-    # Dependencias del sistema
+# Usar la imagen Debian-based en lugar de Alpine
+RUN apt-get update && apt-get install -y \
     git \
     curl \
     zip \
     unzip \
-    libzip-dev
-
-# Crear enlaces simbólicos para que php pueda encontrar las extensiones
-RUN ln -s /usr/bin/php81 /usr/bin/php
+    libzip-dev \
+    libxml2-dev \
+    libonig-dev \
+    && docker-php-ext-install zip dom xml mbstring openssl curl \
+    && apt-get clean
 
 # Instalar Composer globalmente
 RUN curl -sS https://getcomposer.org/installer | php -- --install-dir=/usr/local/bin --filename=composer
 
-WORKDIR /app
+WORKDIR /var/www/html
 
 # Copiar composer.json primero
 COPY composer.json ./
@@ -36,9 +27,11 @@ RUN composer install --no-interaction --no-dev --optimize-autoloader
 COPY api.php ./
 COPY index.php ./
 
-# Exponer puerto
-ENV PORT=8080
+# Configurar Apache para usar el puerto 8080
+RUN echo "Listen 8080" >> /etc/apache2/ports.conf
+RUN sed -i 's/80/8080/g' /etc/apache2/sites-available/000-default.conf /etc/apache2/ports.conf
+
 EXPOSE 8080
 
-# Iniciar servidor ejecutando api.php directamente
-CMD ["php", "-S", "0.0.0.0:$PORT", "api.php"]
+# Usar el entrypoint por defecto de Apache
+CMD ["apache2-foreground"]
