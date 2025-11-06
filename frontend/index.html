@@ -879,7 +879,13 @@ form?.addEventListener('submit', async (e)=>{
   msgBox.textContent = t.form_processing;
 
   try{
-    const fd = new FormData(form);
+    const formData = {
+  name: form.querySelector('[name="name"]').value,
+  email: form.querySelector('[name="email"]').value, 
+  phone: form.querySelector('[name="phone"]').value,
+  message: form.querySelector('[name="message"]').value,
+  sms_consent: form.querySelector('[name="sms_consent"]').checked
+};
     
     // Verificación hCaptcha restaurada
     if (typeof hcaptcha !== 'undefined') {
@@ -891,7 +897,13 @@ form?.addEventListener('submit', async (e)=>{
       fd.append('h-captcha-response', hcaptchaResponse);
     }
     
-    const res = await fetch(form.action, { method:'POST', body:fd });
+   const res = await fetch(form.action, {
+  method: 'POST',
+  headers: {
+    'Content-Type': 'application/json',
+  },
+  body: JSON.stringify(formData)
+});
     let data=null; 
     try{ 
       data = await res.json(); 
@@ -928,3 +940,4 @@ form?.addEventListener('submit', async (e)=>{
 </body>
 
 </html>
+
