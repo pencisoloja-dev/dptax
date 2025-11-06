@@ -448,111 +448,105 @@
   </div>
 </section>
 
-  <section id="contacto" class="py-20 bg-primary text-white">
-    <div class="max-w-7xl mx-auto px-6 grid md:grid-cols-2 gap-12 items-start">
-      <div>
-  <h2 class="text-4xl font-extrabold mb-6 text-white" data-i18n="contact_title">Contact Us</h2>
-  <p class="text-lg mb-8" data-i18n="contact_intro">
-    Write to us and we'll get back to you shortly.
-  </p>
-
-  <div class="space-y-4 mb-10">
-    <p class="text-gray-100 text-lg flex items-center">
-      <i class="fas fa-phone text-accent mr-3 w-5 text-center"></i>
-      <span data-i18n="contact_phone">(910) 584-0478</span>
-    </p>
-    <p class="text-gray-100 text-lg flex items-center">
-      <i class="fas fa-envelope text-accent mr-3 w-5 text-center"></i>
-      <span data-i18n="contact_email">dorissmith@dptaxpreparation.com</span>
-    </p>
-  </div>
-
-  <div class="space-y-8">
-
+<section id="contacto" class="py-20 bg-primary text-white">
+  <div class="max-w-7xl mx-auto px-6 grid md:grid-cols-2 gap-12 items-start">
     <div>
-      <h3 class="text-xl font-bold text-accent mb-3" data-i18n="loc1_title">Fayetteville (Elm Street)</h3>
-      <p class="text-gray-200 leading-relaxed flex">
-        <i class="fas fa-map-marker-alt text-accent mr-3 w-5 text-center pt-1"></i>
-        <span>806 ELM STREET STE A<br>FAYETTEVILLE, NC 28303</span>
+      <h2 class="text-4xl font-extrabold mb-6 text-white" data-i18n="contact_title">Contact Us</h2>
+      <p class="text-lg mb-8" data-i18n="contact_intro">
+        Write to us and we'll get back to you shortly.
       </p>
-      <div class="pl-8 mt-2 space-y-1 text-gray-300">
-        <p><strong data-i18n="loc1_hours1_days">Monday - Friday:</strong> 9:00 AM - 5:00 PM</p>
-        <p><strong data-i18n="loc1_hours2_days">Saturday:</strong> 9:00 AM - 1:00 PM</p>
+
+      <div class="space-y-4 mb-10">
+        <p class="text-gray-100 text-lg flex items-center">
+          <i class="fas fa-phone text-accent mr-3 w-5 text-center"></i>
+          <span data-i18n="contact_phone">(910) 584-0478</span>
+        </p>
+        <p class="text-gray-100 text-lg flex items-center">
+          <i class="fas fa-envelope text-accent mr-3 w-5 text-center"></i>
+          <span data-i18n="contact_email">dorissmith@dptaxpreparation.com</span>
+        </p>
+      </div>
+      <div class="space-y-8">
+        <div>
+          <h3 class="text-xl font-bold text-accent mb-3" data-i18n="loc1_title">Fayetteville (Elm Street)</h3>
+          <p class="text-gray-200 leading-relaxed flex">
+            <i class="fas fa-map-marker-alt text-accent mr-3 w-5 text-center pt-1"></i>
+            <span>806 ELM STREET STE A<br>FAYETTEVILLE, NC 28303</span>
+          </p>
+          <div class="pl-8 mt-2 space-y-1 text-gray-300">
+            <p><strong data-i18n="loc1_hours1_days">Monday - Friday:</strong> 9:00 AM - 5:00 PM</p>
+            <p><strong data-i18n="loc1_hours2_days">Saturday:</strong> 9:00 AM - 1:00 PM</p>
+          </div>
+        </div>
+        <div>
+          <h3 class="text-xl font-bold text-accent mb-3" data-i18n="loc2_title">Saint Pauls</h3>
+          <p class="text-gray-200 leading-relaxed flex">
+            <i class="fas fa-map-marker-alt text-accent mr-3 w-5 text-center pt-1"></i>
+            <span>101 W BROAD ST<br>SAINT PAULS, NC 28384</span>
+          </p>
+          <div class="pl-8 mt-2">
+            <p class="text-gray-300 italic"><strong data-i18n="loc_appt">By appointment only</strong></p>
+          </div>
+        </div>
+        <div>
+          <h3 class="text-xl font-bold text-accent mb-3" data-i18n="loc3_title">Fayetteville (Pennystone)</h3>
+          <p class="text-gray-200 leading-relaxed flex">
+            <i class="fas fa-map-marker-alt text-accent mr-3 w-5 text-center pt-1"></i>
+            <span>4523 PENNYSTONE DRIVE<br>FAYETTEVILLE, NC 28306</span>
+          </p>
+          <div class="pl-8 mt-2">
+            <p class="text-gray-300 italic"><strong data-i18n="loc_appt">By appointment only</strong></p>
+          </div>
+        </div>
       </div>
     </div>
 
-    <div>
-      <h3 class="text-xl font-bold text-accent mb-3" data-i18n="loc2_title">Saint Pauls</h3>
-      <p class="text-gray-200 leading-relaxed flex">
-        <i class="fas fa-map-marker-alt text-accent mr-3 w-5 text-center pt-1"></i>
-        <span>101 W BROAD ST<br>SAINT PAULS, NC 28384</span>
-      </p>
-      <div class="pl-8 mt-2">
-        <p class="text-gray-300 italic"><strong data-i18n="loc_appt">By appointment only</strong></p>
+    <form action="https://api.web3forms.com/submit" method="POST">
+
+      <input type="hidden" name="access_key" value="84094e5e-1515-4682-a130-a3d562f046f1">
+      
+      <input type="hidden" name="subject" value="Nuevo Contacto desde la Web DP Tax">
+      
+      <div class="mb-5">
+        <input type="text" name="name" required
+               class="w-full p-4 rounded bg-white/90 text-gray-900"
+               data-i18n-placeholder="ph_name" placeholder="Full name">
       </div>
-    </div>
-
-    <div>
-      <h3 class="text-xl font-bold text-accent mb-3" data-i18n="loc3_title">Fayetteville (Pennystone)</h3>
-      <p class="text-gray-200 leading-relaxed flex">
-        <i class="fas fa-map-marker-alt text-accent mr-3 w-5 text-center pt-1"></i>
-        <span>4523 PENNYSTONE DRIVE<br>FAYETTEVILLE, NC 28306</span>
-      </f>
-      <div class="pl-8 mt-2">
-        <p class="text-gray-300 italic"><strong data-i18n="loc_appt">By appointment only</strong></p>
+      <div class="mb-5">
+        <input type="email" name="email" required
+               class="w-full p-4 rounded bg-white/90 text-gray-900"
+               data-i18n-placeholder="ph_email" placeholder="Email address">
       </div>
-    </div>
+      <div class="mb-5">
+        <input type="tel" name="phone" required
+               class="w-full p-4 rounded bg-white/90 text-gray-900"
+               data-i18n-placeholder="ph_phone" placeholder="Phone (+1...)">
+      </div>
+      <div class="mb-5">
+        <textarea name="message" rows="4" required
+                  class="w-full p-4 rounded bg-white/90 text-gray-900 resize-none"
+                  data-i18n-placeholder="ph_message" placeholder="Write your message..."></textarea>
+      </div>
 
-  </div>
-</div>
+      <div class="mb-6 flex items-start">
+        <input type="checkbox" id="sms-consent" name="sms_consent" required class="h-5 w-5 text-accent mt-1">
+        <label for="sms-consent" class="ml-3 text-gray-200 text-sm leading-snug" data-i18n="sms_consent">
+          I agree to receive notifications and SMS messages from DP Tax Preparation at the phone number provided.
+          <br><span class="text-gray-400 text-xs" data-i18n="sms_note">Message and data rates may apply.</span>
+        </label>
+      </div>
 
-      <!--
-        AQUÍ ESTÁ EL CAMBIO: 
-        Se reemplazó la URL genérica por la URL pública de tu backend.
-      -->
-      <form id="contact-form" action="https://dptax-backend-web.ctqwrv.easypanel.host/api.php" method="POST">
-        <div class="mb-5">
-          <input type="text" name="name" required
-                 class="w-full p-4 rounded bg-white/90 text-gray-900"
-                 data-i18n-placeholder="ph_name" placeholder="Full name">
-        </div>
-        <div class="mb-5">
-          <input type="email" name="email" required
-                 class="w-full p-4 rounded bg-white/90 text-gray-900"
-                 data-i18n-placeholder="ph_email" placeholder="Email address">
-        </div>
-        <div class="mb-5">
-          <input type="tel" name="phone" required
-                 class="w-full p-4 rounded bg-white/90 text-gray-900"
-                 data-i18n-placeholder="ph_phone" placeholder="Phone (+1...)">
-        </div>
-        <div class="mb-5">
-          <textarea name="message" rows="4" required
-                    class="w-full p-4 rounded bg-white/90 text-gray-900 resize-none"
-                    data-i18n-placeholder="ph_message" placeholder="Write your message..."></textarea>
-        </div>
+      <div class="h-captcha mb-6" data-sitekey="4c607263-836c-4914-b636-a6e0f2105141"></div>
 
-        <div class="mb-6 flex items-start">
-          <input type="checkbox" id="sms-consent" name="sms_consent" required class="h-5 w-5 text-accent mt-1">
-          <label for="sms-consent" class="ml-3 text-gray-200 text-sm leading-snug" data-i18n="sms_consent">
-            I agree to receive notifications and SMS messages from DP Tax Preparation at the phone number provided.
-            <br><span class="text-gray-400 text-xs" data-i18n="sms_note">Message and data rates may apply.</span>
-          </label>
-        </div>
 
-        <!-- Widget hCaptcha restaurado con tu clave de sitio -->
-        <div class="mb-6">
-          <div class="h-captcha" data-sitekey="cc2a563e-0798-46c2-8130-7f4816a475ca"></div>
-        </div>
+      <button id="submit-button" type="submit" class="bg-accent w-full py-3 font-bold rounded-lg hover:bg-[#e67e22] transition" data-i18n="btn_send">
+        Send Message
+      </button>
 
-        <button id="submit-button" type="submit" class="bg-accent w-full py-3 font-bold rounded-lg hover:bg-[#e67e22] transition" data-i18n="btn_send">
-          Send Message
-        </button>
-
-        <div id="form-message" class="hidden mt-4 p-3 rounded text-center font-semibold"></div>
       </form>
+    
     </div>
-  </section>
+</section>
 
   <footer class="bg-dark text-white">
     <div class="max-w-7xl mx-auto px-6 py-6 text-center text-sm" data-i18n="footer_copy">
@@ -942,6 +936,7 @@ form?.addEventListener('submit', async (e)=>{
 </body>
 
 </html>
+
 
 
 
