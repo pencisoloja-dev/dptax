@@ -1,11 +1,14 @@
 FROM php:8.1-cli-alpine
 
-# Instalar composer y dependencias
+# Instalar dependencias del sistema
 RUN apk add --no-cache \
-    composer \
     openssl \
     ca-certificates \
-    git
+    git \
+    unzip
+
+# Instalar Composer desde la imagen oficial
+COPY --from=composer:2 /usr/bin/composer /usr/bin/composer
 
 WORKDIR /app
 
