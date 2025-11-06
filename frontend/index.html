@@ -11,7 +11,7 @@
   <script src="https://cdn.tailwindcss.com"></script>
   <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;600;700;800&display=swap" rel="stylesheet">
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
-  <script src="https://hcaptcha.com/1/api.js" async defer></script>
+  <!-- Se eliminó el script de hcaptcha de aquí -->
 
   <style>
     :root{
@@ -496,7 +496,7 @@
       <p class="text-gray-200 leading-relaxed flex">
         <i class="fas fa-map-marker-alt text-accent mr-3 w-5 text-center pt-1"></i>
         <span>4523 PENNYSTONE DRIVE<br>FAYETTEVILLE, NC 28306</span>
-      </p>
+      </f>
       <div class="pl-8 mt-2">
         <p class="text-gray-300 italic"><strong data-i18n="loc_appt">By appointment only</strong></p>
       </div>
@@ -535,11 +535,9 @@
           </label>
         </div>
 
-        <div class="mb-6">
-          <div class="h-captcha" data-sitekey="cc2a563e-0798-46c2-8130-7f4816a475ca"></div>
-        </div>
+        <!-- Se eliminó el div de h-captcha de aquí -->
 
-        <button id="submit-button" type="submit" class="bg-accent w-full py-3 font-bold rounded-lg hover:bg-[#e67e22] transition" data-i18n="btn_send">
+        <button id="submit-button" type="submit" class="bg-accent w-full py-3 font-bold rounded-lg hover:bg-[#e67e22] transition mt-6" data-i18n="btn_send">
           Send Message
         </button>
 
@@ -727,7 +725,7 @@ faq_a18:"Yes. We guide you step by step so your first return is simple and corre
         process_title:"Proceso de Declaración Simplificado",
         p1_title:"Consulta Inicial", p1_desc:"Evaluamos tu situación fiscal y asignamos un experto.",
         p2_title:"Documentación Segura", p2_desc:"Carga fácilmente tus W-2, 1099 y otros documentos.",
-        p3_title:"Preparación y Revisión", p3_desc:"Preparamos tu declaración y la revisamos contigo.",
+        p3_title:"Preparación y Revisión", p3_desc:"PreparamOS tu declaración y la revisamos contigo.",
         p4_title:"Presentación Final", p4_desc:"Presentamos electrónicamente tu declaración ante el IRS y hacemos seguimiento.",
 
         // testimonials
@@ -853,7 +851,7 @@ faq_a18:"Sí. Te guiamos paso a paso para que tu primera declaración sea sencil
       applyLanguage(saved);
     });
 
- // --- AJAX submit for hCaptcha ---
+ // --- AJAX submit ---
 const form = document.getElementById('contact-form');
 const submitBtn = document.getElementById('submit-button');
 const msgBox = document.getElementById('form-message');
@@ -873,14 +871,7 @@ form?.addEventListener('submit', async (e)=>{
   try{
     const fd = new FormData(form);
     
-    // hCaptcha verification
-    if (typeof hcaptcha !== 'undefined') {
-      const hcaptchaResponse = hcaptcha.getResponse();
-      if (!hcaptchaResponse) {
-        throw new Error('Por favor completa la verificación hCaptcha');
-      }
-      fd.append('h-captcha-response', hcaptchaResponse);
-    }
+    // Se eliminó la verificación de hCaptcha
     
     const res = await fetch(form.action, { method:'POST', body:fd });
     let data=null; 
@@ -894,8 +885,7 @@ form?.addEventListener('submit', async (e)=>{
       msgBox.className = 'mt-4 p-3 rounded text-center font-semibold bg-green-600 text-white';
       msgBox.textContent = t.form_success;
       form.reset();
-      // Reset hCaptcha
-      if (typeof hcaptcha !== 'undefined') hcaptcha.reset();
+      // Se eliminó el reseteo de hCaptcha
     } else {
       msgBox.className = 'mt-4 p-3 rounded text-center font-semibold bg-red-600 text-white';
       msgBox.textContent = data?.message || t.form_error;
@@ -903,8 +893,7 @@ form?.addEventListener('submit', async (e)=>{
   } catch (err){
     msgBox.className = 'mt-4 p-3 rounded text-center font-semibold bg-red-600 text-white';
     msgBox.textContent = err.message || translations[localStorage.getItem('site_lang') || 'en'].form_network;
-    // Reset hCaptcha en caso de error también
-    if (typeof hcaptcha !== 'undefined') hcaptcha.reset();
+    // Se eliminó el reseteo de hCaptcha
   } finally {
     if(submitBtn){
       const lang2 = localStorage.getItem('site_lang') || 'en';
