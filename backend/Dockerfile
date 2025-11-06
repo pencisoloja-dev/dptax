@@ -5,7 +5,8 @@ RUN apk add --no-cache \
     openssl \
     ca-certificates \
     git \
-    unzip
+    unzip \
+    zip
 
 # Instalar Composer desde la imagen oficial
 COPY --from=composer:2 /usr/bin/composer /usr/bin/composer
@@ -17,8 +18,9 @@ COPY composer.json ./
 COPY api.php ./
 COPY index.php ./
 
-# Instalar dependencias PHP
-RUN composer install --no-dev --optimize-autoloader --ignore-platform-reqs
+# Instalar dependencias PHP con verbose para ver qué falla
+RUN composer install --no-dev --optimize-autoloader --ignore-platform-reqs --verbose || \
+    (composer diagnose && exit 1)
 
 # Exponer puerto
 EXPOSE 8080
