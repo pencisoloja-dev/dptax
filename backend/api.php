@@ -15,7 +15,7 @@ header("Content-Type: application/json");
 error_log("Datos recibidos: " . print_r($_POST, true));
 error_log("Variables ENV: " . print_r([
     'smtp_host' => $smtp_host,
-    'recaptcha_secret_set' => !empty($recaptcha_secret)
+    'h-captcha_secret_set' => !empty($h-captcha_secret)
 ], true));
 // Manejar la solicitud OPTIONS (pre-flight)
 if ($_SERVER['REQUEST_METHOD'] == 'OPTIONS') {
@@ -27,7 +27,7 @@ $smtp_host = getenv('SMTP_HOST');
 $smtp_port = (int)getenv('SMTP_PORT');
 $smtp_user = getenv('SMTP_USER');
 $smtp_pass = getenv('SMTP_PASS');
-$recaptcha_secret = getenv('RECAPTCHA_SECRET_KEY');
+$h-captcha_secret = getenv('H-CAPTCHA_SECRET_KEY');
 $mail_to = getenv('MAIL_TO');
 
 // --- Función para devolver JSON y salir ---
@@ -51,7 +51,7 @@ $email = isset($_POST['email']) ? filter_var($_POST['email'], FILTER_SANITIZE_EM
 $phone = isset($_POST['phone']) ? htmlspecialchars($_POST['phone']) : '';
 $message = isset($_POST['message']) ? htmlspecialchars($_POST['message']) : '';
 $sms_consent = isset($_POST['sms_consent']) ? 'Sí' : 'No';
-$recaptcha_response = isset($_POST['g-recaptcha-response']) ? $_POST['g-recaptcha-response'] : '';
+$h-captcha_response = isset($_POST['h-captcha-response']) ? $_POST['h-captcha-response'] : '';
 
 // Validar con hCaptcha
 $hcaptcha_secret = getenv('HCAPTCHA_SECRET_KEY'); // Agregar esta variable a tu entorno
@@ -102,5 +102,6 @@ try {
     send_json(false, "Error al enviar el correo.", ['smtp_error' => $mail->ErrorInfo]);
 }
 ?>
+
 
 
