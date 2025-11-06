@@ -878,23 +878,56 @@ form?.addEventListener('submit', async (e)=>{
   msgBox.className = 'mt-4 p-3 rounded text-center font-semibold bg-white/20 text-white block';
   msgBox.textContent = t.form_processing;
 
- try{
-  // NUEVO: Crear objeto JSON en lugar de FormData
-  const formData = {
-    name: form.querySelector('[name="name"]').value,
-    email: form.querySelector('[name="email"]').value,
-    phone: form.querySelector('[name="phone"]').value,
-    message: form.querySelector('[name="message"]').value,
-    sms_consent: form.querySelector('[name="sms_consent"]').checked
-  };
-  
-  // Verificación hCaptcha
-  if (typeof hcaptcha !== 'undefined') {
-    const hcaptchaResponse = hcaptcha.getResponse();
-    if (!hcaptchaResponse) {
-      throw new Error(t.form_hcaptcha_error || 'Please complete the hCaptcha verification.');
+  try{
+    // Crear objeto JSON en lugar de FormData
+    const formData = {
+      name: form.querySelector('[name="name"]').value,
+      email: form.querySelector('[name="email"]').value,
+      phone: form.querySelector('[name="phone"]').value,
+      message: form.querySelector('[name="message"]').value,
+      sms_consent: form.querySelector('[name="sms_consent"]').checked
+    };
+    
+    // Verificación hCaptcha
+    if (typeof hcaptcha !== 'undefined') {
+      const hcaptchaResponse = hcaptcha.getResponse();
+      if (!hcaptchaResponse) {
+        throw new Error(t.form_hcaptcha_error || 'Please complete the hCaptcha verification.');
+      }
+      formData['h-captcha-response'] = hcaptchaResponse;
     }
-    formData['h-captcha-response'] = hcaptchaResponse; // CAMBIADO: usar formData en lugar de fd
+    
+    const res = await fetch(form.action, {
+      method: 'POST',
+      headers: {
+        'Content-Type': 'application/json',
+      },
+      body: JSON.stringify(formData)
+    });
+    
+    let data = null; 
+    try{ 
+      data = await res.json(); 
+    } catch(jsonError){
+      console.error('Error parseando JSON:', jsonError);
+      throw new Error(t.form_network || 'Network or server error. Try again.');
+    }
+
+    if (data && data.success){
+      msgBox.className = 'mt-4 p-3 rounded text-center font-semibold bg-green-600 text-white';
+      msgBox.textContent = t.form_success;
+      form.reset();
+      if (typeof hcaptcha !== 'undefined') hcaptcha.reset();
+    } else {
+      msgBox.className = 'mt-4 p-3 rounded text-center font-semibold bg-red-600 text-white';
+      msgBox.textContent = data?.message || t.form_error;
+      if (typeof hcaptcha !== 'undefined') hcaptcha.reset();
+    }
+  } catch (err){
+    console.error('Error en fetch:', err);
+    msgBox.className = 'mt-4 p-3 rounded text-center font-semibold bg-red-600 text-white';
+    msgBox.textContent = err.message || t.form_network;
+    if (typeof hcaptcha !== 'undefined') hcaptcha.reset();
   }
   
   // NUEVO: Enviar como JSON
@@ -909,6 +942,7 @@ form?.addEventListener('submit', async (e)=>{
 </body>
 
 </html>
+
 
 
 
