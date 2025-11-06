@@ -7,14 +7,20 @@ use PHPMailer\PHPMailer\PHPMailer;
 use PHPMailer\PHPMailer\Exception;
 
 // --- Configuración de CORS y Headers ---
+// Permitir cualquier origen
 header("Access-Control-Allow-Origin: *");
+// Permitir los métodos POST y OPTIONS
 header("Access-Control-Allow-Methods: POST, OPTIONS");
-header("Access-Control-Allow-Headers: Content-Type");
+// Permitir encabezados comunes que los navegadores pueden enviar
+header("Access-Control-Allow-Headers: Content-Type, Authorization, X-Requested-With, Origin, Accept");
+// Establecer el tipo de contenido de la respuesta
 header("Content-Type: application/json");
 
 // Manejar la solicitud OPTIONS (pre-flight)
 if ($_SERVER['REQUEST_METHOD'] == 'OPTIONS') {
-    exit(0);
+    // Enviar una respuesta 200 OK y salir
+    http_response_code(200);
+    exit;
 }
 
 // --- Leer variables de entorno ---
