@@ -3,13 +3,21 @@ FROM php:7.4-cli-alpine
 
 # Instalar dependencias del sistema operativo
 # Añadimos git, openssl, y las herramientas para compilar extensiones
-RUN apk add --no-cache git openssl ca-certificates build-base
+# También las librerías para zip, mbstring y ctype
+RUN apk add --no-cache \
+    git \
+    openssl \
+    ca-certificates \
+    build-base \
+    libzip-dev \
+    oniguruma-dev # Requerido para mbstring
 
-# Instalar las dependencias para la extensión ZIP
-RUN apk add --no-cache libzip-dev
-
-# Instalar las extensiones de PHP que PHPMailer necesita (sockets y zip)
-RUN docker-php-ext-install sockets zip
+# Instalar las extensiones de PHP que PHPMailer y Composer necesitan
+RUN docker-php-ext-install \
+    sockets \
+    zip \
+    mbstring \
+    ctype
 
 # Instalar Composer (el gestor de paquetes de PHP)
 RUN curl -sS https://getcomposer.org/installer | php -- --install-dir=/usr/local/bin --filename=composer
@@ -21,10 +29,11 @@ WORKDIR /app
 COPY composer.json ./
 
 # Instalar las dependencias de PHP (PHPMailer)
-RUN composer install --no-dev --optimize-autoloader
+# --ignore-platform-reqs es un "martillo" por si algo sigue fallando
+RUN composer install --no-dev --optimize-autoloader --ignore-platform-reqs
 
 # Limpiar las dependencias de compilación para reducir el tamaño
-RUN apk del build-base
+RUN apk del build-base oniguruma-dev
 
 # Copiar el resto del código de tu aplicación (api.php, index.php)
 COPY . .
