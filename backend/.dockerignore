@@ -1,6 +1,6 @@
-.git
+vendor/
+.git/
 .gitignore
-README.md
+*.md
 .env
-vendor
 composer.lock
