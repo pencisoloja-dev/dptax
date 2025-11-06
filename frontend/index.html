@@ -854,55 +854,71 @@ faq_a18:"Sí. Te guiamos paso a paso para que tu primera declaración sea sencil
       applyLanguage(saved);
     });
 
-    // --- Optional: AJAX submit if your PHP returns JSON {success:boolean} ---
-    const form = document.getElementById('contact-form');
-    const submitBtn = document.getElementById('submit-button');
-    const msgBox = document.getElementById('form-message');
+ // --- AJAX submit for hCaptcha ---
+const form = document.getElementById('contact-form');
+const submitBtn = document.getElementById('submit-button');
+const msgBox = document.getElementById('form-message');
 
-    form?.addEventListener('submit', async (e)=>{
-      e.preventDefault(); // remove this if you prefer classic submit
-      const lang = localStorage.getItem('site_lang') || 'en';
-      const t = translations[lang];
+form?.addEventListener('submit', async (e)=>{
+  e.preventDefault();
+  const lang = localStorage.getItem('site_lang') || 'en';
+  const t = translations[lang];
 
-      if(submitBtn){
-        submitBtn.disabled = true;
-        submitBtn.textContent = t.form_processing;
+  if(submitBtn){
+    submitBtn.disabled = true;
+    submitBtn.textContent = t.form_processing;
+  }
+  msgBox.className = 'mt-4 p-3 rounded text-center font-semibold bg-white/20 text-white block';
+  msgBox.textContent = t.form_processing;
+
+  try{
+    const fd = new FormData(form);
+    
+    // CAMBIO: Usar hCaptcha en vez de reCAPTCHA
+    if (typeof hcaptcha !== 'undefined') {
+      const hcaptchaResponse = hcaptcha.getResponse();
+      if (!hcaptchaResponse) {
+        throw new Error('Por favor completa la verificación hCaptcha');
       }
-      msgBox.className = 'mt-4 p-3 rounded text-center font-semibold bg-white/20 text-white block';
-      msgBox.textContent = t.form_processing;
+      fd.append('h-captcha-response', hcaptchaResponse);
+    }
+    
+    const res = await fetch(form.action, { method:'POST', body:fd });
+    let data=null; 
+    try{ 
+      data = await res.json(); 
+    }catch{
+      throw new Error('Error en la respuesta del servidor');
+    }
 
-      try{
-        const fd = new FormData(form);
-        if (typeof grecaptcha !== 'undefined') {
-          fd.append('g-recaptcha-response', grecaptcha.getResponse());
-        }
-        const res = await fetch(form.action, { method:'POST', body:fd });
-        let data=null; try{ data = await res.json(); }catch{}
-
-        if (data && data.success){
-          msgBox.className = 'mt-4 p-3 rounded text-center font-semibold bg-green-600 text-white';
-          msgBox.textContent = t.form_success;
-          form.reset();
-          if (typeof grecaptcha !== 'undefined') grecaptcha.reset();
-        } else {
-          msgBox.className = 'mt-4 p-3 rounded text-center font-semibold bg-red-600 text-white';
-          msgBox.textContent = t.form_error;
-        }
-      } catch (err){
-        msgBox.className = 'mt-4 p-3 rounded text-center font-semibold bg-red-600 text-white';
-        msgBox.textContent = translations[localStorage.getItem('site_lang') || 'en'].form_network;
-      } finally {
-        if(submitBtn){
-          const lang2 = localStorage.getItem('site_lang') || 'en';
-          submitBtn.textContent = translations[lang2].btn_send;
-          submitBtn.disabled = false;
-        }
-      }
-    });
+    if (data && data.success){
+      msgBox.className = 'mt-4 p-3 rounded text-center font-semibold bg-green-600 text-white';
+      msgBox.textContent = t.form_success;
+      form.reset();
+      // CAMBIO: Reset hCaptcha en vez de reCAPTCHA
+      if (typeof hcaptcha !== 'undefined') hcaptcha.reset();
+    } else {
+      msgBox.className = 'mt-4 p-3 rounded text-center font-semibold bg-red-600 text-white';
+      msgBox.textContent = data?.message || t.form_error;
+    }
+  } catch (err){
+    msgBox.className = 'mt-4 p-3 rounded text-center font-semibold bg-red-600 text-white';
+    msgBox.textContent = err.message || translations[localStorage.getItem('site_lang') || 'en'].form_network;
+    // Reset hCaptcha en caso de error también
+    if (typeof hcaptcha !== 'undefined') hcaptcha.reset();
+  } finally {
+    if(submitBtn){
+      const lang2 = localStorage.getItem('site_lang') || 'en';
+      submitBtn.textContent = translations[lang2].btn_send;
+      submitBtn.disabled = false;
+    }
+  }
+});
   </script>
 </body>
 
 </html>
+
 
 
 
