@@ -929,19 +929,20 @@ form?.addEventListener('submit', async (e)=>{
     msgBox.textContent = err.message || t.form_network;
     if (typeof hcaptcha !== 'undefined') hcaptcha.reset();
   }
+    finally {
+    if(submitBtn){
+      const lang2 = localStorage.getItem('site_lang') || 'en';
+      submitBtn.textContent = translations[lang2].btn_send;
+      submitBtn.disabled = false;
+    }
+  }
+});
   
-  // NUEVO: Enviar como JSON
-  const res = await fetch(form.action, {
-    method: 'POST',
-    headers: {
-      'Content-Type': 'application/json',
-    },
-    body: JSON.stringify(formData)
-  });
   </script>
 </body>
 
 </html>
+
 
 
 
