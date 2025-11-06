@@ -1,12 +1,30 @@
-# Usar una imagen oficial de Nginx (un servidor web ligero)
-FROM nginx:1.25-alpine
+FROM php:8.1-cli-alpine
 
-# Copiar los archivos de tu sitio (index.html y la imagen) 
-# desde la carpeta actual (frontend) a la carpeta del servidor web
-COPY . /usr/share/nginx/html
+# Instalar dependencias
+RUN apk add --no-cache \
+    openssl \
+    ca-certificates \
+    git \
+    curl
 
-# Exponer el puerto 80 (el puerto HTTP estándar)
-EXPOSE 80
+# Instalar Composer globalmente
+RUN curl -sS https://getcomposer.org/installer | php -- --install-dir=/usr/local/bin --filename=composer
 
-# Comando para iniciar el servidor Nginx
-CMD ["nginx", "-g", "daemon off;"]
+WORKDIR /app
+
+# Copiar composer.json primero
+COPY composer.json ./
+
+# Instalar dependencias de Composer
+# Esto creará el directorio vendor/ y el autoload.php correctamente
+RUN composer install --no-interaction --no-dev --optimize-autoloader
+
+# Copiar el resto de los archivos de la aplicación
+COPY api.php ./
+COPY index.php ./
+
+# Exponer puerto
+EXPOSE 8080
+
+# Iniciar servidor
+CMD ["php", "-S", "0.0.0.0:8080", "index.php"]
