@@ -13,10 +13,7 @@
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
   
   <!-- ========================================================== -->
-  <!-- 1. SCRIPT DE HCAPTCHA ANTIGUO ELIMINADO -->
-  <!-- <script src="https://hcaptcha.com/1/api.js" async defer></script> -->
-  
-  <!-- 2. SCRIPT DE WEB3FORMS (QUE INCLUYE HCAPTCHA) AÑADIDO -->
+  <!-- 1. SCRIPT DE HCAPTCHA RE-ACTIVADO -->
   <script src="https://web3forms.com/client/script.js" async defer></script>
   <!-- ========================================================== -->
 
@@ -497,14 +494,14 @@
     </div>
 
     <!-- ========================================================== -->
-    <!-- 3. FORMULARIO ACTUALIZADO A WEB3FORMS -->
+    <!-- 2. FORMULARIO ACTUALIZADO A WEB3FORMS -->
     <!-- ========================================================== -->
     <form action="https://api.web3forms.com/submit" method="POST">
 
-      <!-- Clave de Acceso -->
-      <input type="hidden" name="access_key" value="84094e5e-1515-4682-a138-a3d562f046f1">
+      <!-- Clave de Acceso (TU CLAVE PRIVADA) -->
+      <input type="hidden" name="access_key" value="84094e5e-1515-4682-a130-a3d562f046f1">
       
-      <!-- Asunto del Email -->
+      <!-- Asunto del Email (Opcional) -->
       <input type="hidden" name="subject" value="Nuevo Contacto desde la Web DP Tax">
       
       <!-- Campos del Formulario (sin cambios) -->
@@ -537,11 +534,13 @@
         </label>
       </div>
 
-      <!-- hCaptcha de Web3Forms -->
+      <!-- ========================================================== -->
+      <!-- 3. HCAPTCHA RE-ACTIVADO (con la clave pública de Web3Forms) -->
       <div class="h-captcha mb-6" data-sitekey="4c607263-836c-4914-b636-a6e0f2105141"></div>
+      <!-- ========================================================== -->
 
 
-      <button id="submit-button" type="submit" class="bg-accent w-full py-3 font-bold rounded-lg hover:bg-[#e67e22] transition" data-i18n="btn_send">
+      <button id="submit-button" type="submit" class="bg-accent w-full py-3 font-bold rounded-lg hover:bg-[#e67e22] transition" data-i1R8n="btn_send">
         Send Message
       </button>
 
@@ -557,7 +556,7 @@
 </footer>
 
 <!-- ========================================================== -->
-<!-- 4. SCRIPT FINAL CORREGIDO -->
+<!-- 4. SCRIPT FINAL CORREGIDO (FAQ DENTRO DE DOMCONTENTLOADED) -->
 <!-- ========================================================== -->
 <script>
   // --- Objeto de Traducciones (Completo) ---
@@ -726,7 +725,7 @@
       sms_note:"Pueden aplicarse tarifas de mensajes y datos.",
       btn_send:"Enviar Mensaje",
       footer_copy:"© 2024 DP Tax Preparation. Todos los derechos reservados.",
-      form_processing:"Procesando...",
+      form_processing:"Processing...",
       form_success:"✅ ¡Mensaje enviado con éxito! Nos pondremos en contacto pronto.",
       form_error:"❌ Error al enviar. Inténtalo nuevamente.",
       form_hcaptcha_error: "Por favor, completa la verificación hCaptcha.",
@@ -810,4 +809,3 @@
 </script>
 </body>
 </html>
-
