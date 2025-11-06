@@ -53,6 +53,36 @@
         min-height: 3rem;
       }
     }  
+    
+    /* === Estilos para la confirmación del formulario === */
+    .confirmation-message {
+      display: none;
+      background: rgba(255, 255, 255, 0.1);
+      border-radius: 12px;
+      padding: 2rem;
+      text-align: center;
+      margin-top: 1.5rem;
+      border: 1px solid rgba(230, 175, 55, 0.3);
+    }
+    
+    .confirmation-icon {
+      font-size: 4rem;
+      color: var(--accent);
+      margin-bottom: 1rem;
+    }
+    
+    .confirmation-title {
+      font-size: 1.75rem;
+      font-weight: 700;
+      margin-bottom: 1rem;
+      color: white;
+    }
+    
+    .confirmation-text {
+      font-size: 1.1rem;
+      line-height: 1.6;
+      color: rgba(255, 255, 255, 0.9);
+    }
   </style>
 </head>
 
@@ -502,6 +532,9 @@
       <!-- Asunto del Email (Opcional) -->
       <input type="hidden" name="subject" value="Nuevo Contacto desde la Web DP Tax">
       
+      <!-- Redirección deshabilitada para mostrar confirmación en la misma página -->
+      <input type="hidden" name="redirect" value="false">
+      
       <!-- Campos del Formulario (sin cambios) -->
       <div class="mb-5">
         <input type="text" name="name" required
@@ -549,6 +582,19 @@
         Send Message
       </button>
 
+      <!-- ========================================================== -->
+      <!-- ÁREA DE CONFIRMACIÓN -->
+      <!-- ========================================================== -->
+      <div id="form-confirmation" class="confirmation-message">
+        <div class="confirmation-icon">
+          <i class="fas fa-check-circle"></i>
+        </div>
+        <h3 class="confirmation-title" data-i18n="form_success">¡Mensaje enviado con éxito!</h3>
+        <p class="confirmation-text" data-i18n="form_success_details">
+          Gracias por contactarnos. Hemos recibido tu mensaje y nos pondremos en contacto contigo pronto.
+        </p>
+      </div>
+      
       </form>
     
   </div>
@@ -637,6 +683,92 @@
       contact_address:"123 Tax Avenue, Miami, FL 33101",
       contact_phone:"(910) 584-0478",
       contact_email:"dorissmith@dptaxpreparation.com",
+      ph_name:"Full name",
+      ph_email:"Email address",
+      ph_phone:"Phone (+1...)",
+      ph_message:"Write your message...",
+      sms_consent:"I agree to receive notifications and SMS messages from DP Tax Preparation at the phone number provided.",
+      sms_note:"Message and data rates may apply.",
+      btn_send:"Send Message",
+      footer_copy:"© 2024 DP Tax Preparation. All rights reserved.",
+      form_processing:"Processing...",
+      form_success:"Message sent successfully!",
+      form_success_details:"Thank you for contacting us. We have received your message and will get back to you soon.",
+      form_error:"❌ Error sending. Please try again.",
+      form_hcaptcha_error: "Please complete the hCaptcha verification.",
+      form_network:"❌ Network or server error. Please try again."
+    },
+    es: {
+      doc_title: "DP Tax Preparation – Declaración de Impuestos en EE.UU. sin Estrés",
+      nav_home:"Inicio", nav_services:"Servicios", nav_founder:"Fundadora", nav_process:"Proceso",
+      nav_clients:"Clientes", nav_faq:"Preguntas", nav_contact:"Contacto",
+      hero_title1:"Declaración de Impuestos",
+      hero_title2:"en EE.UU. sin Estrés",
+      hero_sub:"Expertos en preparación de impuestos para individuos y empresas. Maximizamos reembolsos y garantizamos cumplimiento total.",
+      services_title:"Nuestros Servicios",
+      srv1_title:"Declaración Individual",
+      srv1_desc:"Preparación completa del Formulario 1040 con todas las deducciones y créditos aplicables.",
+      srv2_title:"Declaración Empresarial",
+      srv2_desc:"Impuestos para corporaciones, LLCs y sociedades. Manejar la complejidad de su negocio.",
+      srv3_title:"Planificación Fiscal",
+      srv3_desc:"Estrategias proactivas para minimizar pasivos futuros e impulsar el crecimiento a largo plazo.",
+      founder_role:"CEO & Experta en Impuestos",
+      founder_bio:"Más de 15 años de experiencia en impuestos estadounidenses para individuos y empresas. Fundó DP Tax Preparation para hacer los impuestos simples, seguros y rentables.",
+      training_title:"Certificados de Capacitación",
+      credentials_title:"Credenciales Oficiales del IRS",
+      cred_ptin:"Número PTIN (Preparador de Impuestos Autorizado)",
+      cred_efin:"Número EFIN (Proveedor Autorizado de e-File)",
+      process_title:"Proceso Simplificado de Presentación",
+      p1_title:"Consulta Inicial", p1_desc:"Evaluamos su situación fiscal y asignamos un experto.",
+      p2_title:"Documentos Seguros", p2_desc:"Cargue fácilmente sus W-2, 1099 y otros documentos.",
+      p3_title:"Preparación y Revisión", p3_desc:"Preparamos su declaración y la revisamos con usted.",
+      p4_title:"e-Filing Final", p4_desc:"Presentamos electrónicamente su declaración ante el IRS y la rastreamos.",
+      testimonials_title:"Lo Que Dicen Nuestros Clientes",
+      t1_text:"\"Servicio excelente — confiable y profesional. ¡Altamente recomendado!\"",
+      t2_text:"\"¡Servicio fantástico! Hicieron que todo el proceso fuera rápido y sin estrés.\"",
+      t3_text:"\"Honesto, eficiente y orientado a los detalles. Volveré cada año.\"",
+      faq_title:"Preguntas Frecuentes",
+      faq_q1:"¿Cuándo es la fecha límite para presentar?",
+      faq_a1:"La fecha límite habitual para presentar la declaración federal es el 15 de abril. Si necesita más tiempo, puede solicitar una prórroga antes de esa fecha.",
+      faq_q2:"¿Qué pasa si no presento mi declaración a tiempo?",
+      faq_a2:"Podría recibir multas o intereses por demora. Le ayudamos a presentar incluso si ha pasado la fecha límite o si necesita ponerse al día con años anteriores.",
+      faq_q3:"¿Qué documentos necesito para presentar mis impuestos?",
+      faq_a3:"Depende de su situación, pero normalmente necesita: formulario W-2 (empleados) o 1099 (contratistas independientes), identificación personal (SSN o ITIN), comprobantes de ingresos y gastos, e información de dependientes si corresponde.",
+      faq_q4:"¿Puedo presentar si no tengo un Número de Seguro Social (SSN)?",
+      faq_a4:"Sí. Podemos ayudarle a obtener y usar un ITIN (Número de Identificación Personal del Contribuyente) para cumplir con sus obligaciones fiscales.",
+      faq_q5:"¿Aceptan documentos escaneados o fotos?",
+      faq_a5:"Sí. Puede cargarlos directamente desde su teléfono o computadora de forma segura y cifrada.",
+      faq_q6:"¿Es seguro compartir mi información en línea?",
+      faq_a6:"Sí. Utilizamos cifrado SSL/TLS, servidores seguros y protocolos de privacidad alineados con los estándares del IRS. Su información es confidencial y está protegida.",
+      faq_q7:"¿Se comparte mi información con otras empresas?",
+      faq_a7:"No. Sus datos se utilizan únicamente para preparar y presentar su declaración de impuestos.",
+      faq_q8:"¿Cuánto tiempo tarda en llegar mi reembolso?",
+      faq_a8:"El IRS generalmente procesa los reembolsos en 7 a 21 días si la declaración se presenta electrónicamente.",
+      faq_q9:"¿Cómo recibiré mi reembolso?",
+      faq_a9:"Puede elegir depósito directo, cheque físico o tarjeta de débito prepagada, según su preferencia.",
+      faq_q10:"¿Qué pasa si debo impuestos?",
+      faq_a10:"Podemos ayudarle a establecer un plan de pagos o realizar el pago directamente al IRS desde su cuenta bancaria.",
+      faq_q11:"¿Cuánto cuesta el servicio?",
+      faq_a11:"El costo depende de la complejidad de su declaración. Ofrecemos una evaluación gratuita antes de comenzar el proceso.",
+      faq_q12:"¿Atienden a trabajadores independientes o propietarios de empresas?",
+      faq_a12:"Sí. Preparamos declaraciones para empleados, contratistas independientes, pequeñas empresas y trabajadores por cuenta propia.",
+      faq_q13:"¿Puedo presentar mi declaración completamente en línea?",
+      faq_a13:"Sí. Todo el proceso se puede realizar de forma virtual, desde la entrega de documentos hasta la firma electrónica.",
+      faq_q14:"¿Puedo programar una cita en persona o por videollamada?",
+      faq_a14:"Por supuesto. Ofrecemos citas presenciales y virtuales según su disponibilidad.",
+      faq_q15:"¿Qué hago si no puedo presentar antes del 15 de abril?",
+      faq_a15:"Podemos ayudarle a solicitar una prórroga hasta el 15 de octubre, evitando multas por presentación tardía.",
+      faq_q16:"¿Pueden ayudarme con declaraciones vencidas?",
+      faq_a16:"Sí. Podemos presentar sus declaraciones de años anteriores y ayudarle a ponerse al día con el IRS.",
+      faq_q17:"¿Puedo presentar si vivo fuera de Estados Unidos?",
+      faq_a17:"Sí. Asistimos a residentes y no residentes con ingresos en EE.UU., incluidos casos de expatriados.",
+      faq_q18:"¿Ayudan a estudiantes o quienes declaran por primera vez?",
+      faq_a18:"Sí. Le guiamos paso a paso para que su primera declaración sea simple y correcta.",
+      contact_title:"Contáctenos",
+      contact_intro:"Escríbanos y le responderemos a la brevedad.",
+      contact_address:"123 Tax Avenue, Miami, FL 33101",
+      contact_phone:"(910) 584-0478",
+      contact_email:"dorissmith@dptaxpreparation.com",
       ph_name:"Nombre completo",
       ph_email:"Correo electrónico",
       ph_phone:"Teléfono (+1...)",
@@ -646,7 +778,8 @@
       btn_send:"Enviar Mensaje",
       footer_copy:"© 2024 DP Tax Preparation. Todos los derechos reservados.",
       form_processing:"Procesando...",
-      form_success:"✅ ¡Mensaje enviado con éxito! Nos pondremos en contacto pronto.",
+      form_success:"¡Mensaje enviado con éxito!",
+      form_success_details:"Gracias por contactarnos. Hemos recibido tu mensaje y nos pondremos en contacto contigo pronto.",
       form_error:"❌ Error al enviar. Inténtalo nuevamente.",
       form_hcaptcha_error: "Por favor, completa la verificación hCaptcha.",
       form_network:"❌ Error de red o servidor. Inténtalo otra vez."
@@ -700,6 +833,23 @@
     document.getElementById('mlang-es')?.addEventListener('click',setES);
   }
 
+  // --- Función para mostrar confirmación del formulario ---
+  function showFormConfirmation() {
+    const form = document.getElementById('contact-form-web3');
+    const confirmation = document.getElementById('form-confirmation');
+    
+    if (form && confirmation) {
+      // Ocultar el formulario
+      form.style.display = 'none';
+      
+      // Mostrar la confirmación
+      confirmation.style.display = 'block';
+      
+      // Desplazar suavemente hacia la confirmación
+      confirmation.scrollIntoView({ behavior: 'smooth', block: 'center' });
+    }
+  }
+
   // --- SCRIPT DE INICIALIZACIÓN CORREGIDO ---
   document.addEventListener('DOMContentLoaded', ()=>{
     
@@ -751,7 +901,45 @@
           captchaError.classList.add('hidden');
       }
 
-      // Si el formulario pasa esta validación, Web3Forms lo enviará.
+      // Cambiar el texto del botón a "Enviando..."
+      const submitBtn = document.getElementById('submit-button');
+      const originalText = submitBtn.textContent;
+      if (translations[saved].form_processing) {
+        submitBtn.textContent = translations[saved].form_processing;
+      }
+      
+      // Deshabilitar el botón para evitar múltiples envíos
+      submitBtn.disabled = true;
+
+      // Manejar la respuesta de Web3Forms
+      const formData = new FormData(web3Form);
+      
+      // Usar fetch para enviar el formulario y manejar la respuesta
+      fetch(web3Form.action, {
+        method: 'POST',
+        body: formData
+      })
+      .then(response => response.json())
+      .then(data => {
+        if (data.success) {
+          // Éxito: mostrar confirmación
+          showFormConfirmation();
+        } else {
+          // Error: restaurar el botón
+          submitBtn.textContent = originalText;
+          submitBtn.disabled = false;
+          alert(translations[saved].form_error || 'Error sending message');
+        }
+      })
+      .catch(error => {
+        // Error de red: restaurar el botón
+        submitBtn.textContent = originalText;
+        submitBtn.disabled = false;
+        alert(translations[saved].form_network || 'Network error');
+      });
+      
+      // Prevenir el envío normal del formulario
+      e.preventDefault();
     });
 
   });
@@ -759,4 +947,3 @@
 </script>
 </body>
 </html>
-
