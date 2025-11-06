@@ -2,20 +2,27 @@ FROM php:8.1-cli
 
 WORKDIR /app
 
-# Copiar todos los archivos de la aplicación
-COPY . .
+# Instalar herramientas necesarias
+RUN apt-get update && apt-get install -y \
+    git \
+    curl \
+    zip \
+    unzip \
+    && rm -rf /var/lib/apt/lists/*
 
-# Crear la estructura de vendor manualmente
-RUN mkdir -p vendor/composer
+# Descargar e instalar PHPMailer manualmente
+RUN curl -L https://github.com/PHPMailer/PHPMailer/archive/refs/tags/v6.9.1.tar.gz -o phpmailer.tar.gz \
+    && tar -xzf phpmailer.tar.gz \
+    && mkdir -p vendor/phpmailer/phpmailer \
+    && cp -r PHPMailer-6.9.1/src/* vendor/phpmailer/phpmailer/ \
+    && rm -rf phpmailer.tar.gz PHPMailer-6.9.1
 
-# Crear un autoloader básico
-RUN echo '<?php function __autoload($class) { include str_replace("\\\\", "/", $class) . ".php"; } spl_autoload_register("__autoload"); ?>' > vendor/autoload.php
-
-# Crear composer.json simulado para PHPMailer y Monolog
-RUN echo '{}' > composer.json
+# Copiar archivos de la aplicación
+COPY api.php ./
+COPY index.php ./
 
 # Exponer puerto
 EXPOSE 8080
 
-# CAMBIO AQUÍ: Puerto fijo en lugar de variable
+# Usar puerto fijo
 CMD ["php", "-S", "0.0.0.0:8080", "api.php"]
