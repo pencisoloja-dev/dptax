@@ -1,28 +1,17 @@
-FROM ubuntu:22.04
+FROM php:8.1-apache
 
-# Instalar PHP 8.1 y extensiones desde repositorios Ubuntu
+# Solo instalar herramientas adicionales necesarias
 RUN apt-get update && apt-get install -y \
-    software-properties-common \
-    && add-apt-repository ppa:ondrej/php -y \
-    && apt-get update \
-    && apt-get install -y \
-        php8.1 \
-        php8.1-cli \
-        php8.1-zip \
-        php8.1-dom \
-        php8.1-xml \
-        php8.1-mbstring \
-        php8.1-curl \
-        php8.1-openssl \
-        composer \
-        git \
-        curl \
-        zip \
-        unzip \
-    && rm -rf /var/lib/apt/lists/* \
-    && apt-get clean
+    git \
+    curl \
+    zip \
+    unzip \
+    && rm -rf /var/lib/apt/lists/*
 
-WORKDIR /app
+# Instalar Composer manualmente
+RUN curl -sS https://getcomposer.org/installer | php -- --install-dir=/usr/local/bin --filename=composer
+
+WORKDIR /var/www/html
 
 # Copiar composer.json primero
 COPY composer.json ./
@@ -34,9 +23,10 @@ RUN composer install --no-interaction --no-dev --optimize-autoloader
 COPY api.php ./
 COPY index.php ./
 
-# Exponer puerto
-ENV PORT=8080
+# Configurar Apache para el puerto 8080
+RUN echo "Listen 8080" >> /etc/apache2/ports.conf
+RUN sed -i 's/80/8080/g' /etc/apache2/sites-available/000-default.conf /etc/apache2/ports.conf
+
 EXPOSE 8080
 
-# Iniciar servidor ejecutando api.php directamente
-CMD ["php", "-S", "0.0.0.0:$PORT", "api.php"]
+CMD ["apache2-foreground"]
