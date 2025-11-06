@@ -12,16 +12,14 @@
   <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;600;700;800&display=swap" rel="stylesheet">
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
   
-  <!-- ========================================================== -->
-  <!-- 1. SCRIPT DE HCAPTCHA RE-ACTIVADO -->
+  <!-- 1. SCRIPT DE WEB3FORMS (YA ESTABA BIEN) -->
   <script src="https://web3forms.com/client/script.js" async defer></script>
-  <!-- ========================================================== -->
 
   <style>
     :root{
       --primary:#424243;
       --accent:#e6af37;
-      --dark:#13232f;
+      --dark:#1323f;
     }
     html{scroll-behavior:smooth; scroll-padding-top:80px;}
     body{font-family:'Poppins',sans-serif; background:#f8fafc; color:#1f2937;}
@@ -60,6 +58,8 @@
 
 <body class="text-gray-800">
 
+  <!-- ... (Todo el Header, Hero, Servicios, Fundadora, Proceso, Clientes, FAQ se queda igual) ... -->
+  
   <header class="bg-white fixed w-full top-0 shadow-md z-50 border-b-2 border-accent/30">
     <div class="max-w-7xl mx-auto px-6 flex justify-between items-center h-20">
       <a href="#inicio" class="text-2xl font-extrabold text-[var(--primary)]">
@@ -496,7 +496,7 @@
     <!-- ========================================================== -->
     <!-- 2. FORMULARIO ACTUALIZADO A WEB3FORMS -->
     <!-- ========================================================== -->
-    <form action="https://api.web3forms.com/submit" method="POST">
+    <form action="https://api.web3forms.com/submit" method="POST" id="contact-form-web3">
 
       <!-- Clave de Acceso (TU CLAVE PRIVADA) -->
       <input type="hidden" name="access_key" value="84094e5e-1515-4682-a130-a3d562f046f1">
@@ -535,12 +535,12 @@
       </div>
 
       <!-- ========================================================== -->
-      <!-- 3. HCAPTCHA RE-ACTIVADO (con la clave pública de Web3Forms) -->
-      <div class="h-captcha mb-6" data-sitekey="4c607263-836c-4914-b636-a6e0f2105141"></div>
+      <!-- 3. HCAPTCHA RE-ACTIVADO (con el atributo data-captcha="true") -->
+      <div class="h-captcha mb-6" data-captcha="true"></div>
       <!-- ========================================================== -->
 
 
-      <button id="submit-button" type="submit" class="bg-accent w-full py-3 font-bold rounded-lg hover:bg-[#e67e22] transition" data-i1R8n="btn_send">
+      <button id="submit-button" type="submit" class="bg-accent w-full py-3 font-bold rounded-lg hover:bg-[#e67e22] transition" data-i18n="btn_send">
         Send Message
       </button>
 
@@ -802,6 +802,20 @@
     const saved = localStorage.getItem('site_lang') || 'en';
     setupLangControls();
     applyLanguage(saved);
+
+    // --- Validación de hCaptcha (Opcional pero recomendado) ---
+    // Esto es para evitar que envíen el formulario sin marcar el captcha
+    const web3Form = document.getElementById('contact-form-web3');
+    web3Form?.addEventListener('submit', function(e) {
+      const hCaptcha = web3Form.querySelector('textarea[name=h-captcha-response]');
+      if (hCaptcha && !hCaptcha.value) {
+          e.preventDefault();
+          // Usa tu sistema de traducción si quieres, por ahora un alert simple
+          alert("Please complete the hCaptcha verification."); 
+          return;
+      }
+    });
+
   });
 
  // --- BLOQUE DE AJAX SUBMIT ELIMINADO ---
