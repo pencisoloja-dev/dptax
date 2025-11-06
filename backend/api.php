@@ -1,7 +1,7 @@
 <?php
 // --- Configuración de CORS y Headers ---
 header("Access-Control-Allow-Origin: *");
-header("Access-Control-Allow-Methods: POST, OPTIONS");
+header("Access-Control-Allow-Methods: POST, OPTIONS, GET");
 header("Access-Control-Allow-Headers: Content-Type, Authorization, X-Requested-With, Origin, Accept");
 header("Content-Type: application/json");
 
@@ -11,10 +11,20 @@ if ($_SERVER['REQUEST_METHOD'] == 'OPTIONS') {
     exit;
 }
 
+// Para debugging - responder a GET requests
+if ($_SERVER['REQUEST_METHOD'] == 'GET') {
+    echo json_encode([
+        'status' => 'online',
+        'message' => 'DP Tax Backend is running',
+        'timestamp' => date('Y-m-d H:i:s')
+    ]);
+    exit;
+}
+
 // --- Cargar PHPMailer manualmente ---
-require 'vendor/phpmailer/phpmailer/src/PHPMailer.php';
-require 'vendor/phpmailer/phpmailer/src/SMTP.php';
-require 'vendor/phpmailer/phpmailer/src/Exception.php';
+require __DIR__ . '/vendor/phpmailer/phpmailer/src/PHPMailer.php';
+require __DIR__ . '/vendor/phpmailer/phpmailer/src/SMTP.php';
+require __DIR__ . '/vendor/phpmailer/phpmailer/src/Exception.php';
 
 use PHPMailer\PHPMailer\PHPMailer;
 use PHPMailer\PHPMailer\SMTP;
@@ -43,7 +53,7 @@ if ($_SERVER["REQUEST_METHOD"] != "POST") {
     send_json(false, "Método no permitido.");
 }
 
-// --- Leer datos del formulario (soporta tanto FormData como JSON) ---
+// --- Leer datos del formulario ---
 $input = $_POST;
 
 // Si no hay datos en $_POST, intentar leer JSON
@@ -82,8 +92,21 @@ if (empty($hcaptcha_secret)) {
 }
 
 // Validar con hCaptcha
-$hcaptcha_url = "https://hcaptcha.com/siteverify?secret=" . urlencode($hcaptcha_secret) . "&response=" . urlencode($hcaptcha_response);
-$hcaptcha_verify = file_get_contents($hcaptcha_url);
+$hcaptcha_url = "https://hcaptcha.com/siteverify";
+$post_data = http_build_query([
+    'secret' => $hcaptcha_secret,
+    'response' => $hcaptcha_response
+]);
+
+$context = stream_context_create([
+    'http' => [
+        'method' => 'POST',
+        'header' => 'Content-Type: application/x-www-form-urlencoded',
+        'content' => $post_data
+    ]
+]);
+
+$hcaptcha_verify = file_get_contents($hcaptcha_url, false, $context);
 $hcaptcha_result = json_decode($hcaptcha_verify, true);
 
 if (!$hcaptcha_result || !$hcaptcha_result['success']) {
