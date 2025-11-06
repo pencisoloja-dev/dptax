@@ -6,7 +6,11 @@ RUN apk add --no-cache \
     ca-certificates \
     git \
     unzip \
-    zip
+    zip \
+    libzip-dev
+
+# Instalar extensión zip de PHP
+RUN docker-php-ext-install zip
 
 # Instalar Composer desde la imagen oficial
 COPY --from=composer:2 /usr/bin/composer /usr/bin/composer
@@ -18,9 +22,8 @@ COPY composer.json ./
 COPY api.php ./
 COPY index.php ./
 
-# Instalar dependencias PHP con verbose para ver qué falla
-RUN composer install --no-dev --optimize-autoloader --ignore-platform-reqs --verbose || \
-    (composer diagnose && exit 1)
+# Instalar dependencias PHP
+RUN composer install --no-dev --optimize-autoloader --ignore-platform-reqs
 
 # Exponer puerto
 EXPOSE 8080
