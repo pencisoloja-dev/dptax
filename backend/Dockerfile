@@ -12,8 +12,10 @@ COPY --from=composer:2 /usr/bin/composer /usr/bin/composer
 
 WORKDIR /app
 
-# Copiar archivos
-COPY . ./
+# Copiar SOLO los archivos necesarios
+COPY composer.json ./
+COPY api.php ./
+COPY index.php ./
 
 # Instalar dependencias PHP
 RUN composer install --no-dev --optimize-autoloader --ignore-platform-reqs
