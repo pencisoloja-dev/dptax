@@ -7,8 +7,7 @@ use PHPMailer\PHPMailer\PHPMailer;
 use PHPMailer\PHPMailer\Exception;
 
 // --- Configuración de CORS y Headers ---
-// Esto permite que tu index.html se comunique con esta API
-header("Access-Control-Allow-Origin: *"); // En producción, deberías cambiar * por tu dominio
+header("Access-Control-Allow-Origin: *");
 header("Access-Control-Allow-Methods: POST, OPTIONS");
 header("Access-Control-Allow-Headers: Content-Type");
 header("Content-Type: application/json");
@@ -19,7 +18,6 @@ if ($_SERVER['REQUEST_METHOD'] == 'OPTIONS') {
 }
 
 // --- Leer variables de entorno ---
-// EasyPanel (y otros) cargan las variables de entorno automáticamente
 $smtp_host = getenv('SMTP_HOST');
 $smtp_port = (int)getenv('SMTP_PORT');
 $smtp_user = getenv('SMTP_USER');
@@ -28,8 +26,12 @@ $recaptcha_secret = getenv('RECAPTCHA_SECRET_KEY');
 $mail_to = getenv('MAIL_TO');
 
 // --- Función para devolver JSON y salir ---
-function send_json($success, $message) {
-    echo json_encode(['success' => $success, 'message' => $message]);
+function send_json($success, $message, $debug = null) {
+    $response = ['success' => $success, 'message' => $message];
+    if ($debug !== null) {
+        $response['debug'] = $debug;
+    }
+    echo json_encode($response);
     exit;
 }
 
@@ -48,7 +50,11 @@ $recaptcha_response = isset($_POST['g-recaptcha-response']) ? $_POST['g-recaptch
 
 // --- 1. Validar reCAPTCHA ---
 if (empty($recaptcha_response)) {
-    send_json(false, "Fallo de reCAPTCHA.");
+    send_json(false, "Token de reCAPTCHA no recibido.");
+}
+
+if (empty($recaptcha_secret)) {
+    send_json(false, "RECAPTCHA_SECRET_KEY no configurada en el servidor.", ['env_missing' => true]);
 }
 
 $recaptcha_url = 'https://www.google.com/recaptcha/api/siteverify';
@@ -62,14 +68,25 @@ $options = [
         'header'  => "Content-type: application/x-www-form-urlencoded\r\n",
         'method'  => 'POST',
         'content' => http_build_query($recaptcha_data),
+        'timeout' => 10
     ],
 ];
 $context = stream_context_create($options);
 $result = @file_get_contents($recaptcha_url, false, $context);
+
+if ($result === false) {
+    send_json(false, "No se pudo conectar con Google reCAPTCHA.", ['connection_error' => true]);
+}
+
 $recaptcha_result = json_decode($result, true);
 
-if (!$result || !$recaptcha_result['success']) {
-    send_json(false, "Verificación de reCAPTCHA fallida.");
+if (!$recaptcha_result || !isset($recaptcha_result['success'])) {
+    send_json(false, "Respuesta inválida de reCAPTCHA.", ['invalid_response' => true, 'raw' => $result]);
+}
+
+if (!$recaptcha_result['success']) {
+    $error_codes = isset($recaptcha_result['error-codes']) ? $recaptcha_result['error-codes'] : ['unknown'];
+    send_json(false, "Verificación de reCAPTCHA fallida.", ['error_codes' => $error_codes]);
 }
 
 // --- 2. Preparar y Enviar el Correo ---
@@ -87,9 +104,9 @@ try {
     $mail->CharSet    = 'UTF-8';
 
     // Destinatarios
-    $mail->setFrom($smtp_user, 'Formulario Web DP Tax'); // El que envía (Brevo)
-    $mail->addAddress($mail_to);                         // El que recibe (Tú)
-    $mail->addReplyTo($email, $name);                    // Para poder "Responder" al cliente
+    $mail->setFrom($smtp_user, 'Formulario Web DP Tax');
+    $mail->addAddress($mail_to);
+    $mail->addReplyTo($email, $name);
 
     // Contenido del correo
     $mail->isHTML(true);
@@ -106,12 +123,9 @@ try {
     ";
 
     $mail->send();
-    // Esta es la respuesta que tu index.html espera
     send_json(true, "Mensaje enviado con éxito."); 
 
 } catch (Exception $e) {
-    // Log de error (en un entorno real, esto iría a un archivo)
-    // error_log("Error de PHPMailer: " . $mail->ErrorInfo);
-    send_json(false, "Error al enviar el correo. Intente más tarde.");
+    send_json(false, "Error al enviar el correo.", ['smtp_error' => $mail->ErrorInfo]);
 }
 ?>
