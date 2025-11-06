@@ -6,25 +6,27 @@ ini_set('display_errors', 1);
 // --- Manejar la solicitud OPTIONS (pre-flight) ---
 // El navegador envía esto ANTES de la solicitud POST
 if ($_SERVER['REQUEST_METHOD'] == 'OPTIONS') {
-    //
-    // --- ESTA ES LA CORRECCIÓN CLAVE ---
-    // Volvemos a poner los headers de permiso, pero *dentro*
-    // del bloque OPTIONS, para asegurar que se envíen con el 204.
-    //
+    
+    // --- ESTA ES LA NUEVA CORRECCIÓN ---
+    // Forzamos un 200 OK porque el 204 está siendo modificado por el servidor.
+    // Esto es un 'truco' de compatibilidad.
+    
     header("Access-Control-Allow-Origin: *");
     header("Access-Control-Allow-Methods: POST, GET, OPTIONS");
     header("Access-Control-Allow-Headers: Content-Type, Authorization, X-Requested-With, Origin, Accept");
     
-    // Respondemos con 204 (No Content)
-    http_response_code(204); 
+    // Respondemos 200 OK y decimos que el contenido es 0
+    header("HTTP/1.1 200 OK");
+    header("Content-Length: 0"); 
+    
     exit; // Termina el script.
 }
 
 // --- De aquí en adelante, SÓLO se ejecuta para POST o GET ---
 
 // --- Configuración de Headers para respuestas REALES (POST/GET) ---
-// Nota: 'Allow-Origin' se pone de nuevo por si acaso es una solicitud 'simple'
-header("Access-Control-Allow-Origin: *");
+// ESTO ES CRUCIAL: La respuesta POST también debe tener este header.
+header("Access-Control-Allow-Origin: *"); 
 header("Content-Type: application/json"); // La respuesta real SÍ es JSON
 
 // Para debugging - responder a GET requests
