@@ -1,4 +1,11 @@
 <?php
+// DEBUG - TEMPORAL
+error_reporting(E_ALL);
+ini_set('display_errors', 1);
+
+// Tus headers CORS aquí...
+header("Access-Control-Allow-Origin: *");
+// ... resto del código
 // --- Configuración de CORS y Headers ---
 header("Access-Control-Allow-Origin: *");
 header("Access-Control-Allow-Methods: POST, OPTIONS, GET");
@@ -160,3 +167,4 @@ try {
     send_json(false, "Error al enviar el mensaje. Por favor, intenta nuevamente.", ['smtp_error' => $mail->ErrorInfo]);
 }
 ?>
+
