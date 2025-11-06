@@ -448,12 +448,60 @@
   <section id="contacto" class="py-20 bg-primary text-white">
     <div class="max-w-7xl mx-auto px-6 grid md:grid-cols-2 gap-12 items-start">
       <div>
-        <h2 class="text-4xl font-extrabold mb-6 text-white" data-i18n="contact_title">Contact Us</h2>
-        <p class="text-lg mb-8" data-i18n="contact_intro">Write to us and we’ll get back to you shortly.</p>
-        <p class="text-gray-200 mb-4"><i class="fas fa-map-marker-alt text-accent mr-2"></i><span data-i18n="contact_address">123 Tax Avenue, Miami, FL 33101</span></p>
-        <p class="text-gray-200 mb-4"><i class="fas fa-phone text-accent mr-2"></i><span data-i18n="contact_phone">(305) 123-4567</span></p>
-        <p class="text-gray-200 mb-8"><i class="fas fa-envelope text-accent mr-2"></i><span data-i18n="contact_email">info@dptaxpreparation.com</span></p>
+  <h2 class="text-4xl font-extrabold mb-6 text-white" data-i18n="contact_title">Contact Us</h2>
+  <p class="text-lg mb-8" data-i18n="contact_intro">
+    Write to us and we’ll get back to you shortly.
+  </p>
+
+  <div class="space-y-4 mb-10">
+    <p class="text-gray-100 text-lg flex items-center">
+      <i class="fas fa-phone text-accent mr-3 w-5 text-center"></i>
+      <span data-i18n="contact_phone">(305) 123-4567</span>
+    </p>
+    <p class="text-gray-100 text-lg flex items-center">
+      <i class="fas fa-envelope text-accent mr-3 w-5 text-center"></i>
+      <span data-i18n="contact_email">info@dptaxpreparation.com</span>
+    </p>
+  </div>
+
+  <div class="space-y-8">
+
+    <div>
+      <h3 class="text-xl font-bold text-accent mb-3" data-i18n="loc1_title">Fayetteville (Elm Street)</h3>
+      <p class="text-gray-200 leading-relaxed flex">
+        <i class="fas fa-map-marker-alt text-accent mr-3 w-5 text-center pt-1"></i>
+        <span>806 ELM STREET STE A<br>FAYETTEVILLE, NC 28303</span>
+      </p>
+      <div class="pl-8 mt-2 space-y-1 text-gray-300">
+        <p><strong data-i18n="loc1_hours1_days">Monday - Friday:</strong> 9:00 AM - 5:00 PM</p>
+        <p><strong data-i18n="loc1_hours2_days">Saturday:</strong> 9:00 AM - 1:00 PM</p>
       </div>
+    </div>
+
+    <div>
+      <h3 class="text-xl font-bold text-accent mb-3" data-i18n="loc2_title">Saint Pauls</h3>
+      <p class="text-gray-200 leading-relaxed flex">
+        <i class="fas fa-map-marker-alt text-accent mr-3 w-5 text-center pt-1"></i>
+        <span>101 W BROAD ST<br>SAINT PAULS, NC 28384</span>
+      </p>
+      <div class="pl-8 mt-2">
+        <p class="text-gray-300 italic"><strong data-i18n="loc_appt">By appointment only</strong></p>
+      </div>
+    </div>
+
+    <div>
+      <h3 class="text-xl font-bold text-accent mb-3" data-i18n="loc3_title">Fayetteville (Pennystone)</h3>
+      <p class="text-gray-200 leading-relaxed flex">
+        <i class="fas fa-map-marker-alt text-accent mr-3 w-5 text-center pt-1"></i>
+        <span>4523 PENNYSTONE DRIVE<br>FAYETTEVILLE, NC 28306</span>
+      </p>
+      <div class="pl-8 mt-2">
+        <p class="text-gray-300 italic"><strong data-i18n="loc_appt">By appointment only</strong></p>
+      </div>
+    </div>
+
+  </div>
+</div>
 
       <form id="contact-form" action="/api" method="POST" class="bg-primary/90 p-8 rounded-xl shadow-2xl border-4 border-accent">
         <div class="mb-5">
@@ -852,6 +900,7 @@ faq_a18:"Sí. Te guiamos paso a paso para que tu primera declaración sea sencil
 </body>
 
 </html>
+
 
 
 
