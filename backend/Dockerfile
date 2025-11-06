@@ -1,21 +1,26 @@
-FROM php:8.1-cli-bullseye
+FROM ubuntu:22.04
 
-# Instalar extensiones PHP usando apt (no docker-php-ext-install)
+# Instalar PHP 8.1 y extensiones desde repositorios Ubuntu
 RUN apt-get update && apt-get install -y \
-    php8.1-zip \
-    php8.1-dom \
-    php8.1-xml \
-    php8.1-mbstring \
-    php8.1-curl \
-    git \
-    curl \
-    zip \
-    unzip \
+    software-properties-common \
+    && add-apt-repository ppa:ondrej/php -y \
+    && apt-get update \
+    && apt-get install -y \
+        php8.1 \
+        php8.1-cli \
+        php8.1-zip \
+        php8.1-dom \
+        php8.1-xml \
+        php8.1-mbstring \
+        php8.1-curl \
+        php8.1-openssl \
+        composer \
+        git \
+        curl \
+        zip \
+        unzip \
     && rm -rf /var/lib/apt/lists/* \
     && apt-get clean
-
-# Instalar Composer globalmente (si no se instaló via apt)
-RUN curl -sS https://getcomposer.org/installer | php -- --install-dir=/usr/local/bin --filename=composer
 
 WORKDIR /app
 
