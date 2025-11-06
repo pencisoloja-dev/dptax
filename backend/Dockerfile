@@ -3,10 +3,14 @@ FROM php:8.1-cli-alpine
 # Instalar dependencias del OS (git, curl) y las librerías -dev
 # necesarias para compilar las extensiones de PHP.
 RUN apk add --no-cache \
-    openssl-dev \  # Para la extensión openssl
-    curl-dev \     # Para la extensión curl
-    libxml2-dev \  # Para dom y xml
-    libzip-dev \   # Para la extensión zip
+    # Para la extensión openssl
+    openssl-dev \
+    # Para la extensión curl
+    curl-dev \
+    # Para dom y xml
+    libxml2-dev \
+    # Para la extensión zip
+    libzip-dev \
     git \
     curl \
     zip \
