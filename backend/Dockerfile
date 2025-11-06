@@ -24,5 +24,5 @@ COPY index.php ./
 # Exponer puerto
 EXPOSE 8080
 
-# Usar puerto fijo
+# CAMBIO AQUÍ: Usar puerto fijo directamente
 CMD ["php", "-S", "0.0.0.0:8080", "api.php"]
