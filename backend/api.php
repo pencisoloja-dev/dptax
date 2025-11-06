@@ -3,20 +3,26 @@
 error_reporting(E_ALL);
 ini_set('display_errors', 1);
 
-// Tus headers CORS aquí...
-header("Access-Control-Allow-Origin: *");
-// ... resto del código
 // --- Configuración de CORS y Headers ---
+// Permitir cualquier origen
 header("Access-Control-Allow-Origin: *");
-header("Access-Control-Allow-Methods: POST, OPTIONS, GET");
+// Permitir los métodos que usaremos
+header("Access-Control-Allow-Methods: POST, GET, OPTIONS");
+// Permitir los headers que el frontend (JS) envía
 header("Access-Control-Allow-Headers: Content-Type, Authorization, X-Requested-With, Origin, Accept");
-header("Content-Type: application/json");
 
-// Manejar la solicitud OPTIONS (pre-flight)
+// --- Manejar la solicitud OPTIONS (pre-flight) ---
+// El navegador envía esto ANTES de la solicitud POST
 if ($_SERVER['REQUEST_METHOD'] == 'OPTIONS') {
-    http_response_code(200);
-    exit;
+    // Simplemente respondemos que 'sí' a los permisos y terminamos.
+    http_response_code(200); // 200 (OK)
+    exit; // Termina el script. No procesar nada más.
 }
+
+// --- De aquí en adelante, SÓLO se ejecuta para POST o GET ---
+
+// Ahora sí, establecemos que la respuesta será JSON
+header("Content-Type: application/json");
 
 // Para debugging - responder a GET requests
 if ($_SERVER['REQUEST_METHOD'] == 'GET') {
@@ -28,7 +34,7 @@ if ($_SERVER['REQUEST_METHOD'] == 'GET') {
     exit;
 }
 
-// --- Cargar PHPMailer manualmente ---
+// --- Cargar PHPMailer manually ---
 require __DIR__ . '/vendor/phpmailer/phpmailer/src/PHPMailer.php';
 require __DIR__ . '/vendor/phpmailer/phpmailer/src/SMTP.php';
 require __DIR__ . '/vendor/phpmailer/phpmailer/src/Exception.php';
@@ -167,4 +173,3 @@ try {
     send_json(false, "Error al enviar el mensaje. Por favor, intenta nuevamente.", ['smtp_error' => $mail->ErrorInfo]);
 }
 ?>
-
