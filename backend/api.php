@@ -11,7 +11,12 @@ header("Access-Control-Allow-Origin: *");
 header("Access-Control-Allow-Methods: POST, OPTIONS");
 header("Access-Control-Allow-Headers: Content-Type");
 header("Content-Type: application/json");
-
+// Después de la línea header("Content-Type: application/json");
+error_log("Datos recibidos: " . print_r($_POST, true));
+error_log("Variables ENV: " . print_r([
+    'smtp_host' => $smtp_host,
+    'recaptcha_secret_set' => !empty($recaptcha_secret)
+], true));
 // Manejar la solicitud OPTIONS (pre-flight)
 if ($_SERVER['REQUEST_METHOD'] == 'OPTIONS') {
     exit(0);
@@ -129,3 +134,4 @@ try {
     send_json(false, "Error al enviar el correo.", ['smtp_error' => $mail->ErrorInfo]);
 }
 ?>
+
