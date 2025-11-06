@@ -11,6 +11,8 @@ RUN apk add --no-cache \
     libxml2-dev \
     # Para la extensión zip
     libzip-dev \
+    # Para la extensión mbstring
+    oniguruma-dev \
     git \
     curl \
     zip \
