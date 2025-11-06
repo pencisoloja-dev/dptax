@@ -8,11 +8,17 @@
   <link rel="apple-touch-icon" href="favicon.png">
   <script src="https://cdn.tailwindcss.com"></script>
 
-  <script src="https://cdn.tailwindcss.com"></script>
+  <!-- <script src="https://cdn.tailwindcss.com"></script> --> <!-- Duplicado, eliminado -->
   <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;600;700;800&display=swap" rel="stylesheet">
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
-  <!-- Script de hCaptcha restaurado -->
-  <script src="https://hcaptcha.com/1/api.js" async defer></script>
+  
+  <!-- ========================================================== -->
+  <!-- 1. SCRIPT DE HCAPTCHA ANTIGUO ELIMINADO -->
+  <!-- <script src="https://hcaptcha.com/1/api.js" async defer></script> -->
+  
+  <!-- 2. SCRIPT DE WEB3FORMS (QUE INCLUYE HCAPTCHA) AÑADIDO -->
+  <script src="https://web3forms.com/client/script.js" async defer></script>
+  <!-- ========================================================== -->
 
   <style>
     :root{
@@ -26,7 +32,8 @@
     .hero{
       background:
         linear-gradient(rgba(230, 175, 55, 0.85), rgba(230, 175, 55, 0.9)),
-    url('fondo web doris.jpg') center/cover no-repeat;
+    url('https://placehold.co/1920x1080/e6af37/424243?text=DP+Tax+Hero+Image') center/cover no-repeat;
+    /* url('fondo web doris.jpg') center/cover no-repeat; */
     }
     .bg-primary{background-color:var(--primary);}
     .bg-accent{background-color:var(--accent);}
@@ -46,11 +53,12 @@
 
     /* === Fix: títulos iguales en tarjetas de Servicios (medibles) === */
     @media (max-width: 768px){
-  .service-title{ 
-    font-size: 1rem !important;
-    min-height: 3rem;
-  }
-}  </style>
+      .service-title{  
+        font-size: 1rem !important;
+        min-height: 3rem;
+      }
+    }  
+  </style>
 </head>
 
 <body class="text-gray-800">
@@ -118,7 +126,8 @@
       <div class="grid grid-cols-1 md:grid-cols-3 gap-8 mt-8">
 
         <div class="bg-gray-50 rounded-xl overflow-hidden shadow-lg border-t-4 border-accent">
-          <img src="ir.jpg">
+          <img src="https://placehold.co/600x400/e8e8e8/333?text=Individual+Return" alt="Individual Return"
+               onerror="this.src='https://placehold.co/600x400/e8e8e8/333?text=Image+Error'">
           <div class="p-6">
             <h3 class="text-xl font-bold text-[var(--primary)] mb-3 text-center" data-i18n="srv1_title">Individual Return</h3>
             <p class="text-gray-700 text-center" data-i18n="srv1_desc">
@@ -128,7 +137,8 @@
         </div>
 
         <div class="bg-gray-50 rounded-xl overflow-hidden shadow-lg border-t-4 border-accent">
-          <img src="b.jpg">
+          <img src="https://placehold.co/600x400/e8e8e8/333?text=Business+Return" alt="Business Return"
+               onerror="this.src='https://placehold.co/600x400/e8e8e8/333?text=Image+Error'">
           <div class="p-6">
             <h3 class="text-xl font-bold text-[var(--primary)] mb-3 text-center" data-i18n="srv2_title">Business Return</h3>
             <p class="text-gray-700 text-center" data-i18n="srv2_desc">
@@ -138,7 +148,8 @@
         </div>
 
         <div class="bg-gray-50 rounded-xl overflow-hidden shadow-lg border-t-4 border-accent">
-         <img src="p.jpg">
+         <img src="https://placehold.co/600x400/e8e8e8/333?text=Tax+Planning" alt="Tax Planning"
+              onerror="this.src='https://placehold.co/600x400/e8e8e8/333?text=Image+Error'">
           <div class="p-6">
             <h3 class="text-xl font-bold text-[var(--primary)] mb-3 text-center" data-i18n="srv3_title">Tax Planning</h3>
             <p class="text-gray-700 text-center" data-i18n="srv3_desc">
@@ -154,8 +165,9 @@
   <section id="fundadora" class="py-20 bg-gray-50">
     <div class="max-w-7xl mx-auto grid md:grid-cols-3 gap-10 px-6 items-center">
       <div class="flex justify-center">
-        <img src="dzs.jpg"
+        <img src="https://placehold.co/300x300/e8e8e8/333?text=Doris+Smith"
              alt="Doris Smith"
+             onerror="this.src='https://placehold.co/300x300/e8e8e8/333?text=Image+Error'"
              class="rounded-full w-72 h-72 object-cover shadow-xl border-8 border-white ring-4 ring-[var(--accent)]">
       </div>
 
@@ -241,17 +253,17 @@
       <h2 class="section-title text-4xl font-extrabold text-[var(--primary)]" data-i18n="testimonials_title">What Our Clients Say</h2>
       <div class="grid md:grid-cols-3 gap-10 mt-10">
         <div class="bg-white shadow-xl rounded-xl p-8">
-          <img src="https://placehold.co/100x100/e8e8e8/333?text=E" alt="" class="w-24 h-24 mx-auto rounded-full mb-4">
+          <img src="https://placehold.co/100x100/e8e8e8/333?text=E" alt="Erika Barrera" class="w-24 h-24 mx-auto rounded-full mb-4">
           <p class="italic text-gray-600 mb-4" data-i18n="t1_text">"Excellent service — reliable and professional. Highly recommended!"</p>
           <h4 class="font-bold text-[var(--primary)]">Erika Barrera</h4>
         </div>
         <div class="bg-white shadow-xl rounded-xl p-8">
-          <img src="https://placehold.co/100x100/e8e8e8/333?text=A" alt="" class="w-24 h-24 mx-auto rounded-full mb-4">
+          <img src="https://placehold.co/100x100/e8e8e8/333?text=A" alt="Andrés Vargas" class="w-24 h-24 mx-auto rounded-full mb-4">
           <p class="italic text-gray-600 mb-4" data-i18n="t2_text">"Fantastic service! They made the whole process quick and stress-free."</p>
           <h4 class="font-bold text-[var(--primary)]">Andrés Vargas</h4>
         </div>
         <div class="bg-white shadow-xl rounded-xl p-8">
-			<img src="https://placehold.co/100x100/e8e8e8/333?text=C" alt="" class="w-24 h-24 mx-auto rounded-full mb-4">
+			<img src="https://placehold.co/100x100/e8e8e8/333?text=C" alt="Consuelo Angel" class="w-24 h-24 mx-auto rounded-full mb-4">
           <p class="italic text-gray-600 mb-4" data-i18n="t3_text">"Honest, efficient, and detail-oriented. I'll return every year."</p>
           <h4 class="font-bold text-[var(--primary)]">Consuelo Angel</h4>
         </div>
@@ -273,7 +285,6 @@
           <p class="p-5 pt-0 text-gray-700" data-i18n="faq_a1">The usual deadline for filing the federal return is April 15. If you need more time, you can request an extension before that date.</p>
         </div>
       </div>
-
       <div class="faq-item bg-white rounded-lg shadow-md overflow-hidden">
         <div class="faq-question flex justify-between items-center p-5 cursor-pointer text-lg font-semibold text-[var(--primary)]">
           <span data-i18n="faq_q2">What happens if I don't file my return on time?</span>
@@ -283,7 +294,6 @@
           <p class="p-5 pt-0 text-gray-700" data-i18n="faq_a2">You could receive penalties or late interest. We help you file even if the deadline has passed or if you need to catch up on previous years.</p>
         </div>
       </div>
-
       <div class="faq-item bg-white rounded-lg shadow-md overflow-hidden">
         <div class="faq-question flex justify-between items-center p-5 cursor-pointer text-lg font-semibold text-[var(--primary)]">
           <span data-i18n="faq_q3">What documents do I need to file my taxes?</span>
@@ -293,7 +303,6 @@
           <p class="p-5 pt-0 text-gray-700" data-i18n="faq_a3">It depends on your situation, but typically you need: W-2 form (employees) or 1099 (independent contractors), personal identification (SSN or ITIN), proof of income and expenses, and dependent information if applicable.</p>
         </div>
       </div>
-
       <div class="faq-item bg-white rounded-lg shadow-md overflow-hidden">
         <div class="faq-question flex justify-between items-center p-5 cursor-pointer text-lg font-semibold text-[var(--primary)]">
           <span data-i18n="faq_q4">Can I file if I don't have a Social Security Number (SSN)?</span>
@@ -303,7 +312,6 @@
           <p class="p-5 pt-0 text-gray-700" data-i18n="faq_a4">Yes. We can help you obtain and use an ITIN (Individual Taxpayer Identification Number) to meet your tax obligations.</p>
         </div>
       </div>
-
       <div class="faq-item bg-white rounded-lg shadow-md overflow-hidden">
         <div class="faq-question flex justify-between items-center p-5 cursor-pointer text-lg font-semibold text-[var(--primary)]">
           <span data-i18n="faq_q5">Do you accept scanned documents or photos?</span>
@@ -313,7 +321,6 @@
           <p class="p-5 pt-0 text-gray-700" data-i18n="faq_a5">Yes. You can upload them directly from your phone or computer in a secure and encrypted manner.</p>
         </div>
       </div>
-
       <div class="faq-item bg-white rounded-lg shadow-md overflow-hidden">
         <div class="faq-question flex justify-between items-center p-5 cursor-pointer text-lg font-semibold text-[var(--primary)]">
           <span data-i18n="faq_q6">Is it safe to share my information online?</span>
@@ -323,7 +330,6 @@
           <p class="p-5 pt-0 text-gray-700" data-i18n="faq_a6">Yes. We use SSL/TLS encryption, secure servers, and privacy protocols aligned with IRS standards. Your information is confidential and protected.</p>
         </div>
       </div>
-
       <div class="faq-item bg-white rounded-lg shadow-md overflow-hidden">
         <div class="faq-question flex justify-between items-center p-5 cursor-pointer text-lg font-semibold text-[var(--primary)]">
           <span data-i18n="faq_q7">Is my information shared with other companies?</span>
@@ -333,7 +339,6 @@
           <p class="p-5 pt-0 text-gray-700" data-i18n="faq_a7">No. Your data is used solely to prepare and file your tax return.</p>
         </div>
       </div>
-
       <div class="faq-item bg-white rounded-lg shadow-md overflow-hidden">
         <div class="faq-question flex justify-between items-center p-5 cursor-pointer text-lg font-semibold text-[var(--primary)]">
           <span data-i18n="faq_q8">How long does it take to receive my refund?</span>
@@ -343,7 +348,6 @@
           <p class="p-5 pt-0 text-gray-700" data-i18n="faq_a8">The IRS usually processes refunds within 7 to 21 days if the return is filed electronically.</p>
         </div>
       </div>
-
       <div class="faq-item bg-white rounded-lg shadow-md overflow-hidden">
         <div class="faq-question flex justify-between items-center p-5 cursor-pointer text-lg font-semibold text-[var(--primary)]">
           <span data-i18n="faq_q9">How will I receive my refund?</span>
@@ -353,7 +357,6 @@
           <p class="p-5 pt-0 text-gray-700" data-i18n="faq_a9">You can choose direct deposit, physical check, or a prepaid debit card, depending on your preference.</p>
         </div>
       </div>
-
       <div class="faq-item bg-white rounded-lg shadow-md overflow-hidden">
         <div class="faq-question flex justify-between items-center p-5 cursor-pointer text-lg font-semibold text-[var(--primary)]">
           <span data-i18n="faq_q10">What if I owe taxes?</span>
@@ -363,7 +366,6 @@
           <p class="p-5 pt-0 text-gray-700" data-i18n="faq_a10">We can help you set up a payment plan or make the payment directly to the IRS from your bank account.</p>
         </div>
       </div>
-
       <div class="faq-item bg-white rounded-lg shadow-md overflow-hidden">
         <div class="faq-question flex justify-between items-center p-5 cursor-pointer text-lg font-semibold text-[var(--primary)]">
           <span data-i18n="faq_q11">How much does the service cost?</span>
@@ -373,17 +375,15 @@
           <p class="p-5 pt-0 text-gray-700" data-i18n="faq_a11">The cost depends on the complexity of your return. We offer a free evaluation before starting the process.</p>
         </div>
       </div>
-
       <div class="faq-item bg-white rounded-lg shadow-md overflow-hidden">
         <div class="faq-question flex justify-between items-center p-5 cursor-pointer text-lg font-semibold text-[var(--primary)]">
-          <span data-i18n="faq_q12">Do you serve independent workers or business owners?</span>
+          <span data-i1GN="faq_q12">Do you serve independent workers or business owners?</span>
           <i class="fas fa-chevron-down text-accent"></i>
         </div>
         <div class="faq-answer max-h-0 overflow-hidden">
           <p class="p-5 pt-0 text-gray-700" data-i18n="faq_a12">Yes. We prepare returns for employees, independent contractors, small businesses, and self-employed workers.</p>
         </div>
       </div>
-
       <div class="faq-item bg-white rounded-lg shadow-md overflow-hidden">
         <div class="faq-question flex justify-between items-center p-5 cursor-pointer text-lg font-semibold text-[var(--primary)]">
           <span data-i18n="faq_q13">Can I file my return completely online?</span>
@@ -393,7 +393,6 @@
           <p class="p-5 pt-0 text-gray-700" data-i18n="faq_a13">Yes. The entire process can be done virtually, from document submission to electronic signature.</p>
         </div>
       </div>
-
       <div class="faq-item bg-white rounded-lg shadow-md overflow-hidden">
         <div class="faq-question flex justify-between items-center p-5 cursor-pointer text-lg font-semibold text-[var(--primary)]">
           <span data-i18n="faq_q14">Can I schedule an in-person or video call appointment?</span>
@@ -403,7 +402,6 @@
           <p class="p-5 pt-0 text-gray-700" data-i18n="faq_a14">Of course. We offer in-person and virtual appointments based on your availability.</p>
         </div>
       </div>
-
       <div class="faq-item bg-white rounded-lg shadow-md overflow-hidden">
         <div class="faq-question flex justify-between items-center p-5 cursor-pointer text-lg font-semibold text-[var(--primary)]">
           <span data-i18n="faq_q15">What do I do if I can't file before April 15?</span>
@@ -413,7 +411,6 @@
           <p class="p-5 pt-0 text-gray-700" data-i18n="faq_a15">We can help you request an extension until October 15, avoiding late filing penalties.</p>
         </div>
       </div>
-
       <div class="faq-item bg-white rounded-lg shadow-md overflow-hidden">
         <div class="faq-question flex justify-between items-center p-5 cursor-pointer text-lg font-semibold text-[var(--primary)]">
           <span data-i18n="faq_q16">Can you help me with past due returns?</span>
@@ -423,7 +420,6 @@
           <p class="p-5 pt-0 text-gray-700" data-i18n="faq_a16">Yes. We can file your returns from previous years and help you get current with the IRS.</p>
         </div>
       </div>
-
       <div class="faq-item bg-white rounded-lg shadow-md overflow-hidden">
         <div class="faq-question flex justify-between items-center p-5 cursor-pointer text-lg font-semibold text-[var(--primary)]">
           <span data-i18n="faq_q17">Can I file if I live outside the United States?</span>
@@ -433,7 +429,6 @@
           <p class="p-5 pt-0 text-gray-700" data-i18n="faq_a17">Yes. We assist residents and non-residents with US income, including expatriate cases.</p>
         </div>
       </div>
-
       <div class="faq-item bg-white rounded-lg shadow-md overflow-hidden">
         <div class="faq-question flex justify-between items-center p-5 cursor-pointer text-lg font-semibold text-[var(--primary)]">
           <span data-i18n="faq_q18">Do you help students or first-time filers?</span>
@@ -501,12 +496,18 @@
       </div>
     </div>
 
+    <!-- ========================================================== -->
+    <!-- 3. FORMULARIO ACTUALIZADO A WEB3FORMS -->
+    <!-- ========================================================== -->
     <form action="https://api.web3forms.com/submit" method="POST">
 
+      <!-- Clave de Acceso -->
       <input type="hidden" name="access_key" value="84094e5e-1515-4682-a130-a3d562f046f1">
       
+      <!-- Asunto del Email -->
       <input type="hidden" name="subject" value="Nuevo Contacto desde la Web DP Tax">
       
+      <!-- Campos del Formulario (sin cambios) -->
       <div class="mb-5">
         <input type="text" name="name" required
                class="w-full p-4 rounded bg-white/90 text-gray-900"
@@ -536,6 +537,7 @@
         </label>
       </div>
 
+      <!-- hCaptcha de Web3Forms -->
       <div class="h-captcha mb-6" data-sitekey="4c607263-836c-4914-b636-a6e0f2105141"></div>
 
 
@@ -545,23 +547,244 @@
 
       </form>
     
-    </div>
+  </div>
 </section>
 
-  <footer class="bg-dark text-white">
-    <div class="max-w-7xl mx-auto px-6 py-6 text-center text-sm" data-i18n="footer_copy">
-      © 2024 DP Tax Preparation. All rights reserved.
-    </div>
-  </footer>
+<footer class="bg-dark text-white">
+  <div class="max-w-7xl mx-auto px-6 py-6 text-center text-sm" data-i18n="footer_copy">
+    © 2024 DP Tax Preparation. All rights reserved.
+  </div>
+</footer>
 
-  <script>
-    // --- Mobile menu ---
+<!-- ========================================================== -->
+<!-- 4. SCRIPT FINAL CORREGIDO -->
+<!-- ========================================================== -->
+<script>
+  // --- Objeto de Traducciones (Completo) ---
+  const translations = {
+    en: {
+      doc_title: "DP Tax Preparation – Tax Declaration in the US without Stress",
+      nav_home:"Home", nav_services:"Services", nav_founder:"Founder", nav_process:"Process",
+      nav_clients:"Clients", nav_faq:"FAQ", nav_contact:"Contact",
+      hero_title1:"Tax Declaration",
+      hero_title2:"in the US without Stress",
+      hero_sub:"Experts in tax preparation for individuals and businesses. We maximize refunds and ensure full compliance.",
+      services_title:"Our Services",
+      srv1_title:"Individual Return",
+      srv1_desc:"Complete preparation of Form 1040 with all applicable deductions and credits.",
+      srv2_title:"Business Return",
+      srv2_desc:"Taxes for corporations, LLCs, and partnerships. We handle the complexity of your business.",
+      srv3_title:"Tax Planning",
+      srv3_desc:"Proactive strategies to minimize future liabilities and boost long-term growth.",
+      founder_role:"CEO & Tax Expert",
+      founder_bio:"Over 15 years of experience in US taxes for individuals and businesses. She founded DP Tax Preparation to make taxes simple, secure, and profitable.",
+      training_title:"Training Certificates",
+      credentials_title:"Official IRS Credentials",
+      cred_ptin:"PTIN Number (Authorized Tax Preparer)",
+      cred_efin:"EFIN Number (Authorized e-File Provider)",
+      process_title:"Simplified Filing Process",
+      p1_title:"Initial Consultation", p1_desc:"We assess your tax situation and assign an expert.",
+      p2_title:"Secure Documents",    p2_desc:"Easily upload your W-2s, 1099s, and other documents.",
+      p3_title:"Preparation & Review", p3_desc:"We prepare your return and review it with you.",
+      p4_title:"Final e-Filing", p4_desc:"We e-file your return with the IRS and track it.",
+      testimonials_title:"What Our Clients Say",
+      t1_text:"\"Excellent service — reliable and professional. Highly recommended!\"",
+      t2_text:"\"Fantastic service! They made the whole process quick and stress-free.\"",
+      t3_text:"\"Honest, efficient, and detail-oriented. I'll return every year.\"",
+      faq_title:"Frequently Asked Questions",
+      faq_q1:"When is the filing deadline?",
+      faq_a1:"The usual deadline for filing the federal return is April 15. If you need more time, you can request an extension before that date.",
+      faq_q2:"What happens if I don't file my return on time?",
+      faq_a2:"You could receive penalties or late interest. We help you file even if the deadline has passed or if you need to catch up on previous years.",
+      faq_q3:"What documents do I need to file my taxes?",
+      faq_a3:"It depends on your situation, but typically you need: W-2 form (employees) or 1099 (independent contractors), personal identification (SSN or ITIN), proof of income and expenses, and dependent information if applicable.",
+	  faq_q4:"Can I file if I don't have a Social Security Number (SSN)?",
+      faq_a4:"Yes. We can help you obtain and use an ITIN (Individual Taxpayer Identification Number) to meet your tax obligations.",
+      faq_q5:"Do you accept scanned documents or photos?",
+      faq_a5:"Yes. You can upload them directly from your phone or computer in a secure and encrypted manner.",
+      faq_q6:"Is it safe to share my information online?",
+      faq_a6:"Yes. We use SSL/TLS encryption, secure servers, and privacy protocols aligned with IRS standards. Your information is confidential and protected.",
+      faq_q7:"Is my information shared with other companies?",
+      faq_a7:"No. Your data is used solely to prepare and file your tax return.",
+      faq_q8:"How long does it take to receive my refund?",
+      faq_a8:"The IRS usually processes refunds within 7 to 21 days if the return is filed electronically.",
+      faq_q9:"How will I receive my refund?",
+      faq_a9:"You can choose direct deposit, physical check, or a prepaid debit card, depending on your preference.",
+      faq_q10:"What if I owe taxes?",
+      faq_a10:"We can help you set up a payment plan or make the payment directly to the IRS from your bank account.",
+      faq_q11:"How much does the service cost?",
+      faq_a11:"The cost depends on the complexity of your return. We offer a free evaluation before starting the process.",
+      faq_q12:"Do you serve independent workers or business owners?",
+      faq_a12:"Yes. We prepare returns for employees, independent contractors, small businesses, and self-employed workers.",
+      faq_q13:"Can I file my return completely online?",
+      faq_a13:"Yes. The entire process can be done virtually, from document submission to electronic signature.",
+      faq_q14:"Can I schedule an in-person or video call appointment?",
+      faq_a14:"Of course. We offer in-person and virtual appointments based on your availability.",
+      faq_q15:"What do I do if I can't file before April 15?",
+      faq_a15:"We can help you request an extension until October 15, avoiding late filing penalties.",
+      faq_q16:"Can you help me with past due returns?",
+      faq_a16:"Yes. We can file your returns from previous years and help you get current with the IRS.",
+      faq_q17:"Can I file if I live outside the United States?",
+      faq_a17:"Yes. We assist residents and non-residents with US income, including expatriate cases.",
+      faq_q18:"Do you help students or first-time filers?",
+      faq_a18:"Yes. We guide you step by step so your first return is simple and correct.",
+      contact_title:"Contact Us",
+      contact_intro:"Write to us and we'll get back to you shortly.",
+      contact_address:"123 Tax Avenue, Miami, FL 33101",
+      contact_phone:"(910) 584-0478",
+      contact_email:"dorissmith@dptaxpreparation.com",
+      ph_name:"Full name",
+      ph_email:"Email address",
+      ph_phone:"Phone (+1...)",
+      ph_message:"Write your message...",
+      sms_consent:"I agree to receive notifications and SMS messages from DP Tax Preparation at the phone number provided.",
+      sms_note:"Message and data rates may apply.",
+      btn_send:"Send Message",
+      footer_copy:"© 2024 DP Tax Preparation. All rights reserved.",
+      form_processing:"Processing...",
+      form_success:"✅ Message sent successfully! We'll contact you soon.",
+      form_error:"❌ Error sending. Please try again.",
+      form_hcaptcha_error: "Please complete the hCaptcha verification.", 
+      form_network:"❌ Network or server error. Try again."
+    },
+    es: {
+      doc_title: "DP Tax Preparation – Declaración de Impuestos en EEUU sin Estrés",
+      nav_home:"Inicio", nav_services:"Servicios", nav_founder:"Fundadora", nav_process:"Proceso",
+      nav_clients:"Clientes", nav_faq:"FAQ", nav_contact:"Contacto",
+      hero_title1:"Declaración de",
+      hero_title2:"Impuestos en EEUU sin Estrés",
+      hero_sub:"Expertos en preparación de taxes para individuos y empresas. Maximizamos tus reembolsos y garantizamos el cumplimiento.",
+      services_title:"Nuestros Servicios",
+      srv1_title:"Declaración Personal",
+      srv1_desc:"Preparación completa del Formulario 1040 con todas las deducciones y créditos aplicables.",
+      srv2_title:"Declaración Empresarial",
+      srv2_desc:"Impuestos para corporaciones, LLCs y sociedades. Gestionamos la complejidad de tu negocio.",
+      srv3_title:"Planificación Fiscal",
+      srv3_desc:"Estrategias proactivas para minimizar obligaciones futuras y potenciar el crecimiento a largo plazo.",
+      founder_role:"CEO y Experta Fiscal",
+      founder_bio:"Más de 15 años de experiencia en impuestos en EEUU para individuos y empresas. Fundó DP Tax Preparation para hacer los taxes simples, seguros y rentables.",
+      training_title:"Certificados de Formación",
+      credentials_title:"Credenciales Oficiales del IRS",
+      cred_ptin:"PTIN Number (Preparadora Autorizada por IRS)",
+      cred_efin:"EFIN Number (Proveedor Autorizado de e-File)",
+      process_title:"Proceso de Declaración Simplificado",
+      p1_title:"Consulta Inicial", p1_desc:"Evaluamos tu situación fiscal y asignamos un experto.",
+      p2_title:"Documentación Segura", p2_desc:"Carga fácilmente tus W-2, 1099 y otros documentos.",
+      p3_title:"Preparación y Revisión", p3_desc:"Preparamos tu declaración y la revisamos contigo.",
+      p4_title:"Presentación Final", p4_desc:"Presentamos electrónicamente tu declaración ante el IRS y hacemos seguimiento.",
+      testimonials_title:"Opiniones de Nuestros Clientes",
+      t1_text:"\"Excelente servicio: confiable y profesional. ¡Muy recomendado!\"",
+      t2_text:"\"Servicio fantástico! Hicieron que todo el proceso fuera rápido y sin estrés.\"",
+      t3_text:"\"Honestos, eficientes y detallistas. Volveré cada año.\"",
+	  faq_title:"Preguntas Frecuentes",
+      faq_q1:"¿Cuándo vence el plazo para declarar impuestos?",
+      faq_a1:"El plazo habitual para presentar la declaración federal es el 15 de abril. Si necesitas más tiempo, puedes solicitar una extensión antes de esa fecha.",
+      faq_q2:"¿Qué pasa si no presento mi declaración a tiempo?",
+      faq_a2:"Podrías recibir multas o intereses por retraso. Te ayudamos a presentar incluso si el plazo ya pasó o si necesitas regularizar años anteriores.",
+      faq_q3:"¿Qué documentos necesito para declarar mis impuestos?",
+      faq_a3:"Depende de tu situación, pero normalmente se requieren: Formulario W-2 (empleados) o 1099 (trabajadores independientes), identificación personal (SSN o ITIN), comprobantes de ingresos y gastos, e información de dependientes si aplica.",
+      faq_q4:"¿Puedo declarar si no tengo número de Seguro Social (SSN)?",
+      faq_a4:"Sí. Podemos ayudarte a obtener y usar un ITIN (Individual Taxpayer Identification Number) para cumplir con tus obligaciones fiscales.",
+      faq_q5:"¿Aceptan documentos escaneados o fotografías?",
+      faq_a5:"Sí. Puedes subirlos directamente desde tu teléfono o computadora de forma segura y cifrada.",
+      faq_q6:"¿Es seguro compartir mi información en línea?",
+      faq_a6:"Sí. Utilizamos cifrado SSL/TLS, servidores seguros y protocolos de privacidad alineados con los estándares del IRS. Tu información es confidencial y protegida.",
+      faq_q7:"¿Mi información se comparte con otras empresas?",
+      faq_a7:"No. Tus datos se usan únicamente para preparar y presentar tu declaración de impuestos.",
+      faq_q8:"¿Cuánto tiempo tarda en llegar mi reembolso?",
+      faq_a8:"El IRS suele procesar los reembolsos en un plazo de 7 a 21 días si la declaración se presenta electrónicamente.",
+      faq_q9:"¿Cómo recibiré mi reembolso?",
+      faq_a9:"Puedes elegir depósito directo, cheque físico, o una tarjeta de débito prepagada, según prefieras.",
+      faq_q10:"¿Qué pasa si debo pagar impuestos?",
+      faq_a10:"Podemos ayudarte a establecer un plan de pagos o hacer el pago directamente al IRS desde tu cuenta bancaria.",
+      faq_q11:"¿Cuánto cuesta el servicio?",
+      faq_a11:"El costo depende de la complejidad de tu declaración. Ofrecemos una evaluación gratuita antes de iniciar el proceso.",
+      faq_q12:"¿Atienden a personas independientes o dueños de negocios?",
+      faq_a12:"Sí. Preparamos declaraciones para empleados, contratistas independientes, negocios pequeños y trabajadores por cuenta propia.",
+      faq_q13:"¿Puedo hacer mi declaración completamente en línea?",
+      faq_a13:"Sí. Todo el proceso puede realizarse de forma virtual, desde el envío de documentos hasta la firma electrónica.",
+      faq_q14:"¿Puedo agendar una cita en persona o por videollamada?",
+      faq_a14:"Claro. Ofrecemos citas presenciales y virtuales según tu disponibilidad.",
+      faq_q15:"¿Qué hago si no puedo declarar antes del 15 de abril?",
+      faq_a15:"Podemos ayudarte a solicitar una extensión hasta el 15 de octubre, evitando multas por presentación tardía.",
+      faq_q16:"¿Pueden ayudarme con declaraciones atrasadas?",
+      faq_a16:"Sí. Podemos presentar tus declaraciones de años anteriores y ayudarte a ponerte al día con el IRS.",
+      faq_q17:"¿Puedo declarar si vivo fuera de los Estados Unidos?",
+      faq_a17:"Sí. Asistimos a residentes y no residentes con ingresos en EE.UU., incluyendo casos de expatriados.",
+      faq_q18:"¿Ayudan a estudiantes o personas que declaran por primera vez?",
+      faq_a18:"Sí. Te guiamos paso a paso para que tu primera declaración sea sencilla y correcta.",
+      contact_title:"Contáctanos",
+      contact_intro:"Escríbenos y muy pronto te responderemos.",
+      contact_address:"123 Tax Avenue, Miami, FL 33101",
+      contact_phone:"(910) 584-0478",
+      contact_email:"dorissmith@dptaxpreparation.com",
+      ph_name:"Nombre completo",
+      ph_email:"Correo electrónico",
+      ph_phone:"Teléfono (+1...)",
+      ph_message:"Escribe tu mensaje...",
+      sms_consent:"Acepto recibir notificaciones y mensajes SMS de DP Tax Preparation al número proporcionado.",
+      sms_note:"Pueden aplicarse tarifas de mensajes y datos.",
+      btn_send:"Enviar Mensaje",
+      footer_copy:"© 2024 DP Tax Preparation. Todos los derechos reservados.",
+      form_processing:"Procesando...",
+      form_success:"✅ ¡Mensaje enviado con éxito! Nos pondremos en contacto pronto.",
+      form_error:"❌ Error al enviar. Inténtalo nuevamente.",
+      form_hcaptcha_error: "Por favor, completa la verificación hCaptcha.",
+      form_network:"❌ Error de red o servidor. Inténtalo otra vez."
+    }
+  };
+
+  // --- Función applyLanguage (Completa) ---
+  function applyLanguage(lang){
+    document.querySelectorAll("[data-i18n]").forEach(el=>{
+      const key=el.getAttribute("data-i18n");
+      if(translations[lang][key]!==undefined){
+        el.textContent = translations[lang][key];
+      }
+    });
+    document.querySelectorAll("[data-i18n-placeholder]").forEach(el=>{
+      const key=el.getAttribute("data-i18n-placeholder");
+      if(translations[lang][key]!==undefined){
+        el.setAttribute("placeholder", translations[lang][key]);
+      }
+    });
+    document.title = translations[lang].doc_title || document.title;
+    const enBtns=[document.getElementById('lang-en'), document.getElementById('mlang-en')];
+    const esBtns=[document.getElementById('lang-es'), document.getElementById('mlang-es')];
+    if(lang==='en'){
+      enBtns.forEach(b=>b?.classList.add('lang-active'));
+      esBtns.forEach(b=>b?.classList.remove('lang-active'));
+    }else{
+      enBtns.forEach(b=>b?.classList.remove('lang-active'));
+      esBtns.forEach(b=>b?.classList.add('lang-active'));
+    }
+    localStorage.setItem('site_lang', lang);
+    const submitBtn = document.getElementById('submit-button');
+    if (submitBtn && translations[lang].btn_send){
+      submitBtn.textContent = translations[lang].btn_send;
+    }
+  }
+
+  // --- Función setupLangControls (Completa) ---
+  function setupLangControls(){
+    const setEN = () => { console.log('Cambiando a EN'); applyLanguage('en'); setTimeout(() => applyLanguage('en'), 200); };
+    const setES = () => { console.log('Cambiando a ES'); applyLanguage('es'); setTimeout(() => applyLanguage('es'), 200); };
+    document.getElementById('lang-en')?.addEventListener('click',setEN);
+    document.getElementById('lang-es')?.addEventListener('click',setES);
+    document.getElementById('mlang-en')?.addEventListener('click',setEN);
+    document.getElementById('mlang-es')?.addEventListener('click',setES);
+  }
+
+  // --- SCRIPT DE INICIALIZACIÓN CORREGIDO ---
+  document.addEventListener('DOMContentLoaded', ()=>{
+    
+    // --- Configuración del Menú Móvil ---
     const mobileBtn = document.getElementById('mobile-menu-button');
     const mobileMenu = document.getElementById('mobile-menu');
     mobileBtn?.addEventListener('click', ()=> mobileMenu.classList.toggle('hidden'));
     mobileMenu?.querySelectorAll('a').forEach(a=>a.addEventListener('click',()=>mobileMenu.classList.add('hidden')));
 
-    // --- FAQ accordion ---
+    // --- Configuración del Acordeón de FAQ ---
     document.querySelectorAll('.faq-item').forEach(item=>{
       const q=item.querySelector('.faq-question');
       const ans=item.querySelector('.faq-answer');
@@ -569,377 +792,21 @@
         const open = ans.style.maxHeight && ans.style.maxHeight !== '0px';
         document.querySelectorAll('.faq-answer').forEach(a=>a.style.maxHeight=0);
         document.querySelectorAll('.faq-question i').forEach(i=>i.classList.remove('rotate-180'));
-        if(!open){ ans.style.maxHeight = ans.scrollHeight+'px'; q.querySelector('i').classList.add('rotate-180'); }
+        if(!open){ 
+          ans.style.maxHeight = ans.scrollHeight+'px'; 
+          q.querySelector('i').classList.add('rotate-180'); 
+        }
       });
     });
 
-    // --- Language translations ---
-    const translations = {
-      en: {
-        doc_title: "DP Tax Preparation – Tax Declaration in the US without Stress",
-
-        // nav
-        nav_home:"Home", nav_services:"Services", nav_founder:"Founder", nav_process:"Process",
-        nav_clients:"Clients", nav_faq:"FAQ", nav_contact:"Contact",
-
-        // hero
-        hero_title1:"Tax Declaration",
-        hero_title2:"in the US without Stress",
-        hero_sub:"Experts in tax preparation for individuals and businesses. We maximize refunds and ensure full compliance.",
-
-        // services
-        services_title:"Our Services",
-        srv1_title:"Individual Return",
-        srv1_desc:"Complete preparation of Form 1040 with all applicable deductions and credits.",
-        srv2_title:"Business Return",
-        srv2_desc:"Taxes for corporations, LLCs, and partnerships. We handle the complexity of your business.",
-        srv3_title:"Tax Planning",
-        srv3_desc:"Proactive strategies to minimize future liabilities and boost long-term growth.",
-
-        // founder
-        founder_role:"CEO & Tax Expert",
-        founder_bio:"Over 15 years of experience in US taxes for individuals and businesses. She founded DP Tax Preparation to make taxes simple, secure, and profitable.",
-        training_title:"Training Certificates",
-        credentials_title:"Official IRS Credentials",
-        cred_ptin:"PTIN Number (Authorized Tax Preparer)",
-        cred_efin:"EFIN Number (Authorized e-File Provider)",
-
-        // process
-        process_title:"Simplified Filing Process",
-        p1_title:"Initial Consultation", p1_desc:"We assess your tax situation and assign an expert.",
-        p2_title:"Secure Documents",   p2_desc:"Easily upload your W-2s, 1099s, and other documents.",
-        p3_title:"Preparation & Review", p3_desc:"We prepare your return and review it with you.",
-        p4_title:"Final e-Filing", p4_desc:"We e-file your return with the IRS and track it.",
-
-        // testimonials
-        testimonials_title:"What Our Clients Say",
-        t1_text:"\"Excellent service — reliable and professional. Highly recommended!\"",
-        t2_text:"\"Fantastic service! They made the whole process quick and stress-free.\"",
-        t3_text:"\"Honest, efficient, and detail-oriented. I'll return every year.\"",
-
-        // faq
-        faq_title:"Frequently Asked Questions",
-        faq_q1:"When is the filing deadline?",
-        faq_a1:"The federal deadline is April 15. If needed, we can request an extension until mid-October.",
-        faq_q2:"What documents do I need?",
-        faq_a2:"W-2, 1099, bank/investment statements (1099-INT, 1099-DIV), and receipts for deductions (medical, education, mortgage interest, etc.).",
-        faq_q3:"Is it safe to share my data online?",
-        faq_a3:"Yes. We use SSL/TLS encryption and secure handling practices aligned with IRS standards.",
-		faq_q4:"Can I file if I don't have a Social Security Number (SSN)?",
-faq_a4:"Yes. We can help you obtain and use an ITIN (Individual Taxpayer Identification Number) to meet your tax obligations.",
-
-faq_q5:"Do you accept scanned documents or photos?",
-faq_a5:"Yes. You can upload them directly from your phone or computer in a secure and encrypted manner.",
-
-faq_q6:"Is it safe to share my information online?",
-faq_a6:"Yes. We use SSL/TLS encryption, secure servers, and privacy protocols aligned with IRS standards. Your information is confidential and protected.",
-
-faq_q7:"Is my information shared with other companies?",
-faq_a7:"No. Your data is used solely to prepare and file your tax return.",
-
-faq_q8:"How long does it take to receive my refund?",
-faq_a8:"The IRS usually processes refunds within 7 to 21 days if the return is filed electronically.",
-
-faq_q9:"How will I receive my refund?",
-faq_a9:"You can choose direct deposit, physical check, or a prepaid debit card, depending on your preference.",
-
-faq_q10:"What if I owe taxes?",
-faq_a10:"We can help you set up a payment plan or make the payment directly to the IRS from your bank account.",
-
-faq_q11:"How much does the service cost?",
-faq_a11:"The cost depends on the complexity of your return. We offer a free evaluation before starting the process.",
-
-faq_q12:"Do you serve independent workers or business owners?",
-faq_a12:"Yes. We prepare returns for employees, independent contractors, small businesses, and self-employed workers.",
-
-faq_q13:"Can I file my return completely online?",
-faq_a13:"Yes. The entire process can be done virtually, from document submission to electronic signature.",
-
-faq_q14:"Can I schedule an in-person or video call appointment?",
-faq_a14:"Of course. We offer in-person and virtual appointments based on your availability.",
-
-faq_q15:"What do I do if I can't file before April 15?",
-faq_a15:"We can help you request an extension until October 15, avoiding late filing penalties.",
-
-faq_q16:"Can you help me with past due returns?",
-faq_a16:"Yes. We can file your returns from previous years and help you get current with the IRS.",
-
-faq_q17:"Can I file if I live outside the United States?",
-faq_a17:"Yes. We assist residents and non-residents with US income, including expatriate cases.",
-
-faq_q18:"Do you help students or first-time filers?",
-faq_a18:"Yes. We guide you step by step so your first return is simple and correct.",
-
-        // contact
-        contact_title:"Contact Us",
-        contact_intro:"Write to us and we'll get back to you shortly.",
-        contact_address:"123 Tax Avenue, Miami, FL 33101",
-        contact_phone:"(910) 584-0478",
-        contact_email:"dorissmith@dptaxpreparation.com",
-        ph_name:"Full name",
-        ph_email:"Email address",
-        ph_phone:"Phone (+1...)",
-        ph_message:"Write your message...",
-        sms_consent:"I agree to receive notifications and SMS messages from DP Tax Preparation at the phone number provided.",
-        sms_note:"Message and data rates may apply.",
-        btn_send:"Send Message",
-
-        // footer
-        footer_copy:"© 2024 DP Tax Preparation. All rights reserved.",
-
-        // form status
-        form_processing:"Processing...",
-        form_success:"✅ Message sent successfully! We'll contact you soon.",
-        form_error:"❌ Error sending. Please try again.",
-        form_hcaptcha_error: "Please complete the hCaptcha verification.", // Mensaje de error de hCaptcha
-        form_network:"❌ Network or server error. Try again."
-      },
-
-      es: {
-        doc_title: "DP Tax Preparation – Declaración de Impuestos en EEUU sin Estrés",
-
-        // nav
-        nav_home:"Inicio", nav_services:"Servicios", nav_founder:"Fundadora", nav_process:"Proceso",
-        nav_clients:"Clientes", nav_faq:"FAQ", nav_contact:"Contacto",
-
-        // hero
-        hero_title1:"Declaración de",
-        hero_title2:"Impuestos en EEUU sin Estrés",
-        hero_sub:"Expertos en preparación de taxes para individuos y empresas. Maximizamos tus reembolsos y garantizamos el cumplimiento.",
-
-        // services (títulos confirmados)
-        services_title:"Nuestros Servicios",
-        srv1_title:"Declaración Personal",
-        srv1_desc:"Preparación completa del Formulario 1040 con todas las deducciones y créditos aplicables.",
-        srv2_title:"Declaración Empresarial",
-        srv2_desc:"Impuestos para corporaciones, LLCs y sociedades. Gestionamos la complejidad de tu negocio.",
-        srv3_title:"Planificación Fiscal",
-        srv3_desc:"Estrategias proactivas para minimizar obligaciones futuras y potenciar el crecimiento a largo plazo.",
-
-        // founder
-        founder_role:"CEO y Experta Fiscal",
-        founder_bio:"Más de 15 años de experiencia en impuestos en EEUU para individuos y empresas. Fundó DP Tax Preparation para hacer los taxes simples, seguros y rentables.",
-        training_title:"Certificados de Formación",
-        credentials_title:"Credenciales Oficiales del IRS",
-        cred_ptin:"PTIN Number (Preparadora Autorizada por IRS)",
-        cred_efin:"EFIN Number (Proveedor Autorizado de e-File)",
-
-        // process
-        process_title:"Proceso de Declaración Simplificado",
-        p1_title:"Consulta Inicial", p1_desc:"Evaluamos tu situación fiscal y asignamos un experto.",
-        p2_title:"Documentación Segura", p2_desc:"Carga fácilmente tus W-2, 1099 y otros documentos.",
-        p3_title:"Preparación y Revisión", p3_desc:"Preparamos tu declaración y la revisamos contigo.",
-        p4_title:"Presentación Final", p4_desc:"Presentamos electrónicamente tu declaración ante el IRS y hacemos seguimiento.",
-
-        // testimonials
-        testimonials_title:"Opiniones de Nuestros Clientes",
-        t1_text:"\"Excelente servicio: confiable y profesional. ¡Muy recomendado!\"",
-        t2_text:"\"Servicio fantástico! Hicieron que todo el proceso fuera rápido y sin estrés.\"",
-        t3_text:"\"Honestos, eficientes y detallistas. Volveré cada año.\"",
-
-        // faq
-	faq_title:"Preguntas Frecuentes",
-        faq_q1:"¿Cuándo vence el plazo para declarar impuestos?",
-faq_a1:"El plazo habitual para presentar la declaración federal es el 15 de abril. Si necesitas más tiempo, puedes solicitar una extensión antes de esa fecha.",
-faq_q2:"¿Qué pasa si no presento mi declaración a tiempo?",
-faq_a2:"Podrías recibir multas o intereses por retraso. Te ayudamos a presentar incluso si el plazo ya pasó o si necesitas regularizar años anteriores.",
-faq_q3:"¿Qué documentos necesito para declarar mis impuestos?",
-faq_a3:"Depende de tu situación, pero normalmente se requieren: Formulario W-2 (empleados) o 1099 (trabajadores independientes), identificación personal (SSN o ITIN), comprobantes de ingresos y gastos, e información de dependientes si aplica.",
-faq_q4:"¿Puedo declarar si no tengo número de Seguro Social (SSN)?",
-faq_a4:"Sí. Podemos ayudarte a obtener y usar un ITIN (Individual Taxpayer Identification Number) para cumplir con tus obligaciones fiscales.",
-faq_q5:"¿Aceptan documentos escaneados o fotografías?",
-faq_a5:"Sí. Puedes subirlos directamente desde tu teléfono o computadora de forma segura y cifrada.",
-faq_q6:"¿Es seguro compartir mi información en línea?",
-faq_a6:"Sí. Utilizamos cifrado SSL/TLS, servidores seguros y protocolos de privacidad alineados con los estándares del IRS. Tu información es confidencial y protegida.",
-faq_q7:"¿Mi información se comparte con otras empresas?",
-faq_a7:"No. Tus datos se usan únicamente para preparar y presentar tu declaración de impuestos.",
-faq_q8:"¿Cuánto tiempo tarda en llegar mi reembolso?",
-faq_a8:"El IRS suele procesar los reembolsos en un plazo de 7 a 21 días si la declaración se presenta electrónicamente.",
-faq_q9:"¿Cómo recibiré mi reembolso?",
-faq_a9:"Puedes elegir depósito directo, cheque físico, o una tarjeta de débito prepagada, según prefieras.",
-faq_q10:"¿Qué pasa si debo pagar impuestos?",
-faq_a10:"Podemos ayudarte a establecer un plan de pagos o hacer el pago directamente al IRS desde tu cuenta bancaria.",
-faq_q11:"¿Cuánto cuesta el servicio?",
-faq_a11:"El costo depende de la complejidad de tu declaración. Ofrecemos una evaluación gratuita antes de iniciar el proceso.",
-faq_q12:"¿Atienden a personas independientes o dueños de negocios?",
-faq_a12:"Sí. Preparamos declaraciones para empleados, contratistas independientes, negocios pequeños y trabajadores por cuenta propia.",
-faq_q13:"¿Puedo hacer mi declaración completamente en línea?",
-faq_a13:"Sí. Todo el proceso puede realizarse de forma virtual, desde el envío de documentos hasta la firma electrónica.",
-faq_q14:"¿Puedo agendar una cita en persona o por videollamada?",
-faq_a14:"Claro. Ofrecemos citas presenciales y virtuales según tu disponibilidad.",
-faq_q15:"¿Qué hago si no puedo declarar antes del 15 de abril?",
-faq_a15:"Podemos ayudarte a solicitar una extensión hasta el 15 de octubre, evitando multas por presentación tardía.",
-faq_q16:"¿Pueden ayudarme con declaraciones atrasadas?",
-faq_a16:"Sí. Podemos presentar tus declaraciones de años anteriores y ayudarte a ponerte al día con el IRS.",
-faq_q17:"¿Puedo declarar si vivo fuera de los Estados Unidos?",
-faq_a17:"Sí. Asistimos a residentes y no residentes con ingresos en EE.UU., incluyendo casos de expatriados.",
-faq_q18:"¿Ayudan a estudiantes o personas que declaran por primera vez?",
-faq_a18:"Sí. Te guiamos paso a paso para que tu primera declaración sea sencilla y correcta.",
-        // contact
-        contact_title:"Contáctanos",
-        contact_intro:"Escríbenos y muy pronto te responderemos.",
-        contact_address:"123 Tax Avenue, Miami, FL 33101",
-        contact_phone:"(910) 584-0478",
-        contact_email:"dorissmith@dptaxpreparation.com",
-        ph_name:"Nombre completo",
-        ph_email:"Correo electrónico",
-        ph_phone:"Teléfono (+1...)",
-        ph_message:"Escribe tu mensaje...",
-        sms_consent:"Acepto recibir notificaciones y mensajes SMS de DP Tax Preparation al número proporcionado.",
-        sms_note:"Pueden aplicarse tarifas de mensajes y datos.",
-        btn_send:"Enviar Mensaje",
-
-        // footer
-        footer_copy:"© 2024 DP Tax Preparation. Todos los derechos reservados.",
-
-        // form status
-        form_processing:"Procesando...",
-        form_success:"✅ ¡Mensaje enviado con éxito! Nos pondremos en contacto pronto.",
-        form_error:"❌ Error al enviar. Inténtalo nuevamente.",
-        form_hcaptcha_error: "Por favor, completa la verificación hCaptcha.", // Mensaje de error de hCaptcha
-        form_network:"❌ Error de red o servidor. Inténtalo otra vez."
-      }
-    };
-
-    function applyLanguage(lang){
-      // Text nodes
-      document.querySelectorAll("[data-i18n]").forEach(el=>{
-        const key=el.getAttribute("data-i18n");
-        if(translations[lang][key]!==undefined){
-          el.textContent = translations[lang][key];
-        }
-      });
-      // Placeholders
-      document.querySelectorAll("[data-i18n-placeholder]").forEach(el=>{
-        const key=el.getAttribute("data-i18n-placeholder");
-        if(translations[lang][key]!==undefined){
-          el.setAttribute("placeholder", translations[lang][key]);
-        }
-      });
-      // Document title
-      document.title = translations[lang].doc_title || document.title;
-
-      // Toggle active class on selectors
-      const enBtns=[document.getElementById('lang-en'), document.getElementById('mlang-en')];
-      const esBtns=[document.getElementById('lang-es'), document.getElementById('mlang-es')];
-      if(lang==='en'){
-        enBtns.forEach(b=>b?.classList.add('lang-active'));
-        esBtns.forEach(b=>b?.classList.remove('lang-active'));
-      }else{
-        enBtns.forEach(b=>b?.classList.remove('lang-active'));
-        esBtns.forEach(b=>b?.classList.add('lang-active'));
-      }
-      // Save preference
-      localStorage.setItem('site_lang', lang);
-
-      // Sync send button label if form exists
-      const submitBtn = document.getElementById('submit-button');
-      if (submitBtn && translations[lang].btn_send){
-        submitBtn.textContent = translations[lang].btn_send;
-      }
-    }
-
-    function setupLangControls(){
-      const setEN = () => { console.log('Cambiando a EN'); applyLanguage('en'); setTimeout(() => applyLanguage('en'), 200); };
-      const setES = () => { console.log('Cambiando a ES'); applyLanguage('es'); setTimeout(() => applyLanguage('es'), 200); };
-      document.getElementById('lang-en')?.addEventListener('click',setEN);
-      document.getElementById('lang-es')?.addEventListener('click',setES);
-      document.getElementById('mlang-en')?.addEventListener('click',setEN);
-      document.getElementById('mlang-es')?.addEventListener('click',setES);
-    }
-
-    // Init language
+    // --- Configuración de Idioma ---
     const saved = localStorage.getItem('site_lang') || 'en';
-    document.addEventListener('DOMContentLoaded', ()=>{
-      setupLangControls();
-      applyLanguage(saved);
-    });
+    setupLangControls();
+    applyLanguage(saved);
+  });
 
- // --- AJAX submit for hCaptcha ---
-const form = document.getElementById('contact-form');
-const submitBtn = document.getElementById('submit-button');
-const msgBox = document.getElementById('form-message');
-
-form?.addEventListener('submit', async (e)=>{
-  e.preventDefault();
-  const lang = localStorage.getItem('site_lang') || 'en';
-  const t = translations[lang];
-
-  if(submitBtn){
-    submitBtn.disabled = true;
-    submitBtn.textContent = t.form_processing;
-  }
-  msgBox.className = 'mt-4 p-3 rounded text-center font-semibold bg-white/20 text-white block';
-  msgBox.textContent = t.form_processing;
-
-  try{
-    // Crear objeto JSON en lugar de FormData
-    const formData = {
-      name: form.querySelector('[name="name"]').value,
-      email: form.querySelector('[name="email"]').value,
-      phone: form.querySelector('[name="phone"]').value,
-      message: form.querySelector('[name="message"]').value,
-      sms_consent: form.querySelector('[name="sms_consent"]').checked
-    };
-    
-    // Verificación hCaptcha
-    if (typeof hcaptcha !== 'undefined') {
-      const hcaptchaResponse = hcaptcha.getResponse();
-      if (!hcaptchaResponse) {
-        throw new Error(t.form_hcaptcha_error || 'Please complete the hCaptcha verification.');
-      }
-      formData['h-captcha-response'] = hcaptchaResponse;
-    }
-    
-    const res = await fetch(form.action, {
-      method: 'POST',
-      headers: {
-        'Content-Type': 'application/json',
-      },
-      body: JSON.stringify(formData)
-    });
-    
-    let data = null; 
-    try{ 
-      data = await res.json(); 
-    } catch(jsonError){
-      console.error('Error parseando JSON:', jsonError);
-      throw new Error(t.form_network || 'Network or server error. Try again.');
-    }
-
-    if (data && data.success){
-      msgBox.className = 'mt-4 p-3 rounded text-center font-semibold bg-green-600 text-white';
-      msgBox.textContent = t.form_success;
-      form.reset();
-      if (typeof hcaptcha !== 'undefined') hcaptcha.reset();
-    } else {
-      msgBox.className = 'mt-4 p-3 rounded text-center font-semibold bg-red-600 text-white';
-      msgBox.textContent = data?.message || t.form_error;
-      if (typeof hcaptcha !== 'undefined') hcaptcha.reset();
-    }
-  } catch (err){
-    console.error('Error en fetch:', err);
-    msgBox.className = 'mt-4 p-3 rounded text-center font-semibold bg-red-600 text-white';
-    msgBox.textContent = err.message || t.form_network;
-    if (typeof hcaptcha !== 'undefined') hcaptcha.reset();
-  }
-    finally {
-    if(submitBtn){
-      const lang2 = localStorage.getItem('site_lang') || 'en';
-      submitBtn.textContent = translations[lang2].btn_send;
-      submitBtn.disabled = false;
-    }
-  }
-});
-  
-  </script>
+ // --- BLOQUE DE AJAX SUBMIT ELIMINADO ---
+ 
+</script>
 </body>
-
 </html>
-
-
-
-
-
-
-
