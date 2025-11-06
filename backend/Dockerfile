@@ -15,8 +15,7 @@ RUN echo '<?php function __autoload($class) { include str_replace("\\\\", "/", $
 RUN echo '{}' > composer.json
 
 # Exponer puerto
-ENV PORT=8080
 EXPOSE 8080
 
-# Iniciar servidor PHP integrado
-CMD ["php", "-S", "0.0.0.0:$PORT", "api.php"]
+# CAMBIO AQUÍ: Puerto fijo en lugar de variable
+CMD ["php", "-S", "0.0.0.0:8080", "api.php"]
