@@ -11,10 +11,9 @@
   <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;600;700;800&display=swap" rel="stylesheet">
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
   
-  <!-- ========================================================== -->
-  <!-- 1. SCRIPT DE WEB3FORMS (MÉTODO CON 'onload' para asegurar la carga) -->
+  <!-- 1. WEB3FORMS SCRIPT -->
+  <!-- Esto carga el sistema de Web3Forms, incluyendo el inyector de Captcha -->
   <script src="https://web3forms.com/client/script.js" async defer></script>
-  <!-- ========================================================== -->
 
   <style>
     :root{
@@ -534,10 +533,10 @@
       </div>
 
       <!-- ========================================================== -->
-      <!-- HCAPTCHA CORREGIDO (USANDO EL SITEKEY ESPECÍFICO DE WEB3FORMS) -->
-      <!-- Esta línea OBLIGA al sistema a cargar el Captcha -->
+      <!-- HCAPTCHA FINAL CORREGIDO (MÉTODO SIMPLE QUE SI CARGA EL WIDGET) -->
+      <!-- Esto sí carga la caja del Captcha. -->
       <div class="h-captcha mb-2" 
-           data-sitekey="50b2fe65-b00b-4b9e-ad62-3ba471098be2">
+           data-captcha="true">
       </div>
       <!-- Nuevo campo de error para el Captcha (oculto por defecto) -->
       <p id="captcha-error" class="text-sm font-semibold text-red-400 hidden mb-4" data-i18n="form_hcaptcha_error">
@@ -635,91 +634,6 @@
       faq_a18:"Yes. We guide you step by step so your first return is simple and correct.",
       contact_title:"Contact Us",
       contact_intro:"Write to us and we'll get back to you shortly.",
-      contact_address:"123 Tax Avenue, Miami, FL 33101",
-      contact_phone:"(910) 584-0478",
-      contact_email:"dorissmith@dptaxpreparation.com",
-      ph_name:"Full name",
-      ph_email:"Email address",
-      ph_phone:"Phone (+1...)",
-      ph_message:"Write your message...",
-      sms_consent:"I agree to receive notifications and SMS messages from DP Tax Preparation at the phone number provided.",
-      sms_note:"Message and data rates may apply.",
-      btn_send:"Send Message",
-      footer_copy:"© 2024 DP Tax Preparation. All rights reserved.",
-      form_processing:"Processing...",
-      form_success:"✅ Message sent successfully! We'll contact you soon.",
-      form_error:"❌ Error sending. Please try again.",
-      form_hcaptcha_error: "Please complete the hCaptcha verification.", 
-      form_network:"❌ Network or server error. Try again."
-    },
-    es: {
-      doc_title: "DP Tax Preparation – Declaración de Impuestos en EEUU sin Estrés",
-      nav_home:"Inicio", nav_services:"Servicios", nav_founder:"Fundadora", nav_process:"Proceso",
-      nav_clients:"Clientes", nav_faq:"FAQ", nav_contact:"Contacto",
-      hero_title1:"Declaración de",
-      hero_title2:"Impuestos en EEUU sin Estrés",
-      hero_sub:"Expertos en preparación de taxes para individuos y empresas. Maximizamos tus reembolsos y garantizamos el cumplimiento.",
-      services_title:"Nuestros Servicios",
-      srv1_title:"Declaración Personal",
-      srv1_desc:"Preparación completa del Formulario 1040 con todas las deducciones y créditos aplicables.",
-      srv2_title:"Declaración Empresarial",
-      srv2_desc:"Impuestos para corporaciones, LLCs y sociedades. Gestionamos la complejidad de tu negocio.",
-      srv3_title:"Planificación Fiscal",
-      srv3_desc:"Estrategias proactivas para minimizar obligaciones futuras y potenciar el crecimiento a largo plazo.",
-      founder_role:"CEO y Experta Fiscal",
-      founder_bio:"Más de 15 años de experiencia en impuestos en EEUU para individuos y empresas. Fundó DP Tax Preparation para hacer los taxes simples, seguros y rentables.",
-      training_title:"Certificados de Formación",
-      credentials_title:"Credenciales Oficiales del IRS",
-      cred_ptin:"PTIN Number (Preparadora Autorizada por IRS)",
-      cred_efin:"EFIN Number (Proveedor Autorizado de e-File)",
-      process_title:"Proceso de Declaración Simplificado",
-      p1_title:"Consulta Inicial", p1_desc:"Evaluamos tu situación fiscal y asignamos un experto.",
-      p2_title:"Documentación Segura", p2_desc:"Carga fácilmente tus W-2, 1099 y otros documentos.",
-      p3_title:"Preparación y Revisión", p3_desc:"Preparamos tu declaración y la revisamos contigo.",
-      p4_title:"Presentación Final", p4_desc:"Presentamos electrónicamente tu declaración ante el IRS y hacemos seguimiento.",
-      testimonials_title:"Opiniones de Nuestros Clientes",
-      t1_text:"\"Excelente servicio: confiable y profesional. ¡Muy recomendado!\"",
-      t2_text:"\"Servicio fantástico! Hicieron que todo el proceso fuera rápido y sin estrés.\"",
-      t3_text:"\"Honestos, eficientes y detallistas. Volveré cada año.\"",
-	  faq_title:"Preguntas Frecuentes",
-      faq_q1:"¿Cuándo vence el plazo para declarar impuestos?",
-      faq_a1:"El plazo habitual para presentar la declaración federal es el 15 de abril. Si necesitas más tiempo, puedes solicitar una extensión antes de esa fecha.",
-      faq_q2:"¿Qué pasa si no presento mi declaración a tiempo?",
-      faq_a2:"Podrías recibir multas o intereses por retraso. Te ayudamos a presentar incluso si el plazo ya pasó o si necesitas regularizar años anteriores.",
-      faq_q3:"¿Qué documentos necesito para declarar mis impuestos?",
-      faq_a3:"Depende de tu situación, pero normalmente se requieren: Formulario W-2 (empleados) o 1099 (trabajadores independientes), identificación personal (SSN o ITIN), comprobantes de ingresos y gastos, e información de dependientes si aplica.",
-      faq_q4:"¿Puedo declarar si no tengo número de Seguro Social (SSN)?",
-      faq_a4:"Sí. Podemos ayudarte a obtener y usar un ITIN (Individual Taxpayer Identification Number) para cumplir con tus obligaciones fiscales.",
-      faq_q5:"¿Aceptan documentos escaneados o fotografías?",
-      faq_a5:"Sí. Puedes subirlos directamente desde tu teléfono o computadora de forma segura y cifrada.",
-      faq_q6:"¿Es seguro compartir mi información en línea?",
-      faq_a6:"Sí. Utilizamos cifrado SSL/TLS, servidores seguros y protocolos de privacidad alineados con los estándares del IRS. Tu información es confidencial y protegida.",
-      faq_q7:"¿Mi información se comparte con otras empresas?",
-      faq_a7:"No. Tus datos se usan únicamente para preparar y presentar tu declaración de impuestos.",
-      faq_q8:"¿Cuánto tiempo tarda en llegar mi reembolso?",
-      faq_a8:"El IRS suele procesar los reembolsos en un plazo de 7 a 21 días si la declaración se presenta electrónicamente.",
-      faq_q9:"¿Cómo recibiré mi reembolso?",
-      faq_a9:"Puedes elegir depósito directo, cheque físico, o una tarjeta de débito prepagada, según prefieras.",
-      faq_q10:"¿Qué pasa si debo pagar impuestos?",
-      faq_a10:"Podemos ayudarte a establecer un plan de pagos o hacer el pago directamente al IRS desde tu cuenta bancaria.",
-      faq_q11:"¿Cuánto cuesta el servicio?",
-      faq_a11:"El costo depende de la complejidad de tu declaración. Ofrecemos una evaluación gratuita antes de iniciar el proceso.",
-      faq_q12:"¿Atienden a personas independientes o dueños de negocios?",
-      faq_a12:"Sí. Preparamos declaraciones para empleados, contratistas independientes, negocios pequeños y trabajadores por cuenta propia.",
-      faq_q13:"¿Puedo hacer mi declaración completamente en línea?",
-      faq_a13:"Sí. Todo el proceso puede realizarse de forma virtual, desde el envío de documentos hasta la firma electrónica.",
-      faq_q14:"¿Puedo agendar una cita en persona o por videollamada?",
-      faq_a14:"Claro. Ofrecemos citas presenciales y virtuales según tu disponibilidad.",
-      faq_q15:"¿Qué hago si no puedo declarar antes del 15 de abril?",
-      faq_a15:"Podemos ayudarte a solicitar una extensión hasta el 15 de octubre, evitando multas por presentación tardía.",
-      faq_q16:"¿Pueden ayudarme con declaraciones atrasadas?",
-      faq_a16:"Sí. Podemos presentar tus declaraciones de años anteriores y ayudarte a ponerte al día con el IRS.",
-      faq_q17:"¿Puedo declarar si vivo fuera de los Estados Unidos?",
-      faq_a17:"Sí. Asistimos a residentes y no residentes con ingresos en EE.UU., incluyendo casos de expatriados.",
-      faq_q18:"¿Ayudan a estudiantes o personas que declaran por primera vez?",
-      faq_a18:"Sí. Te guiamos paso a paso para que tu primera declaración sea sencilla y correcta.",
-      contact_title:"Contáctanos",
-      contact_intro:"Escríbenos y muy pronto te responderemos.",
       contact_address:"123 Tax Avenue, Miami, FL 33101",
       contact_phone:"(910) 584-0478",
       contact_email:"dorissmith@dptaxpreparation.com",
