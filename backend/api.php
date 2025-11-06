@@ -11,12 +11,7 @@ header("Access-Control-Allow-Origin: *");
 header("Access-Control-Allow-Methods: POST, OPTIONS");
 header("Access-Control-Allow-Headers: Content-Type");
 header("Content-Type: application/json");
-// Después de la línea header("Content-Type: application/json");
-error_log("Datos recibidos: " . print_r($_POST, true));
-error_log("Variables ENV: " . print_r([
-    'smtp_host' => $smtp_host,
-    'h-captcha_secret_set' => !empty($h-captcha_secret)
-], true));
+
 // Manejar la solicitud OPTIONS (pre-flight)
 if ($_SERVER['REQUEST_METHOD'] == 'OPTIONS') {
     exit(0);
@@ -27,7 +22,7 @@ $smtp_host = getenv('SMTP_HOST');
 $smtp_port = (int)getenv('SMTP_PORT');
 $smtp_user = getenv('SMTP_USER');
 $smtp_pass = getenv('SMTP_PASS');
-$h-captcha_secret = getenv('H-CAPTCHA_SECRET_KEY');
+$hcaptcha_secret = getenv('HCAPTCHA_SECRET_KEY'); // CORREGIDO: sin guión
 $mail_to = getenv('MAIL_TO');
 
 // --- Función para devolver JSON y salir ---
@@ -51,10 +46,18 @@ $email = isset($_POST['email']) ? filter_var($_POST['email'], FILTER_SANITIZE_EM
 $phone = isset($_POST['phone']) ? htmlspecialchars($_POST['phone']) : '';
 $message = isset($_POST['message']) ? htmlspecialchars($_POST['message']) : '';
 $sms_consent = isset($_POST['sms_consent']) ? 'Sí' : 'No';
-$h-captcha_response = isset($_POST['h-captcha-response']) ? $_POST['h-captcha-response'] : '';
+$hcaptcha_response = isset($_POST['h-captcha-response']) ? $_POST['h-captcha-response'] : ''; // CORREGIDO
+
+// --- 1. Validar hCaptcha ---
+if (empty($hcaptcha_response)) {
+    send_json(false, "Por favor, completa la verificación hCaptcha.");
+}
+
+if (empty($hcaptcha_secret)) {
+    send_json(false, "HCAPTCHA_SECRET_KEY no configurada en el servidor.");
+}
 
 // Validar con hCaptcha
-$hcaptcha_secret = getenv('HCAPTCHA_SECRET_KEY'); // Agregar esta variable a tu entorno
 $hcaptcha_verify = file_get_contents("https://hcaptcha.com/siteverify?secret=" . $hcaptcha_secret . "&response=" . $hcaptcha_response);
 $hcaptcha_result = json_decode($hcaptcha_verify, true);
 
@@ -102,6 +105,3 @@ try {
     send_json(false, "Error al enviar el correo.", ['smtp_error' => $mail->ErrorInfo]);
 }
 ?>
-
-
-
