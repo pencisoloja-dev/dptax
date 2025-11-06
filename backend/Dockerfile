@@ -1,4 +1,4 @@
-FROM php:8.1-apache
+FROM php:8.1-cli
 
 # Solo instalar herramientas adicionales necesarias
 RUN apt-get update && apt-get install -y \
@@ -11,22 +11,22 @@ RUN apt-get update && apt-get install -y \
 # Instalar Composer manualmente
 RUN curl -sS https://getcomposer.org/installer | php -- --install-dir=/usr/local/bin --filename=composer
 
-WORKDIR /var/www/html
+WORKDIR /app
 
-# Copiar composer.json primero
+# Copiar composer.json primero y verificar que se copió
 COPY composer.json ./
+RUN ls -la composer.json && cat composer.json
 
-# Instalar dependencias de Composer
-RUN composer install --no-interaction --no-dev --optimize-autoloader
+# Instalar dependencias de Composer con verbose para ver el error
+RUN composer install --no-interaction --no-dev --optimize-autoloader -vvv
 
 # Copiar el resto de los archivos de la aplicación
 COPY api.php ./
 COPY index.php ./
 
-# Configurar Apache para el puerto 8080
-RUN echo "Listen 8080" >> /etc/apache2/ports.conf
-RUN sed -i 's/80/8080/g' /etc/apache2/sites-available/000-default.conf /etc/apache2/ports.conf
-
+# Exponer puerto
+ENV PORT=8080
 EXPOSE 8080
 
-CMD ["apache2-foreground"]
+# Iniciar servidor PHP integrado
+CMD ["php", "-S", "0.0.0.0:$PORT", "api.php"]
