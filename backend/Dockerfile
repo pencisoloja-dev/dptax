@@ -10,19 +10,22 @@ RUN apt-get update && apt-get install -y \
     unzip \
     && rm -rf /var/lib/apt/lists/*
 
-# Descargar e instalar PHPMailer manualmente - CORREGIDO
+# Descargar e instalar PHPMailer manualmente
 RUN curl -L https://github.com/PHPMailer/PHPMailer/archive/refs/tags/v6.9.1.tar.gz -o phpmailer.tar.gz \
     && tar -xzf phpmailer.tar.gz \
     && mkdir -p vendor/phpmailer/phpmailer \
     && cp -r PHPMailer-6.9.1/src/* vendor/phpmailer/phpmailer/ \
     && rm -rf phpmailer.tar.gz PHPMailer-6.9.1
 
-# Verificar que los archivos se copiaron correctamente
+# Verificar que los archivos se copiaron
 RUN ls -la vendor/phpmailer/phpmailer/
 
 # Copiar archivos de la aplicación
 COPY api.php ./
 COPY index.php ./
+
+# VERIFICAR QUÉ HAY EN EL CONTENEDOR FINAL
+RUN ls -la /app/
 
 # Exponer puerto
 EXPOSE 8080
