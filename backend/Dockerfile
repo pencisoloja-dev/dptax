@@ -1,21 +1,20 @@
 FROM php:8.1-cli-bullseye
 
-# Instalar dependencias del sistema
+# Instalar extensiones PHP usando apt (no docker-php-ext-install)
 RUN apt-get update && apt-get install -y \
+    php8.1-zip \
+    php8.1-dom \
+    php8.1-xml \
+    php8.1-mbstring \
+    php8.1-curl \
     git \
     curl \
     zip \
     unzip \
-    libzip-dev \
-    libxml2-dev \
-    libonig-dev \
-    libssl-dev \
-    && rm -rf /var/lib/apt/lists/*
+    && rm -rf /var/lib/apt/lists/* \
+    && apt-get clean
 
-# Instalar extensiones PHP
-RUN docker-php-ext-install zip dom xml mbstring openssl curl
-
-# Instalar Composer globalmente
+# Instalar Composer globalmente (si no se instaló via apt)
 RUN curl -sS https://getcomposer.org/installer | php -- --install-dir=/usr/local/bin --filename=composer
 
 WORKDIR /app
