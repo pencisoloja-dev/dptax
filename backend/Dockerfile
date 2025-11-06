@@ -1,32 +1,40 @@
-# Usar una imagen base oficial de PHP 7.4 (CLI)
-# Usamos 7.4 porque tu composer.json lo especifica
-FROM php:7.4-cli-alpine
+FROM php:8.1-cli-alpine
 
-# Instalar dependencias necesarias para Composer y Git
-RUN apk add --no-cache git
+# Instalar dependencias del OS (git, curl)
+# Y AÑADIR extensiones de PHP (json es vital para composer)
+RUN apk add --no-cache \
+    openssl \
+    ca-certificates \
+    git \
+    curl \
+    php81-json \
+    php81-mbstring \
+    php81-curl \
+    php81-openssl \
+    php81-dom \
+    php81-xml \
+    php81-zip
 
-# Instalar Composer (el gestor de paquetes de PHP)
+# Instalar Composer globalmente
 RUN curl -sS https://getcomposer.org/installer | php -- --install-dir=/usr/local/bin --filename=composer
 
-# Establecer el directorio de trabajo dentro del contenedor
 WORKDIR /app
 
-# Copiar solo el composer.json para instalar dependencias
+# Copiar composer.json primero
 COPY composer.json ./
 
-# Instalar las dependencias de PHP (PHPMailer)
-# --no-dev: omite paquetes de desarrollo
-# --optimize-autoloader: optimiza para producción
-RUN composer install --no-dev --optimize-autoloader
+# Instalar dependencias de Composer (PHPMailer)
+# Esto ahora funcionará porque tiene las extensiones
+RUN composer install --no-interaction --no-dev --optimize-autoloader
 
-# Copiar el resto del código de tu aplicación (api.php, index.php)
-COPY . .
+# Copiar el resto de los archivos de la aplicación
+COPY api.php ./
+COPY index.php ./
 
-# EasyPanel asignará un $PORT automáticamente. 
-# Definimos uno por defecto por si acaso.
-ENV PORT 8080
+# Exponer puerto (EasyPanel usará $PORT, 8080 es el fallback)
+# Corregido el formato de ENV por la advertencia (warning)
+ENV PORT=8080
 EXPOSE 8080
 
-# Este es el comando para iniciar tu API, tomado de tu composer.json
-# Inicia el servidor web incorporado de PHP
-CMD [ "php", "-S", "0.0.0.0:$PORT", "index.php" ]
+# Iniciar servidor ejecutando api.php directamente (más estable)
+CMD ["php", "-S", "0.0.0.0:$PORT", "api.php"]
