@@ -44,8 +44,7 @@
     .lang-active{color:var(--accent); font-weight:700;}
 
     /* === Fix: títulos iguales en tarjetas de Servicios (medibles) === */
-    {
-  @media (max-width: 768px){
+    @media (max-width: 768px){
   .service-title{ 
     font-size: 1rem !important;
     min-height: 3rem;
@@ -242,17 +241,17 @@
       <div class="grid md:grid-cols-3 gap-10 mt-10">
         <div class="bg-white shadow-xl rounded-xl p-8">
           <img src="https://placehold.co/100x100/e8e8e8/333?text=E" alt="" class="w-24 h-24 mx-auto rounded-full mb-4">
-          <p class="italic text-gray-600 mb-4" data-i18n="t1_text">“Excellent service — reliable and professional. Highly recommended!”</p>
+          <p class="italic text-gray-600 mb-4" data-i18n="t1_text">"Excellent service — reliable and professional. Highly recommended!"</p>
           <h4 class="font-bold text-[var(--primary)]">Erika Barrera</h4>
         </div>
         <div class="bg-white shadow-xl rounded-xl p-8">
           <img src="https://placehold.co/100x100/e8e8e8/333?text=A" alt="" class="w-24 h-24 mx-auto rounded-full mb-4">
-          <p class="italic text-gray-600 mb-4" data-i18n="t2_text">“Fantastic service! They made the whole process quick and stress-free.”</p>
+          <p class="italic text-gray-600 mb-4" data-i18n="t2_text">"Fantastic service! They made the whole process quick and stress-free."</p>
           <h4 class="font-bold text-[var(--primary)]">Andrés Vargas</h4>
         </div>
         <div class="bg-white shadow-xl rounded-xl p-8">
 			<img src="https://placehold.co/100x100/e8e8e8/333?text=C" alt="" class="w-24 h-24 mx-auto rounded-full mb-4">
-          <p class="italic text-gray-600 mb-4" data-i18n="t3_text">“Honest, efficient, and detail-oriented. I’ll return every year.”</p>
+          <p class="italic text-gray-600 mb-4" data-i18n="t3_text">"Honest, efficient, and detail-oriented. I'll return every year."</p>
           <h4 class="font-bold text-[var(--primary)]">Consuelo Angel</h4>
         </div>
       </div>
@@ -453,7 +452,7 @@
       <div>
   <h2 class="text-4xl font-extrabold mb-6 text-white" data-i18n="contact_title">Contact Us</h2>
   <p class="text-lg mb-8" data-i18n="contact_intro">
-    Write to us and we’ll get back to you shortly.
+    Write to us and we'll get back to you shortly.
   </p>
 
   <div class="space-y-4 mb-10">
@@ -614,9 +613,9 @@
 
         // testimonials
         testimonials_title:"What Our Clients Say",
-        t1_text:"“Excellent service — reliable and professional. Highly recommended!”",
-        t2_text:"“Fantastic service! They made the whole process quick and stress-free.”",
-        t3_text:"“Honest, efficient, and detail-oriented. I’ll return every year.”",
+        t1_text:"\"Excellent service — reliable and professional. Highly recommended!\"",
+        t2_text:"\"Fantastic service! They made the whole process quick and stress-free.\"",
+        t3_text:"\"Honest, efficient, and detail-oriented. I'll return every year.\"",
 
         // faq
         faq_title:"Frequently Asked Questions",
@@ -673,7 +672,7 @@ faq_a18:"Yes. We guide you step by step so your first return is simple and corre
 
         // contact
         contact_title:"Contact Us",
-        contact_intro:"Write to us and we’ll get back to you shortly.",
+        contact_intro:"Write to us and we'll get back to you shortly.",
         contact_address:"123 Tax Avenue, Miami, FL 33101",
         contact_phone:"(910) 584-0478",
         contact_email:"dorissmith@dptaxpreparation.com",
@@ -690,7 +689,7 @@ faq_a18:"Yes. We guide you step by step so your first return is simple and corre
 
         // form status
         form_processing:"Processing...",
-        form_success:"✅ Message sent successfully! We’ll contact you soon.",
+        form_success:"✅ Message sent successfully! We'll contact you soon.",
         form_error:"❌ Error sending. Please try again.",
         form_network:"❌ Network or server error. Try again."
       },
@@ -733,9 +732,9 @@ faq_a18:"Yes. We guide you step by step so your first return is simple and corre
 
         // testimonials
         testimonials_title:"Opiniones de Nuestros Clientes",
-        t1_text:"“Excelente servicio: confiable y profesional. ¡Muy recomendado!”",
-        t2_text:"“Servicio fantástico! Hicieron que todo el proceso fuera rápido y sin estrés.”",
-        t3_text:"“Honestos, eficientes y detallistas. Volveré cada año.”",
+        t1_text:"\"Excelente servicio: confiable y profesional. ¡Muy recomendado!\"",
+        t2_text:"\"Servicio fantástico! Hicieron que todo el proceso fuera rápido y sin estrés.\"",
+        t3_text:"\"Honestos, eficientes y detallistas. Volveré cada año.\"",
 
         // faq
 	faq_title:"Preguntas Frecuentes",
@@ -874,7 +873,7 @@ form?.addEventListener('submit', async (e)=>{
   try{
     const fd = new FormData(form);
     
-    // CAMBIO: Usar hCaptcha en vez de reCAPTCHA
+    // hCaptcha verification
     if (typeof hcaptcha !== 'undefined') {
       const hcaptchaResponse = hcaptcha.getResponse();
       if (!hcaptchaResponse) {
@@ -895,7 +894,7 @@ form?.addEventListener('submit', async (e)=>{
       msgBox.className = 'mt-4 p-3 rounded text-center font-semibold bg-green-600 text-white';
       msgBox.textContent = t.form_success;
       form.reset();
-      // CAMBIO: Reset hCaptcha en vez de reCAPTCHA
+      // Reset hCaptcha
       if (typeof hcaptcha !== 'undefined') hcaptcha.reset();
     } else {
       msgBox.className = 'mt-4 p-3 rounded text-center font-semibold bg-red-600 text-white';
@@ -918,37 +917,3 @@ form?.addEventListener('submit', async (e)=>{
 </body>
 
 </html>
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
