@@ -3,27 +3,29 @@
 error_reporting(E_ALL);
 ini_set('display_errors', 1);
 
-// --- Configuración de CORS y Headers ---
-header("Access-Control-Allow-Origin: *");
-header("Access-Control-Allow-Methods: POST, GET, OPTIONS");
-header("Access-Control-Allow-Headers: Content-Type, Authorization, X-Requested-With, Origin, Accept");
-
 // --- Manejar la solicitud OPTIONS (pre-flight) ---
+// El navegador envía esto ANTES de la solicitud POST
 if ($_SERVER['REQUEST_METHOD'] == 'OPTIONS') {
     //
-    // --- ESTA ES LA CORRECCIÓN ---
-    // Respondemos con 204 (No Content), que es la forma más limpia
-    // de manejar preflight. Indica "permiso concedido" sin
-    // necesidad de un cuerpo de respuesta y evita el header 'text/html'.
+    // --- ESTA ES LA CORRECCIÓN CLAVE ---
+    // Volvemos a poner los headers de permiso, pero *dentro*
+    // del bloque OPTIONS, para asegurar que se envíen con el 204.
     //
+    header("Access-Control-Allow-Origin: *");
+    header("Access-Control-Allow-Methods: POST, GET, OPTIONS");
+    header("Access-Control-Allow-Headers: Content-Type, Authorization, X-Requested-With, Origin, Accept");
+    
+    // Respondemos con 204 (No Content)
     http_response_code(204); 
     exit; // Termina el script.
 }
 
 // --- De aquí en adelante, SÓLO se ejecuta para POST o GET ---
 
-// Ahora sí, establecemos que la respuesta será JSON
-header("Content-Type: application/json");
+// --- Configuración de Headers para respuestas REALES (POST/GET) ---
+// Nota: 'Allow-Origin' se pone de nuevo por si acaso es una solicitud 'simple'
+header("Access-Control-Allow-Origin: *");
+header("Content-Type: application/json"); // La respuesta real SÍ es JSON
 
 // Para debugging - responder a GET requests
 if ($_SERVER['REQUEST_METHOD'] == 'GET') {
