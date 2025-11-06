@@ -1,21 +1,40 @@
-FROM php:8.1-apache-bullseye
+FROM php:8.1-cli-alpine
 
-# Usar la imagen Debian-based en lugar de Alpine
-RUN apt-get update && apt-get install -y \
+# Actualizar los repositorios e instalar herramientas de compilación
+RUN apk update && apk add --no-cache \
+    # Herramientas de compilación esenciales
+    autoconf g++ make \
+    # Dependencias para extensiones PHP
+    openssl-dev \
+    curl-dev \
+    libxml2-dev \
+    libzip-dev \
+    oniguruma-dev \
+    zlib-dev \
+    # Utilidades
     git \
     curl \
     zip \
-    unzip \
-    libzip-dev \
-    libxml2-dev \
-    libonig-dev \
-    && docker-php-ext-install zip dom xml mbstring openssl curl \
-    && apt-get clean
+    unzip
+
+# Configurar e instalar extensiones PHP paso a paso
+RUN docker-php-ext-configure zip && \
+    docker-php-ext-install zip
+
+RUN docker-php-ext-install dom
+
+RUN docker-php-ext-install xml
+
+RUN docker-php-ext-install mbstring
+
+RUN docker-php-ext-install openssl
+
+RUN docker-php-ext-install curl
 
 # Instalar Composer globalmente
 RUN curl -sS https://getcomposer.org/installer | php -- --install-dir=/usr/local/bin --filename=composer
 
-WORKDIR /var/www/html
+WORKDIR /app
 
 # Copiar composer.json primero
 COPY composer.json ./
@@ -27,11 +46,9 @@ RUN composer install --no-interaction --no-dev --optimize-autoloader
 COPY api.php ./
 COPY index.php ./
 
-# Configurar Apache para usar el puerto 8080
-RUN echo "Listen 8080" >> /etc/apache2/ports.conf
-RUN sed -i 's/80/8080/g' /etc/apache2/sites-available/000-default.conf /etc/apache2/ports.conf
-
+# Exponer puerto
+ENV PORT=8080
 EXPOSE 8080
 
-# Usar el entrypoint por defecto de Apache
-CMD ["apache2-foreground"]
+# Iniciar servidor ejecutando api.php directamente
+CMD ["php", "-S", "0.0.0.0:$PORT", "api.php"]
