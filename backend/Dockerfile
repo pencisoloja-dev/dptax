@@ -1,32 +1,26 @@
 FROM php:8.1-cli-alpine
 
-# Instalar dependencias del sistema
+# Instalar dependencias
 RUN apk add --no-cache \
     openssl \
     ca-certificates \
-    git \
-    unzip \
-    zip \
-    libzip-dev
-
-# Instalar extensión zip de PHP
-RUN docker-php-ext-install zip
-
-# Instalar Composer desde la imagen oficial
-COPY --from=composer:2 /usr/bin/composer /usr/bin/composer
+    git
 
 WORKDIR /app
 
-# Copiar SOLO los archivos necesarios
-COPY composer.json ./
+# Copiar archivos de la aplicación
 COPY api.php ./
 COPY index.php ./
 
-# Verificar que composer funciona
-RUN composer --version
+# Descargar PHPMailer directamente desde GitHub
+RUN mkdir -p vendor/phpmailer/phpmailer && \
+    cd vendor/phpmailer/phpmailer && \
+    wget -q https://github.com/PHPMailer/PHPMailer/archive/refs/tags/v6.9.1.tar.gz && \
+    tar -xzf v6.9.1.tar.gz --strip-components=1 && \
+    rm v6.9.1.tar.gz
 
-# Instalar dependencias PHP
-RUN composer install --no-dev --optimize-autoloader --ignore-platform-reqs -vvv
+# Crear autoload manual
+RUN echo '<?php spl_autoload_register(function($class) { $prefix = "PHPMailer\\\\PHPMailer\\\\"; $base_dir = __DIR__ . "/phpmailer/phpmailer/src/"; $len = strlen($prefix); if (strncmp($prefix, $class, $len) !== 0) return; $relative_class = substr($class, $len); $file = $base_dir . str_replace("\\\\", "/", $relative_class) . ".php"; if (file_exists($file)) require $file; });' > vendor/autoload.php
 
 # Exponer puerto
 EXPOSE 8080
