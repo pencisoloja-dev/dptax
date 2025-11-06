@@ -4,19 +4,20 @@ error_reporting(E_ALL);
 ini_set('display_errors', 1);
 
 // --- Configuración de CORS y Headers ---
-// Permitir cualquier origen
 header("Access-Control-Allow-Origin: *");
-// Permitir los métodos que usaremos
 header("Access-Control-Allow-Methods: POST, GET, OPTIONS");
-// Permitir los headers que el frontend (JS) envía
 header("Access-Control-Allow-Headers: Content-Type, Authorization, X-Requested-With, Origin, Accept");
 
 // --- Manejar la solicitud OPTIONS (pre-flight) ---
-// El navegador envía esto ANTES de la solicitud POST
 if ($_SERVER['REQUEST_METHOD'] == 'OPTIONS') {
-    // Simplemente respondemos que 'sí' a los permisos y terminamos.
-    http_response_code(200); // 200 (OK)
-    exit; // Termina el script. No procesar nada más.
+    //
+    // --- ESTA ES LA CORRECCIÓN ---
+    // Respondemos con 204 (No Content), que es la forma más limpia
+    // de manejar preflight. Indica "permiso concedido" sin
+    // necesidad de un cuerpo de respuesta y evita el header 'text/html'.
+    //
+    http_response_code(204); 
+    exit; // Termina el script.
 }
 
 // --- De aquí en adelante, SÓLO se ejecuta para POST o GET ---
