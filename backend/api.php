@@ -53,45 +53,13 @@ $message = isset($_POST['message']) ? htmlspecialchars($_POST['message']) : '';
 $sms_consent = isset($_POST['sms_consent']) ? 'Sí' : 'No';
 $recaptcha_response = isset($_POST['g-recaptcha-response']) ? $_POST['g-recaptcha-response'] : '';
 
-// --- 1. Validar reCAPTCHA ---
-if (empty($recaptcha_response)) {
-    send_json(false, "Token de reCAPTCHA no recibido.");
-}
+// Validar con hCaptcha
+$hcaptcha_secret = getenv('HCAPTCHA_SECRET_KEY'); // Agregar esta variable a tu entorno
+$hcaptcha_verify = file_get_contents("https://hcaptcha.com/siteverify?secret=" . $hcaptcha_secret . "&response=" . $hcaptcha_response);
+$hcaptcha_result = json_decode($hcaptcha_verify, true);
 
-if (empty($recaptcha_secret)) {
-    send_json(false, "RECAPTCHA_SECRET_KEY no configurada en el servidor.", ['env_missing' => true]);
-}
-
-$recaptcha_url = 'https://www.google.com/recaptcha/api/siteverify';
-$recaptcha_data = [
-    'secret'   => $recaptcha_secret,
-    'response' => $recaptcha_response,
-];
-
-$options = [
-    'http' => [
-        'header'  => "Content-type: application/x-www-form-urlencoded\r\n",
-        'method'  => 'POST',
-        'content' => http_build_query($recaptcha_data),
-        'timeout' => 10
-    ],
-];
-$context = stream_context_create($options);
-$result = @file_get_contents($recaptcha_url, false, $context);
-
-if ($result === false) {
-    send_json(false, "No se pudo conectar con Google reCAPTCHA.", ['connection_error' => true]);
-}
-
-$recaptcha_result = json_decode($result, true);
-
-if (!$recaptcha_result || !isset($recaptcha_result['success'])) {
-    send_json(false, "Respuesta inválida de reCAPTCHA.", ['invalid_response' => true, 'raw' => $result]);
-}
-
-if (!$recaptcha_result['success']) {
-    $error_codes = isset($recaptcha_result['error-codes']) ? $recaptcha_result['error-codes'] : ['unknown'];
-    send_json(false, "Verificación de reCAPTCHA fallida.", ['error_codes' => $error_codes]);
+if (!$hcaptcha_result || !$hcaptcha_result['success']) {
+    send_json(false, "Verificación hCaptcha fallida.");
 }
 
 // --- 2. Preparar y Enviar el Correo ---
@@ -134,4 +102,5 @@ try {
     send_json(false, "Error al enviar el correo.", ['smtp_error' => $mail->ErrorInfo]);
 }
 ?>
+
 
