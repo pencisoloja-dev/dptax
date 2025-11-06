@@ -1,37 +1,34 @@
 <?php
-// Cargar el autoloader de Composer
-require 'vendor/autoload.php';
-
-// Usar las clases de PHPMailer
-use PHPMailer\PHPMailer\PHPMailer;
-use PHPMailer\PHPMailer\Exception;
-
 // --- Configuración de CORS y Headers ---
-// Permitir cualquier origen
 header("Access-Control-Allow-Origin: *");
-// Permitir los métodos POST y OPTIONS
 header("Access-Control-Allow-Methods: POST, OPTIONS");
-// Permitir encabezados comunes que los navegadores pueden enviar
 header("Access-Control-Allow-Headers: Content-Type, Authorization, X-Requested-With, Origin, Accept");
-// Establecer el tipo de contenido de la respuesta
 header("Content-Type: application/json");
 
 // Manejar la solicitud OPTIONS (pre-flight)
 if ($_SERVER['REQUEST_METHOD'] == 'OPTIONS') {
-    // Enviar una respuesta 200 OK y salir
     http_response_code(200);
     exit;
 }
+
+// --- Cargar PHPMailer manualmente ---
+require 'vendor/phpmailer/phpmailer/src/PHPMailer.php';
+require 'vendor/phpmailer/phpmailer/src/SMTP.php';
+require 'vendor/phpmailer/phpmailer/src/Exception.php';
+
+use PHPMailer\PHPMailer\PHPMailer;
+use PHPMailer\PHPMailer\SMTP;
+use PHPMailer\PHPMailer\Exception;
 
 // --- Leer variables de entorno ---
 $smtp_host = getenv('SMTP_HOST');
 $smtp_port = (int)getenv('SMTP_PORT');
 $smtp_user = getenv('SMTP_USER');
 $smtp_pass = getenv('SMTP_PASS');
-$hcaptcha_secret = getenv('HCAPTCHA_SECRET_KEY'); // Restaurado
+$hcaptcha_secret = getenv('HCAPTCHA_SECRET_KEY');
 $mail_to = getenv('MAIL_TO');
 
-// --- Función para devolver JSON y salir ---
+// --- Función para devolver JSON ---
 function send_json($success, $message, $debug = null) {
     $response = ['success' => $success, 'message' => $message];
     if ($debug !== null) {
@@ -46,15 +43,36 @@ if ($_SERVER["REQUEST_METHOD"] != "POST") {
     send_json(false, "Método no permitido.");
 }
 
-// --- Recibir los datos del formulario ---
-$name = isset($_POST['name']) ? htmlspecialchars($_POST['name']) : '';
-$email = isset($_POST['email']) ? filter_var($_POST['email'], FILTER_SANITIZE_EMAIL) : '';
-$phone = isset($_POST['phone']) ? htmlspecialchars($_POST['phone']) : '';
-$message = isset($_POST['message']) ? htmlspecialchars($_POST['message']) : '';
-$sms_consent = isset($_POST['sms_consent']) ? 'Sí' : 'No';
-$hcaptcha_response = isset($_POST['h-captcha-response']) ? $_POST['h-captcha-response'] : ''; // Restaurado
+// --- Leer datos del formulario (soporta tanto FormData como JSON) ---
+$input = $_POST;
 
-// --- 1. Validar hCaptcha --- (Bloque restaurado)
+// Si no hay datos en $_POST, intentar leer JSON
+if (empty($input)) {
+    $json_input = file_get_contents('php://input');
+    $input = json_decode($json_input, true);
+    if (json_last_error() !== JSON_ERROR_NONE) {
+        $input = [];
+    }
+}
+
+// --- Recibir los datos del formulario ---
+$name = isset($input['name']) ? htmlspecialchars($input['name']) : '';
+$email = isset($input['email']) ? filter_var($input['email'], FILTER_SANITIZE_EMAIL) : '';
+$phone = isset($input['phone']) ? htmlspecialchars($input['phone']) : '';
+$message = isset($input['message']) ? htmlspecialchars($input['message']) : '';
+$sms_consent = isset($input['sms_consent']) && $input['sms_consent'] ? 'Sí' : 'No';
+$hcaptcha_response = isset($input['h-captcha-response']) ? $input['h-captcha-response'] : '';
+
+// --- Validaciones básicas ---
+if (empty($name) || empty($email) || empty($phone)) {
+    send_json(false, "Por favor, completa todos los campos requeridos.");
+}
+
+if (!filter_var($email, FILTER_VALIDATE_EMAIL)) {
+    send_json(false, "Por favor, ingresa un email válido.");
+}
+
+// --- 1. Validar hCaptcha ---
 if (empty($hcaptcha_response)) {
     send_json(false, "Por favor, completa la verificación hCaptcha.");
 }
@@ -64,7 +82,8 @@ if (empty($hcaptcha_secret)) {
 }
 
 // Validar con hCaptcha
-$hcaptcha_verify = file_get_contents("https://hcaptcha.com/siteverify?secret=" . $hcaptcha_secret . "&response=" . $hcaptcha_response);
+$hcaptcha_url = "https://hcaptcha.com/siteverify?secret=" . urlencode($hcaptcha_secret) . "&response=" . urlencode($hcaptcha_response);
+$hcaptcha_verify = file_get_contents($hcaptcha_url);
 $hcaptcha_result = json_decode($hcaptcha_verify, true);
 
 if (!$hcaptcha_result || !$hcaptcha_result['success']) {
@@ -84,11 +103,14 @@ try {
     $mail->SMTPSecure = PHPMailer::ENCRYPTION_STARTTLS;
     $mail->Port       = $smtp_port;
     $mail->CharSet    = 'UTF-8';
+    $mail->SMTPDebug = 0;
 
     // Destinatarios
     $mail->setFrom($smtp_user, 'Formulario Web DP Tax');
     $mail->addAddress($mail_to);
-    $mail->addReplyTo($email, $name);
+    if (!empty($email)) {
+        $mail->addReplyTo($email, $name);
+    }
 
     // Contenido del correo
     $mail->isHTML(true);
@@ -102,12 +124,16 @@ try {
         <p>" . nl2br($message) . "</p>
         <hr>
         <p><strong>Consentimiento SMS:</strong> {$sms_consent}</p>
+        <p><strong>Fecha:</strong> " . date('Y-m-d H:i:s') . "</p>
     ";
 
+    $mail->AltBody = "Nuevo Contacto desde DP Tax Preparation\nNombre: {$name}\nEmail: {$email}\nTeléfono: {$phone}\nMensaje: {$message}\nConsentimiento SMS: {$sms_consent}\nFecha: " . date('Y-m-d H:i:s');
+
     $mail->send();
-    send_json(true, "Mensaje enviado con éxito."); 
+    send_json(true, "Mensaje enviado con éxito. Te contactaremos pronto."); 
 
 } catch (Exception $e) {
-    send_json(false, "Error al enviar el correo.", ['smtp_error' => $mail->ErrorInfo]);
+    error_log("Error PHPMailer: " . $e->getMessage());
+    send_json(false, "Error al enviar el mensaje. Por favor, intenta nuevamente.", ['smtp_error' => $mail->ErrorInfo]);
 }
 ?>
