@@ -1,21 +1,20 @@
 FROM php:8.1-cli-alpine
 
-# Instalar dependencias del OS (git, curl, y librerías para extensiones)
-# 'zip', 'unzip' y 'libzip-dev' son necesarios para composer y la extensión zip
-# 'libxml2-dev' es para dom y xml
+# Instalar dependencias del OS (git, curl) y las librerías -dev
+# necesarias para compilar las extensiones de PHP.
 RUN apk add --no-cache \
-    openssl \
-    ca-certificates \
+    openssl-dev \  # Para la extensión openssl
+    curl-dev \     # Para la extensión curl
+    libxml2-dev \  # Para dom y xml
+    libzip-dev \   # Para la extensión zip
     git \
     curl \
     zip \
-    unzip \
-    libzip-dev \
-    libxml2-dev
+    unzip
 
 # Instalar las extensiones de PHP que PHPMailer y Composer necesitan
-# Esta es la forma oficial de hacerlo en la imagen de PHP
-RUN docker-php-ext-install zip dom xml mbstring openssl curl json
+# 'json' ya está incluido en PHP 8.1 y no debe instalarse aquí
+RUN docker-php-ext-install zip dom xml mbstring openssl curl
 
 # Instalar Composer globalmente
 RUN curl -sS https://getcomposer.org/installer | php -- --install-dir=/usr/local/bin --filename=composer
@@ -33,7 +32,7 @@ RUN composer install --no-interaction --no-dev --optimize-autoloader
 COPY api.php ./
 COPY index.php ./
 
-# Exponer puerto (EasyPanel usará $PORT, 8080 es el fallback)
+# Exponer puerto
 ENV PORT=8080
 EXPOSE 8080
 
