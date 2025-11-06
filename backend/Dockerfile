@@ -1,35 +1,19 @@
-FROM php:8.1-cli-alpine
+FROM php:8.1-cli-bullseye
 
-# Actualizar los repositorios e instalar herramientas de compilación
-RUN apk update && apk add --no-cache \
-    # Herramientas de compilación esenciales
-    autoconf g++ make \
-    # Dependencias para extensiones PHP
-    openssl-dev \
-    curl-dev \
-    libxml2-dev \
-    libzip-dev \
-    oniguruma-dev \
-    zlib-dev \
-    # Utilidades
+# Instalar dependencias del sistema
+RUN apt-get update && apt-get install -y \
     git \
     curl \
     zip \
-    unzip
+    unzip \
+    libzip-dev \
+    libxml2-dev \
+    libonig-dev \
+    libssl-dev \
+    && rm -rf /var/lib/apt/lists/*
 
-# Configurar e instalar extensiones PHP paso a paso
-RUN docker-php-ext-configure zip && \
-    docker-php-ext-install zip
-
-RUN docker-php-ext-install dom
-
-RUN docker-php-ext-install xml
-
-RUN docker-php-ext-install mbstring
-
-RUN docker-php-ext-install openssl
-
-RUN docker-php-ext-install curl
+# Instalar extensiones PHP
+RUN docker-php-ext-install zip dom xml mbstring openssl curl
 
 # Instalar Composer globalmente
 RUN curl -sS https://getcomposer.org/installer | php -- --install-dir=/usr/local/bin --filename=composer
