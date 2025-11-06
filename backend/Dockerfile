@@ -22,8 +22,9 @@ COPY composer.json ./
 COPY api.php ./
 COPY index.php ./
 
-# Instalar dependencias PHP
-RUN composer install --no-dev --optimize-autoloader --ignore-platform-reqs
+# Limpiar cache de composer y ejecutar con máximo detalle
+RUN composer clear-cache && \
+    composer install --no-dev --optimize-autoloader --ignore-platform-reqs -vvv
 
 # Exponer puerto
 EXPOSE 8080
