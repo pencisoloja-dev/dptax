@@ -11,7 +11,8 @@
   <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;600;700;800&display=swap" rel="stylesheet">
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
   
-  <!-- WEB3FORMS SCRIPT -->
+  <!-- 1. WEB3FORMS SCRIPT -->
+  <!-- Esto carga el sistema de Web3Forms, incluyendo el inyector de Captcha -->
   <script src="https://web3forms.com/client/script.js" async defer></script>
 
   <style>
@@ -27,6 +28,7 @@
       background:
         linear-gradient(rgba(230, 175, 55, 0.85), rgba(230, 175, 55, 0.9)),
     url('https://placehold.co/1920x1080/e6af37/424243?text=DP+Tax+Hero+Image') center/cover no-repeat;
+    /* url('fondo web doris.jpg') center/cover no-repeat; */
     }
     .bg-primary{background-color:var(--primary);}
     .bg-accent{background-color:var(--accent);}
@@ -44,7 +46,15 @@
     .faq-answer{transition:max-height .3s ease;}
     .lang-active{color:var(--accent); font-weight:700;}
 
-    /* Estilos para la confirmación del formulario */
+    /* === Fix: títulos iguales en tarjetas de Servicios (medibles) === */
+    @media (max-width: 768px){
+      .service-title{  
+        font-size: 1rem !important;
+        min-height: 3rem;
+      }
+    }  
+    
+    /* === Estilos para la confirmación del formulario === */
     .confirmation-message {
       display: none;
       background: rgba(255, 255, 255, 0.95);
@@ -76,23 +86,17 @@
       max-width: 500px;
       margin: 0 auto;
     }
-
-    @media (max-width: 768px){
-      .service-title{  
-        font-size: 1rem !important;
-        min-height: 3rem;
-      }
-    }  
   </style>
 </head>
 
 <body class="text-gray-800">
-  <!-- Header y resto del contenido se mantiene igual -->
+
   <header class="bg-white fixed w-full top-0 shadow-md z-50 border-b-2 border-accent/30">
     <div class="max-w-7xl mx-auto px-6 flex justify-between items-center h-20">
       <a href="#inicio" class="text-2xl font-extrabold text-[var(--primary)]">
         DP <span class="text-accent">Tax Preparation</span>
       </a>
+
       <nav class="hidden md:flex items-center space-x-8 font-medium">
         <a href="#inicio" class="hover:text-accent" data-i18n="nav_home">Home</a>
         <a href="#servicios" class="hover:text-accent" data-i18n="nav_services">Services</a>
@@ -101,16 +105,19 @@
         <a href="#clientes" class="hover:text-accent" data-i18n="nav_clients">Clients</a>
         <a href="#faq" class="hover:text-accent" data-i18n="nav_faq">FAQ</a>
         <a href="#contacto" class="hover:text-accent" data-i18n="nav_contact">Contact</a>
+
         <div class="pl-4 border-l border-gray-200 flex items-center space-x-2 text-sm">
           <button id="lang-en" class="hover:text-accent lang-active" aria-label="Switch to English">EN</button>
           <span>|</span>
           <button id="lang-es" class="hover:text-accent" aria-label="Cambiar a Español">ES</button>
         </div>
       </nav>
+
       <button id="mobile-menu-button" class="md:hidden text-[var(--primary)] text-2xl" aria-label="Open menu">
         <i class="fa-solid fa-bars"></i>
       </button>
     </div>
+
     <div id="mobile-menu" class="hidden md:hidden bg-white border-t border-gray-100 shadow-lg">
       <div class="max-w-7xl mx-auto px-6 py-4 grid gap-2">
         <a href="#inicio" class="py-2 text-[var(--primary)] hover:text-accent" data-i18n="nav_home">Home</a>
@@ -120,6 +127,7 @@
         <a href="#clientes" class="py-2 text-[var(--primary)] hover:text-accent" data-i18n="nav_clients">Clients</a>
         <a href="#faq" class="py-2 text-[var(--primary)] hover:text-accent" data-i18n="nav_faq">FAQ</a>
         <a href="#contacto" class="py-2 text-[var(--primary)] hover:text-accent" data-i18n="nav_contact">Contact</a>
+
         <div class="pt-2 border-t border-gray-200 flex items-center space-x-2 text-sm">
           <button id="mlang-en" class="hover:text-accent lang-active">EN</button>
           <span>|</span>
@@ -129,7 +137,6 @@
     </div>
   </header>
 
-  <!-- Secciones anteriores se mantienen igual -->
   <section id="inicio" class="hero min-h-[600px] flex flex-col justify-center items-center text-center pt-24 text-white px-6">
     <h1 class="text-5xl md:text-6xl font-extrabold mb-4 leading-tight">
       <span data-i18n="hero_title1">Tax Declaration</span><br>
@@ -140,172 +147,711 @@
     </p>
   </section>
 
-  <!-- Otras secciones (servicios, fundadora, proceso, clientes, faq) se mantienen igual -->
+ <section id="servicios" class="py-20 bg-white">
+    <div class="max-w-7xl mx-auto px-6 text-center">
+      <h2 class="section-title text-4xl font-extrabold text-[var(--primary)]" data-i18n="services_title">Our Services</h2>
+      
+      <div class="grid grid-cols-1 md:grid-cols-3 gap-8 mt-8">
 
-  <section id="contacto" class="py-20 bg-primary text-white">
-    <div class="max-w-7xl mx-auto px-6 grid md:grid-cols-2 gap-12 items-start">
-      <div>
-        <h2 class="text-4xl font-extrabold mb-6 text-white" data-i18n="contact_title">Contact Us</h2>
-        <p class="text-lg mb-8" data-i18n="contact_intro">
-          Write to us and we'll get back to you shortly.
-        </p>
-
-        <div class="space-y-4 mb-10">
-          <p class="text-gray-100 text-lg flex items-center">
-            <i class="fas fa-phone text-accent mr-3 w-5 text-center"></i>
-            <span data-i18n="contact_phone">(910) 584-0478</span>
-          </p>
-          <p class="text-gray-100 text-lg flex items-center">
-            <i class="fas fa-envelope text-accent mr-3 w-5 text-center"></i>
-            <span data-i18n="contact_email">dorissmith@dptaxpreparation.com</span>
-          </p>
-        </div>
-        <div class="space-y-8">
-          <div>
-            <h3 class="text-xl font-bold text-accent mb-3" data-i18n="loc1_title">Fayetteville (Elm Street)</h3>
-            <p class="text-gray-200 leading-relaxed flex">
-              <i class="fas fa-map-marker-alt text-accent mr-3 w-5 text-center pt-1"></i>
-              <span>806 ELM STREET STE A<br>FAYETTEVILLE, NC 28303</span>
+        <div class="bg-gray-50 rounded-xl overflow-hidden shadow-lg border-t-4 border-accent">
+          <img src="https://placehold.co/600x400/e8e8e8/333?text=Individual+Return" alt="Individual Return"
+               onerror="this.src='https://placehold.co/600x400/e8e8e8/333?text=Image+Error'">
+          <div class="p-6">
+            <h3 class="text-xl font-bold text-[var(--primary)] mb-3 text-center" data-i18n="srv1_title">Individual Return</h3>
+            <p class="text-gray-700 text-center" data-i18n="srv1_desc">
+              Complete preparation of Form 1040 with all applicable deductions and credits.
             </p>
-            <div class="pl-8 mt-2 space-y-1 text-gray-300">
-              <p><strong data-i18n="loc1_hours1_days">Monday - Friday:</strong> 9:00 AM - 5:00 PM</p>
-              <p><strong data-i18n="loc1_hours2_days">Saturday:</strong> 9:00 AM - 1:00 PM</p>
-            </div>
-          </div>
-          <div>
-            <h3 class="text-xl font-bold text-accent mb-3" data-i18n="loc2_title">Saint Pauls</h3>
-            <p class="text-gray-200 leading-relaxed flex">
-              <i class="fas fa-map-marker-alt text-accent mr-3 w-5 text-center pt-1"></i>
-              <span>101 W BROAD ST<br>SAINT PAULS, NC 28384</span>
-            </p>
-            <div class="pl-8 mt-2">
-              <p class="text-gray-300 italic"><strong data-i18n="loc_appt">By appointment only</strong></p>
-            </div>
-          </div>
-          <div>
-            <h3 class="text-xl font-bold text-accent mb-3" data-i18n="loc3_title">Fayetteville (Pennystone)</h3>
-            <p class="text-gray-200 leading-relaxed flex">
-              <i class="fas fa-map-marker-alt text-accent mr-3 w-5 text-center pt-1"></i>
-              <span>4523 PENNYSTONE DRIVE<br>FAYETTEVILLE, NC 28306</span>
-            </p>
-            <div class="pl-8 mt-2">
-              <p class="text-gray-300 italic"><strong data-i18n="loc_appt">By appointment only</strong></p>
-            </div>
           </div>
         </div>
+
+        <div class="bg-gray-50 rounded-xl overflow-hidden shadow-lg border-t-4 border-accent">
+          <img src="https://placehold.co/600x400/e8e8e8/333?text=Business+Return" alt="Business Return"
+               onerror="this.src='https://placehold.co/600x400/e8e8e8/333?text=Image+Error'">
+          <div class="p-6">
+            <h3 class="text-xl font-bold text-[var(--primary)] mb-3 text-center" data-i18n="srv2_title">Business Return</h3>
+            <p class="text-gray-700 text-center" data-i18n="srv2_desc">
+              Taxes for corporations, LLCs, and partnerships. We handle the complexity of your business.
+            </p>
+          </div>
+        </div>
+
+        <div class="bg-gray-50 rounded-xl overflow-hidden shadow-lg border-t-4 border-accent">
+         <img src="https://placehold.co/600x400/e8e8e8/333?text=Tax+Planning" alt="Tax Planning"
+              onerror="this.src='https://placehold.co/600x400/e8e8e8/333?text=Image+Error'">
+          <div class="p-6">
+            <h3 class="text-xl font-bold text-[var(--primary)] mb-3 text-center" data-i18n="srv3_title">Tax Planning</h3>
+            <p class="text-gray-700 text-center" data-i18n="srv3_desc">
+              Proactive strategies to minimize future liabilities and boost long-term growth.
+            </p>
+          </div>
+        </div>
+
+      </div>
+    </div>
+  </section>
+
+  <section id="fundadora" class="py-20 bg-gray-50">
+    <div class="max-w-7xl mx-auto grid md:grid-cols-3 gap-10 px-6 items-center">
+      <div class="flex justify-center">
+        <img src="https://placehold.co/300x300/e8e8e8/333?text=Doris+Smith"
+             alt="Doris Smith"
+             onerror="this.src='https://placehold.co/300x300/e8e8e8/333?text=Image+Error'"
+             class="rounded-full w-72 h-72 object-cover shadow-xl border-8 border-white ring-4 ring-[var(--accent)]">
       </div>
 
-      <!-- FORMULARIO CON CONFIRMACIÓN MEJORADA -->
-      <div id="form-container">
-        <form action="https://api.web3forms.com/submit" method="POST" id="contact-form-web3" class="form-visible">
+      <div class="md:col-span-2">
+        <h2 class="text-4xl font-extrabold text-[var(--primary)] mb-2">Doris Smith</h2>
+        <h3 class="text-2xl font-semibold text-accent mb-4" data-i18n="founder_role">CEO & Tax Expert</h3>
+        <p class="text-gray-700 mb-6" data-i18n="founder_bio">
+          Over 15 years of experience in US taxes for individuals and businesses. She founded DP Tax Preparation to make taxes simple, secure, and profitable.
+        </p>
 
-          <input type="hidden" name="access_key" value="84094e5e-1515-4682-a138-a3d562f046f1">
-          <input type="hidden" name="subject" value="Nuevo Contacto desde la Web DP Tax">
-          <input type="hidden" name="redirect" value="false">
-          
-          <div class="mb-5">
-            <input type="text" name="name" required
-                   class="w-full p-4 rounded bg-white/90 text-gray-900 border border-gray-300 focus:border-accent focus:ring-2 focus:ring-accent/20 transition"
-                   data-i18n-placeholder="ph_name" placeholder="Full name">
-          </div>
-          <div class="mb-5">
-            <input type="email" name="email" required
-                   class="w-full p-4 rounded bg-white/90 text-gray-900 border border-gray-300 focus:border-accent focus:ring-2 focus:ring-accent/20 transition"
-                   data-i18n-placeholder="ph_email" placeholder="Email address">
-          </div>
-          <div class="mb-5">
-            <input type="tel" name="phone" required
-                   class="w-full p-4 rounded bg-white/90 text-gray-900 border border-gray-300 focus:border-accent focus:ring-2 focus:ring-accent/20 transition"
-                   data-i18n-placeholder="ph_phone" placeholder="Phone (+1...)">
-          </div>
-          <div class="mb-5">
-            <textarea name="message" rows="4" required
-                      class="w-full p-4 rounded bg-white/90 text-gray-900 border border-gray-300 focus:border-accent focus:ring-2 focus:ring-accent/20 transition resize-none"
-                      data-i18n-placeholder="ph_message" placeholder="Write your message..."></textarea>
-          </div>
-
-          <div class="mb-6 flex items-start">
-            <input type="checkbox" id="sms-consent" name="sms_consent" required class="h-5 w-5 text-accent mt-1 focus:ring-accent">
-            <label for="sms-consent" class="ml-3 text-gray-200 text-sm leading-snug" data-i18n="sms_consent">
-              I agree to receive notifications and SMS messages from DP Tax Preparation at the phone number provided.
-              <br><span class="text-gray-400 text-xs" data-i18n="sms_note">Message and data rates may apply.</span>
-            </label>
-          </div>
-
-          <div class="h-captcha mb-2" data-captcha="true"></div>
-          <p id="captcha-error" class="text-sm font-semibold text-red-400 hidden mb-4" data-i18n="form_hcaptcha_error">
-              Please complete the hCaptcha verification.
-          </p>
-
-          <button id="submit-button" type="submit" class="bg-accent w-full py-3 font-bold rounded-lg hover:bg-[#e67e22] transition text-white text-lg">
-            <span id="button-text" data-i18n="btn_send">Send Message</span>
-            <div id="button-spinner" class="hidden">
-              <i class="fas fa-spinner fa-spin mr-2"></i>
-              <span data-i18n="form_processing">Sending...</span>
+        <div class="mt-8 space-y-8">
+          <div>
+            <h4 class="text-2xl font-bold text-[var(--primary)] mb-4" data-i18n="training_title">Training Certificates</h4>
+            <div class="grid sm:grid-cols-2 gap-4">
+              <div class="flex items-center bg-white shadow-md rounded-lg p-4 border-l-4 border-accent min-h-[70px]">
+                <i class="fas fa-graduation-cap text-accent mr-3 text-lg"></i>
+                <span class="font-medium">H&amp;R BLOCK</span>
+              </div>
+              <div class="flex items-center bg-white shadow-md rounded-lg p-4 border-l-4 border-accent min-h-[70px]">
+                <i class="fas fa-graduation-cap text-accent mr-3 text-lg"></i>
+                <span class="font-medium">FTCC (Fayetteville Technical Community College)</span>
+              </div>
+              <div class="flex items-center bg-white shadow-md rounded-lg p-4 border-l-4 border-accent min-h-[70px]">
+                <i class="fas fa-graduation-cap text-accent mr-3 text-lg"></i>
+                <span class="font-medium">JACKSON HEWITT</span>
+              </div>
+              <div class="flex items-center bg-white shadow-md rounded-lg p-4 border-l-4 border-accent min-h-[70px]">
+                <i class="fas fa-graduation-cap text-accent mr-3 text-lg"></i>
+                <span class="font-medium">LIBERTY TAX</span>
+              </div>
             </div>
-          </button>
-        </form>
-
-        <!-- MENSAJE DE CONFIRMACIÓN -->
-        <div id="form-confirmation" class="confirmation-message">
-          <div class="confirmation-icon">
-            <i class="fas fa-check-circle"></i>
           </div>
-          <h3 class="confirmation-title" data-i18n="form_success">Message Sent Successfully!</h3>
-          <p class="confirmation-text" data-i18n="form_success_details">
-            Thank you for contacting us. We have received your message and will get back to you soon.
-          </p>
-          <button id="send-another" class="mt-6 bg-accent text-white px-6 py-2 rounded-lg hover:bg-[#e67e22] transition font-medium">
-            <span data-i18n="form_send_another">Send Another Message</span>
-          </button>
+
+          <div>
+            <h4 class="text-2xl font-bold text-[var(--primary)] mb-4" data-i18n="credentials_title">Official IRS Credentials</h4>
+            <div class="grid sm:grid-cols-2 gap-4">
+              <div class="flex items-center bg-white shadow-md rounded-lg p-4 border-l-4 border-accent min-h-[70px]">
+                <i class="fas fa-id-card text-accent mr-3 text-lg"></i>
+                <span class="font-medium" data-i18n="cred_ptin">PTIN Number (Authorized Tax Preparer)</span>
+              </div>
+              <div class="flex items-center bg-white shadow-md rounded-lg p-4 border-l-4 border-accent min-h-[70px]">
+                <i class="fas fa-certificate text-accent mr-3 text-lg"></i>
+                <span class="font-medium" data-i18n="cred_efin">EFIN Number (Authorized e-File Provider)</span>
+              </div>
+            </div>
+          </div>
+        </div>
+
+      </div>
+    </div>
+  </section>
+
+  <section id="proceso" class="py-20 bg-white">
+    <div class="max-w-7xl mx-auto px-6 text-center">
+      <h2 class="section-title text-4xl font-extrabold text-[var(--primary)]" data-i18n="process_title">Simplified Filing Process</h2>
+      <div class="grid md:grid-cols-4 gap-10 mt-10">
+        <div class="p-6 bg-gray-50 rounded-xl shadow-lg border-t-4 border-accent">
+          <div class="text-3xl font-bold text-accent mb-2">1</div>
+          <h3 class="font-bold text-[var(--primary)] mb-2" data-i18n="p1_title">Initial Consultation</h3>
+          <p data-i18n="p1_desc">We assess your tax situation and assign an expert.</p>
+        </div>
+        <div class="p-6 bg-gray-50 rounded-xl shadow-lg border-t-4 border-accent">
+          <div class="text-3xl font-bold text-accent mb-2">2</div>
+          <h3 class="font-bold text-[var(--primary)] mb-2" data-i18n="p2_title">Secure Documents</h3>
+          <p data-i18n="p2_desc">Easily upload your W-2s, 1099s, and other documents.</p>
+        </div>
+        <div class="p-6 bg-gray-50 rounded-xl shadow-lg border-t-4 border-accent">
+          <div class="text-3xl font-bold text-accent mb-2">3</div>
+          <h3 class="font-bold text-[var(--primary)] mb-2" data-i18n="p3_title">Preparation & Review</h3>
+          <p data-i18n="p3_desc">We prepare your return and review it with you.</p>
+        </div>
+        <div class="p-6 bg-gray-50 rounded-xl shadow-lg border-t-4 border-accent">
+          <div class="text-3xl font-bold text-accent mb-2">4</div>
+          <h3 class="font-bold text-[var(--primary)] mb-2" data-i18n="p4_title">Final e-Filing</h3>
+          <p data-i18n="p4_desc">We e-file your return with the IRS and track it.</p>
         </div>
       </div>
     </div>
   </section>
 
-  <footer class="bg-dark text-white">
-    <div class="max-w-7xl mx-auto px-6 py-6 text-center text-sm" data-i18n="footer_copy">
-      © 2024 DP Tax Preparation. All rights reserved.
+  <section id="clientes" class="py-20 bg-gray-50">
+    <div class="max-w-7xl mx-auto px-6 text-center">
+      <h2 class="section-title text-4xl font-extrabold text-[var(--primary)]" data-i18n="testimonials_title">What Our Clients Say</h2>
+      <div class="grid md:grid-cols-3 gap-10 mt-10">
+        <div class="bg-white shadow-xl rounded-xl p-8">
+          <img src="https://placehold.co/100x100/e8e8e8/333?text=E" alt="Erika Barrera" class="w-24 h-24 mx-auto rounded-full mb-4">
+          <p class="italic text-gray-600 mb-4" data-i18n="t1_text">"Excellent service — reliable and professional. Highly recommended!"</p>
+          <h4 class="font-bold text-[var(--primary)]">Erika Barrera</h4>
+        </div>
+        <div class="bg-white shadow-xl rounded-xl p-8">
+          <img src="https://placehold.co/100x100/e8e8e8/333?text=A" alt="Andrés Vargas" class="w-24 h-24 mx-auto rounded-full mb-4">
+          <p class="italic text-gray-600 mb-4" data-i18n="t2_text">"Fantastic service! They made the whole process quick and stress-free."</p>
+          <h4 class="font-bold text-[var(--primary)]">Andrés Vargas</h4>
+        </div>
+        <div class="bg-white shadow-xl rounded-xl p-8">
+			<img src="https://placehold.co/100x100/e8e8e8/333?text=C" alt="Consuelo Angel" class="w-24 h-24 mx-auto rounded-full mb-4">
+          <p class="italic text-gray-600 mb-4" data-i18n="t3_text">"Honest, efficient, and detail-oriented. I'll return every year."</p>
+          <h4 class="font-bold text-[var(--primary)]">Consuelo Angel</h4>
+        </div>
+      </div>
     </div>
-  </footer>
+  </section>
 
+ <section id="faq" class="py-20 bg-primary/10">
+  <div class="max-w-5xl mx-auto px-6">
+    <h2 class="section-title text-4xl font-extrabold text-[var(--primary)] text-center" data-i18n="faq_title">Frequently Asked Questions</h2>
+    <div class="space-y-4">
+
+      <div class="faq-item bg-white rounded-lg shadow-md overflow-hidden">
+        <div class="faq-question flex justify-between items-center p-5 cursor-pointer text-lg font-semibold text-[var(--primary)]">
+          <span data-i18n="faq_q1">When is the filing deadline?</span>
+          <i class="fas fa-chevron-down text-accent"></i>
+        </div>
+        <div class="faq-answer max-h-0 overflow-hidden">
+          <p class="p-5 pt-0 text-gray-700" data-i18n="faq_a1">The usual deadline for filing the federal return is April 15. If you need more time, you can request an extension before that date.</p>
+        </div>
+      </div>
+      <div class="faq-item bg-white rounded-lg shadow-md overflow-hidden">
+        <div class="faq-question flex justify-between items-center p-5 cursor-pointer text-lg font-semibold text-[var(--primary)]">
+          <span data-i18n="faq_q2">What happens if I don't file my return on time?</span>
+          <i class="fas fa-chevron-down text-accent"></i>
+        </div>
+        <div class="faq-answer max-h-0 overflow-hidden">
+          <p class="p-5 pt-0 text-gray-700" data-i18n="faq_a2">You could receive penalties or late interest. We help you file even if the deadline has passed or if you need to catch up on previous years.</p>
+        </div>
+      </div>
+      <div class="faq-item bg-white rounded-lg shadow-md overflow-hidden">
+        <div class="faq-question flex justify-between items-center p-5 cursor-pointer text-lg font-semibold text-[var(--primary)]">
+          <span data-i18n="faq_q3">What documents do I need to file my taxes?</span>
+          <i class="fas fa-chevron-down text-accent"></i>
+        </div>
+        <div class="faq-answer max-h-0 overflow-hidden">
+          <p class="p-5 pt-0 text-gray-700" data-i18n="faq_a3">It depends on your situation, but typically you need: W-2 form (employees) or 1099 (independent contractors), personal identification (SSN or ITIN), proof of income and expenses, and dependent information if applicable.</p>
+        </div>
+      </div>
+      <div class="faq-item bg-white rounded-lg shadow-md overflow-hidden">
+        <div class="faq-question flex justify-between items-center p-5 cursor-pointer text-lg font-semibold text-[var(--primary)]">
+          <span data-i18n="faq_q4">Can I file if I don't have a Social Security Number (SSN)?</span>
+          <i class="fas fa-chevron-down text-accent"></i>
+        </div>
+        <div class="faq-answer max-h-0 overflow-hidden">
+          <p class="p-5 pt-0 text-gray-700" data-i18n="faq_a4">Yes. We can help you obtain and use an ITIN (Individual Taxpayer Identification Number) to meet your tax obligations.</p>
+        </div>
+      </div>
+      <div class="faq-item bg-white rounded-lg shadow-md overflow-hidden">
+        <div class="faq-question flex justify-between items-center p-5 cursor-pointer text-lg font-semibold text-[var(--primary)]">
+          <span data-i18n="faq_q5">Do you accept scanned documents or photos?</span>
+          <i class="fas fa-chevron-down text-accent"></i>
+        </div>
+        <div class="faq-answer max-h-0 overflow-hidden">
+          <p class="p-5 pt-0 text-gray-700" data-i18n="faq_a5">Yes. You can upload them directly from your phone or computer in a secure and encrypted manner.</p>
+        </div>
+      </div>
+      <div class="faq-item bg-white rounded-lg shadow-md overflow-hidden">
+        <div class="faq-question flex justify-between items-center p-5 cursor-pointer text-lg font-semibold text-[var(--primary)]">
+          <span data-i18n="faq_q6">Is it safe to share my information online?</span>
+          <i class="fas fa-chevron-down text-accent"></i>
+        </div>
+        <div class="faq-answer max-h-0 overflow-hidden">
+          <p class="p-5 pt-0 text-gray-700" data-i18n="faq_a6">Yes. We use SSL/TLS encryption, secure servers, and privacy protocols aligned with IRS standards. Your information is confidential and protected.</p>
+        </div>
+      </div>
+      <div class="faq-item bg-white rounded-lg shadow-md overflow-hidden">
+        <div class="faq-question flex justify-between items-center p-5 cursor-pointer text-lg font-semibold text-[var(--primary)]">
+          <span data-i18n="faq_q7">Is my information shared with other companies?</span>
+          <i class="fas fa-chevron-down text-accent"></i>
+        </div>
+        <div class="faq-answer max-h-0 overflow-hidden">
+          <p class="p-5 pt-0 text-gray-700" data-i18n="faq_a7">No. Your data is used solely to prepare and file your tax return.</p>
+        </div>
+      </div>
+      <div class="faq-item bg-white rounded-lg shadow-md overflow-hidden">
+        <div class="faq-question flex justify-between items-center p-5 cursor-pointer text-lg font-semibold text-[var(--primary)]">
+          <span data-i18n="faq_q8">How long does it take to receive my refund?</span>
+          <i class="fas fa-chevron-down text-accent"></i>
+        </div>
+        <div class="faq-answer max-h-0 overflow-hidden">
+          <p class="p-5 pt-0 text-gray-700" data-i18n="faq_a8">The IRS usually processes refunds within 7 to 21 days if the return is filed electronically.</p>
+        </div>
+      </div>
+      <div class="faq-item bg-white rounded-lg shadow-md overflow-hidden">
+        <div class="faq-question flex justify-between items-center p-5 cursor-pointer text-lg font-semibold text-[var(--primary)]">
+          <span data-i18n="faq_q9">How will I receive my refund?</span>
+          <i class="fas fa-chevron-down text-accent"></i>
+        </div>
+        <div class="faq-answer max-h-0 overflow-hidden">
+          <p class="p-5 pt-0 text-gray-700" data-i18n="faq_a9">You can choose direct deposit, physical check, or a prepaid debit card, depending on your preference.</p>
+        </div>
+      </div>
+      <div class="faq-item bg-white rounded-lg shadow-md overflow-hidden">
+        <div class="faq-question flex justify-between items-center p-5 cursor-pointer text-lg font-semibold text-[var(--primary)]">
+          <span data-i18n="faq_q10">What if I owe taxes?</span>
+          <i class="fas fa-chevron-down text-accent"></i>
+        </div>
+        <div class="faq-answer max-h-0 overflow-hidden">
+          <p class="p-5 pt-0 text-gray-700" data-i18n="faq_a10">We can help you set up a payment plan or make the payment directly to the IRS from your bank account.</p>
+        </div>
+      </div>
+      <div class="faq-item bg-white rounded-lg shadow-md overflow-hidden">
+        <div class="faq-question flex justify-between items-center p-5 cursor-pointer text-lg font-semibold text-[var(--primary)]">
+          <span data-i18n="faq_q11">How much does the service cost?</span>
+          <i class="fas fa-chevron-down text-accent"></i>
+        </div>
+        <div class="faq-answer max-h-0 overflow-hidden">
+          <p class="p-5 pt-0 text-gray-700" data-i18n="faq_a11">The cost depends on the complexity of your return. We offer a free evaluation before starting the process.</p>
+        </div>
+      </div>
+      <div class="faq-item bg-white rounded-lg shadow-md overflow-hidden">
+        <div class="faq-question flex justify-between items-center p-5 cursor-pointer text-lg font-semibold text-[var(--primary)]">
+          <span data-i1GN="faq_q12">Do you serve independent workers or business owners?</span>
+          <i class="fas fa-chevron-down text-accent"></i>
+        </div>
+        <div class="faq-answer max-h-0 overflow-hidden">
+          <p class="p-5 pt-0 text-gray-700" data-i18n="faq_a12">Yes. We prepare returns for employees, independent contractors, small businesses, and self-employed workers.</p>
+        </div>
+      </div>
+      <div class="faq-item bg-white rounded-lg shadow-md overflow-hidden">
+        <div class="faq-question flex justify-between items-center p-5 cursor-pointer text-lg font-semibold text-[var(--primary)]">
+          <span data-i18n="faq_q13">Can I file my return completely online?</span>
+          <i class="fas fa-chevron-down text-accent"></i>
+        </div>
+        <div class="faq-answer max-h-0 overflow-hidden">
+          <p class="p-5 pt-0 text-gray-700" data-i18n="faq_a13">Yes. The entire process can be done virtually, from document submission to electronic signature.</p>
+        </div>
+      </div>
+      <div class="faq-item bg-white rounded-lg shadow-md overflow-hidden">
+        <div class="faq-question flex justify-between items-center p-5 cursor-pointer text-lg font-semibold text-[var(--primary)]">
+          <span data-i18n="faq_q14">Can I schedule an in-person or video call appointment?</span>
+          <i class="fas fa-chevron-down text-accent"></i>
+        </div>
+        <div class="faq-answer max-h-0 overflow-hidden">
+          <p class="p-5 pt-0 text-gray-700" data-i18n="faq_a14">Of course. We offer in-person and virtual appointments based on your availability.</p>
+        </div>
+      </div>
+      <div class="faq-item bg-white rounded-lg shadow-md overflow-hidden">
+        <div class="faq-question flex justify-between items-center p-5 cursor-pointer text-lg font-semibold text-[var(--primary)]">
+          <span data-i18n="faq_q15">What do I do if I can't file before April 15?</span>
+          <i class="fas fa-chevron-down text-accent"></i>
+        </div>
+        <div class="faq-answer max-h-0 overflow-hidden">
+          <p class="p-5 pt-0 text-gray-700" data-i18n="faq_a15">We can help you request an extension until October 15, avoiding late filing penalties.</p>
+        </div>
+      </div>
+      <div class="faq-item bg-white rounded-lg shadow-md overflow-hidden">
+        <div class="faq-question flex justify-between items-center p-5 cursor-pointer text-lg font-semibold text-[var(--primary)]">
+          <span data-i18n="faq_q16">Can you help me with past due returns?</span>
+          <i class="fas fa-chevron-down text-accent"></i>
+        </div>
+        <div class="faq-answer max-h-0 overflow-hidden">
+          <p class="p-5 pt-0 text-gray-700" data-i18n="faq_a16">Yes. We can file your returns from previous years and help you get current with the IRS.</p>
+        </div>
+      </div>
+      <div class="faq-item bg-white rounded-lg shadow-md overflow-hidden">
+        <div class="faq-question flex justify-between items-center p-5 cursor-pointer text-lg font-semibold text-[var(--primary)]">
+          <span data-i18n="faq_q17">Can I file if I live outside the United States?</span>
+          <i class="fas fa-chevron-down text-accent"></i>
+        </div>
+        <div class="faq-answer max-h-0 overflow-hidden">
+          <p class="p-5 pt-0 text-gray-700" data-i18n="faq_a17">Yes. We assist residents and non-residents with US income, including expatriate cases.</p>
+        </div>
+      </div>
+      <div class="faq-item bg-white rounded-lg shadow-md overflow-hidden">
+        <div class="faq-question flex justify-between items-center p-5 cursor-pointer text-lg font-semibold text-[var(--primary)]">
+          <span data-i18n="faq_q18">Do you help students or first-time filers?</span>
+          <i class="fas fa-chevron-down text-accent"></i>
+        </div>
+        <div class="faq-answer max-h-0 overflow-hidden">
+          <p class="p-5 pt-0 text-gray-700" data-i18n="faq_a18">Yes. We guide you step by step so your first return is simple and correct.</p>
+        </div>
+      </div>
+
+    </div>
+  </div>
+</section>
+
+<section id="contacto" class="py-20 bg-primary text-white">
+  <div class="max-w-7xl mx-auto px-6 grid md:grid-cols-2 gap-12 items-start">
+    <div>
+      <h2 class="text-4xl font-extrabold mb-6 text-white" data-i18n="contact_title">Contact Us</h2>
+      <p class="text-lg mb-8" data-i18n="contact_intro">
+        Write to us and we'll get back to you shortly.
+      </p>
+
+      <div class="space-y-4 mb-10">
+        <p class="text-gray-100 text-lg flex items-center">
+          <i class="fas fa-phone text-accent mr-3 w-5 text-center"></i>
+          <span data-i18n="contact_phone">(910) 584-0478</span>
+        </p>
+        <p class="text-gray-100 text-lg flex items-center">
+          <i class="fas fa-envelope text-accent mr-3 w-5 text-center"></i>
+          <span data-i18n="contact_email">dorissmith@dptaxpreparation.com</span>
+        </p>
+      </div>
+      <div class="space-y-8">
+        <div>
+          <h3 class="text-xl font-bold text-accent mb-3" data-i18n="loc1_title">Fayetteville (Elm Street)</h3>
+          <p class="text-gray-200 leading-relaxed flex">
+            <i class="fas fa-map-marker-alt text-accent mr-3 w-5 text-center pt-1"></i>
+            <span>806 ELM STREET STE A<br>FAYETTEVILLE, NC 28303</span>
+          </p>
+          <div class="pl-8 mt-2 space-y-1 text-gray-300">
+            <p><strong data-i18n="loc1_hours1_days">Monday - Friday:</strong> 9:00 AM - 5:00 PM</p>
+            <p><strong data-i18n="loc1_hours2_days">Saturday:</strong> 9:00 AM - 1:00 PM</p>
+          </div>
+        </div>
+        <div>
+          <h3 class="text-xl font-bold text-accent mb-3" data-i18n="loc2_title">Saint Pauls</h3>
+          <p class="text-gray-200 leading-relaxed flex">
+            <i class="fas fa-map-marker-alt text-accent mr-3 w-5 text-center pt-1"></i>
+            <span>101 W BROAD ST<br>SAINT PAULS, NC 28384</span>
+          </p>
+          <div class="pl-8 mt-2">
+            <p class="text-gray-300 italic"><strong data-i18n="loc_appt">By appointment only</strong></p>
+          </div>
+        </div>
+        <div>
+          <h3 class="text-xl font-bold text-accent mb-3" data-i18n="loc3_title">Fayetteville (Pennystone)</h3>
+          <p class="text-gray-200 leading-relaxed flex">
+            <i class="fas fa-map-marker-alt text-accent mr-3 w-5 text-center pt-1"></i>
+            <span>4523 PENNYSTONE DRIVE<br>FAYETTEVILLE, NC 28306</span>
+          </p>
+          <div class="pl-8 mt-2">
+            <p class="text-gray-300 italic"><strong data-i18n="loc_appt">By appointment only</strong></p>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- ========================================================== -->
+    <!-- FORMULARIO CON CONFIRMACIÓN EN LA MISMA PÁGINA -->
+    <!-- ========================================================== -->
+    <div id="form-container">
+      <form action="https://api.web3forms.com/submit" method="POST" id="contact-form-web3">
+
+        <!-- Clave de Acceso (TU CLAVE PRIVADA) -->
+        <input type="hidden" name="access_key" value="84094e5e-1515-4682-a138-a3d562f046f1">
+        
+        <!-- Asunto del Email (Opcional) -->
+        <input type="hidden" name="subject" value="Nuevo Contacto desde la Web DP Tax">
+        
+        <!-- Redirección deshabilitada para mostrar confirmación en la misma página -->
+        <input type="hidden" name="redirect" value="false">
+        
+        <!-- Campos del Formulario -->
+        <div class="mb-5">
+          <input type="text" name="name" required
+                 class="w-full p-4 rounded bg-white/90 text-gray-900"
+                 data-i18n-placeholder="ph_name" placeholder="Full name">
+        </div>
+        <div class="mb-5">
+          <input type="email" name="email" required
+                 class="w-full p-4 rounded bg-white/90 text-gray-900"
+                 data-i18n-placeholder="ph_email" placeholder="Email address">
+        </div>
+        <div class="mb-5">
+          <input type="tel" name="phone" required
+                 class="w-full p-4 rounded bg-white/90 text-gray-900"
+                 data-i18n-placeholder="ph_phone" placeholder="Phone (+1...)">
+        </div>
+        <div class="mb-5">
+          <textarea name="message" rows="4" required
+                    class="w-full p-4 rounded bg-white/90 text-gray-900 resize-none"
+                    data-i18n-placeholder="ph_message" placeholder="Write your message..."></textarea>
+        </div>
+
+        <div class="mb-6 flex items-start">
+          <input type="checkbox" id="sms-consent" name="sms_consent" required class="h-5 w-5 text-accent mt-1">
+          <label for="sms-consent" class="ml-3 text-gray-200 text-sm leading-snug" data-i18n="sms_consent">
+            I agree to receive notifications and SMS messages from DP Tax Preparation at the phone number provided.
+            <br><span class="text-gray-400 text-xs" data-i18n="sms_note">Message and data rates may apply.</span>
+          </label>
+        </div>
+
+        <!-- HCAPTCHA -->
+        <div class="h-captcha mb-2" 
+             data-captcha="true">
+        </div>
+        <!-- Campo de error para el Captcha -->
+        <p id="captcha-error" class="text-sm font-semibold text-red-400 hidden mb-4" data-i18n="form_hcaptcha_error">
+            Please complete the hCaptcha verification.
+        </p>
+
+        <button id="submit-button" type="submit" class="bg-accent w-full py-3 font-bold rounded-lg hover:bg-[#e67e22] transition" data-i18n="btn_send">
+          Send Message
+        </button>
+      </form>
+
+      <!-- ========================================================== -->
+      <!-- ÁREA DE CONFIRMACIÓN -->
+      <!-- ========================================================== -->
+      <div id="form-confirmation" class="confirmation-message">
+        <div class="confirmation-icon">
+          <i class="fas fa-check-circle"></i>
+        </div>
+        <h3 class="confirmation-title" data-i18n="form_success">Message Sent Successfully!</h3>
+        <p class="confirmation-text" data-i18n="form_success_details">
+          Thank you for contacting us. We have received your message and will get back to you soon.
+        </p>
+        <button id="send-another" class="mt-6 bg-accent text-white px-6 py-2 rounded-lg hover:bg-[#e67e22] transition font-medium">
+          <span data-i18n="form_send_another">Send Another Message</span>
+        </button>
+      </div>
+    </div>
+    
+  </div>
+</section>
+
+<footer class="bg-dark text-white">
+  <div class="max-w-7xl mx-auto px-6 py-6 text-center text-sm" data-i18n="footer_copy">
+    © 2024 DP Tax Preparation. All rights reserved.
+  </div>
+</footer>
+
+<!-- ========================================================== -->
+<!-- SCRIPT COMPLETO CON LA FUNCIONALIDAD DE CONFIRMACIÓN -->
+<!-- ========================================================== -->
 <script>
-  // --- Objeto de Traducciones (Actualizado) ---
+  // --- Objeto de Traducciones (Completo) ---
   const translations = {
     en: {
-      // ... (todas las traducciones existentes se mantienen igual)
-      form_success: "Message Sent Successfully!",
-      form_success_details: "Thank you for contacting us. We have received your message and will get back to you soon.",
-      form_send_another: "Send Another Message",
-      form_processing: "Sending..."
+      doc_title: "DP Tax Preparation – Tax Declaration in the US without Stress",
+      nav_home:"Home", nav_services:"Services", nav_founder:"Founder", nav_process:"Process",
+      nav_clients:"Clients", nav_faq:"FAQ", nav_contact:"Contact",
+      hero_title1:"Tax Declaration",
+      hero_title2:"in the US without Stress",
+      hero_sub:"Experts in tax preparation for individuals and businesses. We maximize refunds and ensure full compliance.",
+      services_title:"Our Services",
+      srv1_title:"Individual Return",
+      srv1_desc:"Complete preparation of Form 1040 with all applicable deductions and credits.",
+      srv2_title:"Business Return",
+      srv2_desc:"Taxes for corporations, LLCs, and partnerships. We handle the complexity of your business.",
+      srv3_title:"Tax Planning",
+      srv3_desc:"Proactive strategies to minimize future liabilities and boost long-term growth.",
+      founder_role:"CEO & Tax Expert",
+      founder_bio:"Over 15 years of experience in US taxes for individuals and businesses. She founded DP Tax Preparation to make taxes simple, secure, and profitable.",
+      training_title:"Training Certificates",
+      credentials_title:"Official IRS Credentials",
+      cred_ptin:"PTIN Number (Authorized Tax Preparer)",
+      cred_efin:"EFIN Number (Authorized e-File Provider)",
+      process_title:"Simplified Filing Process",
+      p1_title:"Initial Consultation", p1_desc:"We assess your tax situation and assign an expert.",
+      p2_title:"Secure Documents",    p2_desc:"Easily upload your W-2s, 1099s, and other documents.",
+      p3_title:"Preparation & Review", p3_desc:"We prepare your return and review it with you.",
+      p4_title:"Final e-Filing", p4_p4_desc:"We e-file your return with the IRS and track it.",
+      testimonials_title:"What Our Clients Say",
+      t1_text:"\"Excellent service — reliable and professional. Highly recommended!\"",
+      t2_text:"\"Fantastic service! They made the whole process quick and stress-free.\"",
+      t3_text:"\"Honest, efficient, and detail-oriented. I'll return every year.\"",
+      faq_title:"Frequently Asked Questions",
+      faq_q1:"When is the filing deadline?",
+      faq_a1:"The usual deadline for filing the federal return is April 15. If you need more time, you can request an extension before that date.",
+      faq_q2:"What happens if I don't file my return on time?",
+      faq_a2:"You could receive penalties or late interest. We help you file even if the deadline has passed or if you need to catch up on previous years.",
+      faq_q3:"What documents do I need to file my taxes?",
+      faq_a3:"It depends on your situation, but typically you need: W-2 form (employees) or 1099 (independent contractors), personal identification (SSN or ITIN), proof of income and expenses, and dependent information if applicable.",
+	  faq_q4:"Can I file if I don't have a Social Security Number (SSN)?",
+      faq_a4:"Yes. We can help you obtain and use an ITIN (Individual Taxpayer Identification Number) to meet your tax obligations.",
+      faq_q5:"Do you accept scanned documents or photos?",
+      faq_a5:"Yes. You can upload them directly from your phone or computer in a secure and encrypted manner.",
+      faq_q6:"Is it safe to share my information online?",
+      faq_a6:"Yes. We use SSL/TLS encryption, secure servers, and privacy protocols aligned with IRS standards. Your information is confidential and protected.",
+      faq_q7:"Is my information shared with other companies?",
+      faq_a7:"No. Your data is used solely to prepare and file your tax return.",
+      faq_q8:"How long does it take to receive my refund?",
+      faq_a8:"The IRS usually processes refunds within 7 to 21 days if the return is filed electronically.",
+      faq_q9:"How will I receive my refund?",
+      faq_a9:"You can choose direct deposit, physical check, or a prepaid debit card, depending on your preference.",
+      faq_q10:"What if I owe taxes?",
+      faq_a10:"We can help you set up a payment plan or make the payment directly to the IRS from your bank account.",
+      faq_q11:"How much does the service cost?",
+      faq_a11:"The cost depends on the complexity of your return. We offer a free evaluation before starting the process.",
+      faq_q12:"Do you serve independent workers or business owners?",
+      faq_a12:"Yes. We prepare returns for employees, independent contractors, small businesses, and self-employed workers.",
+      faq_q13:"Can I file my return completely online?",
+      faq_a13:"Yes. The entire process can be done virtually, from document submission to electronic signature.",
+      faq_q14:"Can I schedule an in-person or video call appointment?",
+      faq_a14:"Of course. We offer in-person and virtual appointments based on your availability.",
+      faq_q15:"What do I do if I can't file before April 15?",
+      faq_a15:"We can help you request an extension until October 15, avoiding late filing penalties.",
+      faq_q16:"Can you help me with past due returns?",
+      faq_a16:"Yes. We can file your returns from previous years and help you get current with the IRS.",
+      faq_q17:"Can I file if I live outside the United States?",
+      faq_a17:"Yes. We assist residents and non-residents with US income, including expatriate cases.",
+      faq_q18:"Do you help students or first-time filers?",
+      faq_a18:"Yes. We guide you step by step so your first return is simple and correct.",
+      contact_title:"Contact Us",
+      contact_intro:"Write to us and we'll get back to you shortly.",
+      contact_address:"123 Tax Avenue, Miami, FL 33101",
+      contact_phone:"(910) 584-0478",
+      contact_email:"dorissmith@dptaxpreparation.com",
+      ph_name:"Full name",
+      ph_email:"Email address",
+      ph_phone:"Phone (+1...)",
+      ph_message:"Write your message...",
+      sms_consent:"I agree to receive notifications and SMS messages from DP Tax Preparation at the phone number provided.",
+      sms_note:"Message and data rates may apply.",
+      btn_send:"Send Message",
+      footer_copy:"© 2024 DP Tax Preparation. All rights reserved.",
+      form_processing:"Processing...",
+      form_success:"Message Sent Successfully!",
+      form_success_details:"Thank you for contacting us. We have received your message and will get back to you soon.",
+      form_send_another:"Send Another Message",
+      form_error:"Error sending. Please try again.",
+      form_hcaptcha_error: "Please complete the hCaptcha verification.",
+      form_network:"Network or server error. Please try again."
     },
     es: {
-      // ... (todas las traducciones existentes se mantienen igual)
-      form_success: "¡Mensaje Enviado con Éxito!",
-      form_success_details: "Gracias por contactarnos. Hemos recibido tu mensaje y nos pondremos en contacto contigo pronto.",
-      form_send_another: "Enviar Otro Mensaje",
-      form_processing: "Enviando..."
+      doc_title: "DP Tax Preparation – Declaración de Impuestos en EE.UU. sin Estrés",
+      nav_home:"Inicio", nav_services:"Servicios", nav_founder:"Fundadora", nav_process:"Proceso",
+      nav_clients:"Clientes", nav_faq:"Preguntas", nav_contact:"Contacto",
+      hero_title1:"Declaración de Impuestos",
+      hero_title2:"en EE.UU. sin Estrés",
+      hero_sub:"Expertos en preparación de impuestos para individuos y empresas. Maximizamos reembolsos y garantizamos cumplimiento total.",
+      services_title:"Nuestros Servicios",
+      srv1_title:"Declaración Individual",
+      srv1_desc:"Preparación completa del Formulario 1040 con todas las deducciones y créditos aplicables.",
+      srv2_title:"Declaración Empresarial",
+      srv2_desc:"Impuestos para corporaciones, LLCs y sociedades. Manejar la complejidad de su negocio.",
+      srv3_title:"Planificación Fiscal",
+      srv3_desc:"Estrategias proactivas para minimizar pasivos futuros e impulsar el crecimiento a largo plazo.",
+      founder_role:"CEO & Experta en Impuestos",
+      founder_bio:"Más de 15 años de experiencia en impuestos estadounidenses para individuos y empresas. Fundó DP Tax Preparation para hacer los impuestos simples, seguros y rentables.",
+      training_title:"Certificados de Capacitación",
+      credentials_title:"Credenciales Oficiales del IRS",
+      cred_ptin:"Número PTIN (Preparador de Impuestos Autorizado)",
+      cred_efin:"Número EFIN (Proveedor Autorizado de e-File)",
+      process_title:"Proceso Simplificado de Presentación",
+      p1_title:"Consulta Inicial", p1_desc:"Evaluamos su situación fiscal y asignamos un experto.",
+      p2_title:"Documentos Seguros", p2_desc:"Cargue fácilmente sus W-2, 1099 y otros documentos.",
+      p3_title:"Preparación y Revisión", p3_desc:"Preparamos su declaración y la revisamos con usted.",
+      p4_title:"e-Filing Final", p4_desc:"Presentamos electrónicamente su declaración ante el IRS y la rastreamos.",
+      testimonials_title:"Lo Que Dicen Nuestros Clientes",
+      t1_text:"\"Servicio excelente — confiable y profesional. ¡Altamente recomendado!\"",
+      t2_text:"\"¡Servicio fantástico! Hicieron que todo el proceso fuera rápido y sin estrés.\"",
+      t3_text:"\"Honesto, eficiente y orientado a los detalles. Volveré cada año.\"",
+      faq_title:"Preguntas Frecuentes",
+      faq_q1:"¿Cuándo es la fecha límite para presentar?",
+      faq_a1:"La fecha límite habitual para presentar la declaración federal es el 15 de abril. Si necesita más tiempo, puede solicitar una prórroga antes de esa fecha.",
+      faq_q2:"¿Qué pasa si no presento mi declaración a tiempo?",
+      faq_a2:"Podría recibir multas o intereses por demora. Le ayudamos a presentar incluso si ha pasado la fecha límite o si necesita ponerse al día con años anteriores.",
+      faq_q3:"¿Qué documentos necesito para presentar mis impuestos?",
+      faq_a3:"Depende de su situación, pero normalmente necesita: formulario W-2 (empleados) o 1099 (contratistas independientes), identificación personal (SSN o ITIN), comprobantes de ingresos y gastos, e información de dependientes si corresponde.",
+      faq_q4:"¿Puedo presentar si no tengo un Número de Seguro Social (SSN)?",
+      faq_a4:"Sí. Podemos ayudarle a obtener y usar un ITIN (Número de Identificación Personal del Contribuyente) para cumplir con sus obligaciones fiscales.",
+      faq_q5:"¿Aceptan documentos escaneados o fotos?",
+      faq_a5:"Sí. Puede cargarlos directamente desde su teléfono o computadora de forma segura y cifrada.",
+      faq_q6:"¿Es seguro compartir mi información en línea?",
+      faq_a6:"Sí. Utilizamos cifrado SSL/TLS, servidores seguros y protocolos de privacidad alineados con los estándares del IRS. Su información es confidencial y está protegida.",
+      faq_q7:"¿Se comparte mi información con otras empresas?",
+      faq_a7:"No. Sus datos se utilizan únicamente para preparar y presentar su declaración de impuestos.",
+      faq_q8:"¿Cuánto tiempo tarda en llegar mi reembolso?",
+      faq_a8:"El IRS generalmente procesa los reembolsos en 7 a 21 días si la declaración se presenta electrónicamente.",
+      faq_q9:"¿Cómo recibiré mi reembolso?",
+      faq_a9:"Puede elegir depósito directo, cheque físico o tarjeta de débito prepagada, según su preferencia.",
+      faq_q10:"¿Qué pasa si debo impuestos?",
+      faq_a10:"Podemos ayudarle a establecer un plan de pagos o realizar el pago directamente al IRS desde su cuenta bancaria.",
+      faq_q11:"¿Cuánto cuesta el servicio?",
+      faq_a11:"El costo depende de la complejidad de su declaración. Ofrecemos una evaluación gratuita antes de comenzar el proceso.",
+      faq_q12:"¿Atienden a trabajadores independientes o propietarios de empresas?",
+      faq_a12:"Sí. Preparamos declaraciones para empleados, contratistas independientes, pequeñas empresas y trabajadores por cuenta propia.",
+      faq_q13:"¿Puedo presentar mi declaración completamente en línea?",
+      faq_a13:"Sí. Todo el proceso se puede realizar de forma virtual, desde la entrega de documentos hasta la firma electrónica.",
+      faq_q14:"¿Puedo programar una cita en persona o por videollamada?",
+      faq_a14:"Por supuesto. Ofrecemos citas presenciales y virtuales según su disponibilidad.",
+      faq_q15:"¿Qué hago si no puedo presentar antes del 15 de abril?",
+      faq_a15:"Podemos ayudarle a solicitar una prórroga hasta el 15 de octubre, evitando multas por presentación tardía.",
+      faq_q16:"¿Pueden ayudarme con declaraciones vencidas?",
+      faq_a16:"Sí. Podemos presentar sus declaraciones de años anteriores y ayudarle a ponerse al día con el IRS.",
+      faq_q17:"¿Puedo presentar si vivo fuera de Estados Unidos?",
+      faq_a17:"Sí. Asistimos a residentes y no residentes con ingresos en EE.UU., incluidos casos de expatriados.",
+      faq_q18:"¿Ayudan a estudiantes o quienes declaran por primera vez?",
+      faq_a18:"Sí. Le guiamos paso a paso para que su primera declaración sea simple y correcta.",
+      contact_title:"Contáctenos",
+      contact_intro:"Escríbanos y le responderemos a la brevedad.",
+      contact_address:"123 Tax Avenue, Miami, FL 33101",
+      contact_phone:"(910) 584-0478",
+      contact_email:"dorissmith@dptaxpreparation.com",
+      ph_name:"Nombre completo",
+      ph_email:"Correo electrónico",
+      ph_phone:"Teléfono (+1...)",
+      ph_message:"Escribe tu mensaje...",
+      sms_consent:"Acepto recibir notificaciones y mensajes SMS de DP Tax Preparation al número proporcionado.",
+      sms_note:"Pueden aplicarse tarifas de mensajes y datos.",
+      btn_send:"Enviar Mensaje",
+      footer_copy:"© 2024 DP Tax Preparation. Todos los derechos reservados.",
+      form_processing:"Procesando...",
+      form_success:"¡Mensaje enviado con éxito!",
+      form_success_details:"Gracias por contactarnos. Hemos recibido tu mensaje y nos pondremos en contacto contigo pronto.",
+      form_send_another:"Enviar Otro Mensaje",
+      form_error:"Error al enviar. Inténtalo nuevamente.",
+      form_hcaptcha_error: "Por favor, completa la verificación hCaptcha.",
+      form_network:"Error de red o servidor. Inténtalo otra vez."
     }
   };
 
-  // --- Función para mostrar confirmación ---
+  // --- Función applyLanguage (Completa) ---
+  function applyLanguage(lang){
+    document.querySelectorAll("[data-i18n]").forEach(el=>{
+      const key=el.getAttribute("data-i18n");
+      if(translations[lang][key]!==undefined){
+        el.textContent = translations[lang][key];
+      }
+    });
+    document.querySelectorAll("[data-i18n-placeholder]").forEach(el=>{
+      const key=el.getAttribute("data-i18n-placeholder");
+      if(translations[lang][key]!==undefined){
+        el.setAttribute("placeholder", translations[lang][key]);
+      }
+    });
+    document.title = translations[lang].doc_title || document.title;
+    const enBtns=[document.getElementById('lang-en'), document.getElementById('mlang-en')];
+    const esBtns=[document.getElementById('lang-es'), document.getElementById('mlang-es')];
+    if(lang==='en'){
+      enBtns.forEach(b=>b?.classList.add('lang-active'));
+      esBtns.forEach(b=>b?.classList.remove('lang-active'));
+    }else{
+      enBtns.forEach(b=>b?.classList.remove('lang-active'));
+      esBtns.forEach(b=>b?.classList.add('lang-active'));
+    }
+    localStorage.setItem('site_lang', lang);
+    const submitBtn = document.getElementById('submit-button');
+    if (submitBtn && translations[lang].btn_send){
+      submitBtn.textContent = translations[lang].btn_send;
+    }
+    
+    // Sincronizar el mensaje de error del Captcha
+    const captchaErrorEl = document.getElementById('captcha-error');
+    if(captchaErrorEl) {
+        captchaErrorEl.textContent = translations[lang].form_hcaptcha_error || "Por favor, completa la verificación hCaptcha.";
+    }
+  }
+
+  // --- Función setupLangControls (Completa) ---
+  function setupLangControls(){
+    const setEN = () => { console.log('Cambiando a EN'); applyLanguage('en'); setTimeout(() => applyLanguage('en'), 200); };
+    const setES = () => { console.log('Cambiando a ES'); applyLanguage('es'); setTimeout(() => applyLanguage('es'), 200); };
+    document.getElementById('lang-en')?.addEventListener('click',setEN);
+    document.getElementById('lang-es')?.addEventListener('click',setES);
+    document.getElementById('mlang-en')?.addEventListener('click',setEN);
+    document.getElementById('mlang-es')?.addEventListener('click',setES);
+  }
+
+  // --- Función para mostrar confirmación del formulario ---
   function showFormConfirmation() {
     const form = document.getElementById('contact-form-web3');
     const confirmation = document.getElementById('form-confirmation');
     
     if (form && confirmation) {
-      // Ocultar formulario y mostrar confirmación
+      // Ocultar el formulario
       form.style.display = 'none';
+      
+      // Mostrar la confirmación
       confirmation.style.display = 'block';
       
-      // Desplazar suavemente a la confirmación
-      setTimeout(() => {
-        confirmation.scrollIntoView({ 
-          behavior: 'smooth', 
-          block: 'center',
-          inline: 'nearest'
-        });
-      }, 300);
+      // Desplazar suavemente hacia la confirmación
+      confirmation.scrollIntoView({ behavior: 'smooth', block: 'center' });
     }
   }
 
@@ -313,9 +859,6 @@
   function resetForm() {
     const form = document.getElementById('contact-form-web3');
     const confirmation = document.getElementById('form-confirmation');
-    const submitBtn = document.getElementById('submit-button');
-    const buttonText = document.getElementById('button-text');
-    const buttonSpinner = document.getElementById('button-spinner');
     
     if (form && confirmation) {
       // Mostrar formulario y ocultar confirmación
@@ -326,9 +869,9 @@
       form.reset();
       
       // Restaurar botón
+      const submitBtn = document.getElementById('submit-button');
       submitBtn.disabled = false;
-      buttonText.classList.remove('hidden');
-      buttonSpinner.classList.add('hidden');
+      submitBtn.textContent = translations[localStorage.getItem('site_lang') || 'en'].btn_send;
       
       // Resetear captcha si existe
       if (typeof hcaptcha !== 'undefined') {
@@ -337,15 +880,16 @@
     }
   }
 
+  // --- SCRIPT DE INICIALIZACIÓN CORREGIDO ---
   document.addEventListener('DOMContentLoaded', ()=>{
     
-    // Configuración del menú móvil
+    // --- Configuración del Menú Móvil ---
     const mobileBtn = document.getElementById('mobile-menu-button');
     const mobileMenu = document.getElementById('mobile-menu');
     mobileBtn?.addEventListener('click', ()=> mobileMenu.classList.toggle('hidden'));
     mobileMenu?.querySelectorAll('a').forEach(a=>a.addEventListener('click',()=>mobileMenu.classList.add('hidden')));
 
-    // Configuración del acordeón de FAQ
+    // --- Configuración del Acordeón de FAQ ---
     document.querySelectorAll('.faq-item').forEach(item=>{
       const q=item.querySelector('.faq-question');
       const ans=item.querySelector('.faq-answer');
@@ -360,21 +904,17 @@
       });
     });
 
-    // Configuración de idioma
+    // --- Configuración de Idioma ---
     const saved = localStorage.getItem('site_lang') || 'en';
     setupLangControls();
     applyLanguage(saved);
 
-    // Manejo del formulario
+    // --- Botón para enviar otro mensaje ---
+    document.getElementById('send-another')?.addEventListener('click', resetForm);
+
+    // --- Manejo del Formulario con Confirmación ---
     const web3Form = document.getElementById('contact-form-web3');
     const captchaError = document.getElementById('captcha-error');
-    const submitBtn = document.getElementById('submit-button');
-    const buttonText = document.getElementById('button-text');
-    const buttonSpinner = document.getElementById('button-spinner');
-    const sendAnotherBtn = document.getElementById('send-another');
-
-    // Botón para enviar otro mensaje
-    sendAnotherBtn?.addEventListener('click', resetForm);
 
     web3Form?.addEventListener('submit', async function(e) {
       e.preventDefault();
@@ -382,16 +922,22 @@
       // Validar captcha
       const hCaptchaInput = web3Form.querySelector('textarea[name="h-captcha-response"]');
       if (hCaptchaInput && !hCaptchaInput.value) {
-        captchaError?.classList.remove('hidden');
+        if(captchaError) {
+            captchaError.classList.remove('hidden');
+        }
         return;
       }
-      captchaError?.classList.add('hidden');
+      
+      if(captchaError) {
+          captchaError.classList.add('hidden');
+      }
 
       // Cambiar estado del botón
+      const submitBtn = document.getElementById('submit-button');
       const currentLang = localStorage.getItem('site_lang') || 'en';
+      const originalText = submitBtn.textContent;
+      submitBtn.textContent = translations[currentLang].form_processing;
       submitBtn.disabled = true;
-      buttonText.classList.add('hidden');
-      buttonSpinner.classList.remove('hidden');
 
       try {
         const formData = new FormData(web3Form);
@@ -404,55 +950,22 @@
         const data = await response.json();
         
         if (data.success) {
+          // Éxito: mostrar confirmación
           showFormConfirmation();
         } else {
+          // Error: restaurar el botón
           throw new Error('Form submission failed');
         }
       } catch (error) {
-        // Restaurar botón en caso de error
+        // Error: restaurar el botón
+        submitBtn.textContent = originalText;
         submitBtn.disabled = false;
-        buttonText.classList.remove('hidden');
-        buttonSpinner.classList.add('hidden');
-        
-        alert(translations[currentLang].form_error || 'Error sending message');
+        alert(translations[currentLang].form_error);
       }
     });
 
-    function setupLangControls(){
-      const setEN = () => { applyLanguage('en'); };
-      const setES = () => { applyLanguage('es'); };
-      document.getElementById('lang-en')?.addEventListener('click',setEN);
-      document.getElementById('lang-es')?.addEventListener('click',setES);
-      document.getElementById('mlang-en')?.addEventListener('click',setEN);
-      document.getElementById('mlang-es')?.addEventListener('click',setES);
-    }
-
-    function applyLanguage(lang){
-      document.querySelectorAll("[data-i18n]").forEach(el=>{
-        const key=el.getAttribute("data-i18n");
-        if(translations[lang][key]!==undefined){
-          el.textContent = translations[lang][key];
-        }
-      });
-      document.querySelectorAll("[data-i18n-placeholder]").forEach(el=>{
-        const key=el.getAttribute("data-i18n-placeholder");
-        if(translations[lang][key]!==undefined){
-          el.setAttribute("placeholder", translations[lang][key]);
-        }
-      });
-      document.title = translations[lang].doc_title || document.title;
-      const enBtns=[document.getElementById('lang-en'), document.getElementById('mlang-en')];
-      const esBtns=[document.getElementById('lang-es'), document.getElementById('mlang-es')];
-      if(lang==='en'){
-        enBtns.forEach(b=>b?.classList.add('lang-active'));
-        esBtns.forEach(b=>b?.classList.remove('lang-active'));
-      }else{
-        enBtns.forEach(b=>b?.classList.remove('lang-active'));
-        esBtns.forEach(b=>b?.classList.add('lang-active'));
-      }
-      localStorage.setItem('site_lang', lang);
-    }
   });
+
 </script>
 </body>
 </html>
