@@ -1,0 +1,173 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8"/>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Términos y Condiciones – DP Tax Preparation</title>
+  <link rel="icon" type="image/png" href="favicon.png">
+  <script src="https://cdn.tailwindcss.com"></script>
+  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;600;700;800&display=swap" rel="stylesheet">
+  <style>
+    :root { --primary:#424243; --accent:#e6af37; }
+    body { font-family:'Poppins',sans-serif; background:#ffffff; color:#1f2937; }
+    .nav-link{ color:var(--primary); transition:color .2s ease; }
+    .nav-link:hover{ color:var(--accent); }
+    .lang-active{ color:var(--accent); font-weight:700; }
+  </style>
+</head>
+<body class="text-gray-800">
+  <!-- HEADER -->
+  <header class="bg-white fixed w-full top-0 shadow-md z-50 border-b-2 border-accent/30">
+    <div class="max-w-7xl mx-auto px-6 flex justify-between items-center h-20">
+      <a href="/" class="text-2xl font-extrabold text-[var(--primary)]">
+        DP <span class="text-[var(--accent)]">Tax Preparation</span>
+      </a>
+      <nav class="hidden md:flex items-center space-x-8 font-medium">
+        <a href="/#inicio"     class="nav-link" data-i18n="nav_home">Inicio</a>
+        <a href="/#servicios"  class="nav-link" data-i18n="nav_services">Servicios</a>
+        <a href="/#fundadora"  class="nav-link" data-i18n="nav_founder">Fundadora</a>
+        <a href="/#proceso"    class="nav-link" data-i18n="nav_process">Proceso</a>
+        <a href="/#clientes"   class="nav-link" data-i18n="nav_clients">Clientes</a>
+        <a href="/#faq"        class="nav-link" data-i18n="nav_faq">Preguntas</a>
+        <a href="/#contacto"   class="nav-link" data-i18n="nav_contact">Contacto</a>
+        <div class="pl-4 border-l border-gray-200 flex items-center space-x-2 text-sm">
+          <button id="lang-en" class="nav-link">EN</button>
+          <span>|</span>
+          <button id="lang-es" class="nav-link">ES</button>
+        </div>
+      </nav>
+    </div>
+  </header>
+
+  <!-- CONTENIDO -->
+  <main class="pt-28 pb-20 bg-white">
+    <div class="max-w-5xl mx-auto px-6">
+      <h1 class="text-4xl font-extrabold text-[var(--primary)] text-center mb-10" data-i18n="terms_title">
+        Términos y Condiciones
+      </h1>
+
+      <p class="text-gray-700 leading-relaxed mb-6" data-i18n="terms_intro">
+        Estos Términos y Condiciones rigen el uso del sitio web y los servicios de DP Tax Preparation LLC.
+      </p>
+
+      <h2 class="text-2xl font-bold text-[var(--primary)] mt-8 mb-3" data-i18n="terms_section1">1. Uso del Sitio y de los Servicios</h2>
+      <p class="text-gray-700 leading-relaxed mb-4" data-i18n="terms_p1">
+        Los servicios de preparación de impuestos se brindan para fines informativos y de cumplimiento. Usted se compromete a proporcionar información veraz, completa y actualizada.
+      </p>
+
+      <h2 class="text-2xl font-bold text-[var(--primary)] mt-8 mb-3" data-i18n="terms_section2">2. Confidencialidad</h2>
+      <p class="text-gray-700 leading-relaxed mb-4" data-i18n="terms_p2">
+        Toda la información y documentos del cliente se manejarán de manera confidencial y se utilizarán exclusivamente para la preparación y presentación de impuestos.
+      </p>
+
+      <h2 class="text-2xl font-bold text-[var(--primary)] mt-8 mb-3" data-i18n="terms_section3">3. Limitación de Responsabilidad</h2>
+      <p class="text-gray-700 leading-relaxed mb-4" data-i18n="terms_p3">
+        DP Tax Preparation LLC no será responsable por sanciones, multas o pérdidas derivadas de información imprecisa o incompleta proporcionada por el cliente.
+      </p>
+
+      <h2 class="text-2xl font-bold text-[var(--primary)] mt-8 mb-3" data-i18n="terms_section4">4. Cambios en los Términos</h2>
+      <p class="text-gray-700 leading-relaxed mb-4" data-i18n="terms_p4">
+        Podemos modificar estos Términos periódicamente. El uso continuo del sitio implica la aceptación de las versiones actualizadas.
+      </p>
+
+      <h2 class="text-2xl font-bold text-[var(--primary)] mt-8 mb-3" data-i18n="terms_section5">5. Ley Aplicable</h2>
+      <p class="text-gray-700 leading-relaxed mb-4" data-i18n="terms_p5">
+        Estos Términos se regirán e interpretarán de acuerdo con las leyes del Estado de Carolina del Norte, EE. UU.
+      </p>
+
+      <h2 class="text-2xl font-bold text-[var(--primary)] mt-8 mb-3" data-i18n="terms_section6">6. Contacto</h2>
+      <p class="text-gray-700 leading-relaxed mb-4" data-i18n="terms_p6">
+        Para consultas sobre estos Términos, escríbenos a
+        <a href="mailto:dorissmith@dptaxpreparation.com" class="text-[var(--accent)]">dorissmith@dptaxpreparation.com</a>.
+      </p>
+    </div>
+  </main>
+
+  <!-- FOOTER -->
+  <footer class="bg-[var(--primary)] text-white">
+    <div class="max-w-7xl mx-auto px-6 py-6 text-center text-sm space-x-4">
+      <a href="/privacy-policy.html" class="text-gray-300 hover:text-[var(--accent)] transition" data-i18n="footer_privacy">Política de Privacidad</a> |
+      <a href="/terms-and-conditions.html" class="text-gray-300 hover:text-[var(--accent)] transition" data-i18n="footer_terms">Términos y Condiciones</a>
+      <p class="mt-2 text-gray-300" data-i18n="footer_copy">© 2024 DP Tax Preparation. Todos los derechos reservados.</p>
+    </div>
+  </footer>
+
+  <!-- TRADUCCIONES Y SWITCH -->
+  <script>
+    const translations = {
+      en: {
+        doc_title_terms:"Terms & Conditions – DP Tax Preparation",
+        // Nav
+        nav_home:"Home", nav_services:"Services", nav_founder:"Founder", nav_process:"Process",
+        nav_clients:"Clients", nav_faq:"FAQ", nav_contact:"Contact",
+        // Page
+        terms_title:"Terms & Conditions",
+        terms_intro:"These Terms and Conditions govern the use of DP Tax Preparation LLC’s website and services.",
+        terms_section1:"1. Use of the Site and Services",
+        terms_p1:"Our tax preparation services are provided for informational and compliance purposes. You agree to provide accurate, complete and up-to-date information.",
+        terms_section2:"2. Confidentiality",
+        terms_p2:"All client information and documents will be handled confidentially and used solely for tax preparation and filing.",
+        terms_section3:"3. Limitation of Liability",
+        terms_p3:"DP Tax Preparation LLC will not be liable for penalties, fines or losses arising from inaccurate or incomplete information provided by the client.",
+        terms_section4:"4. Changes to Terms",
+        terms_p4:"We may modify these Terms periodically. Continued use of the site implies acceptance of the updated versions.",
+        terms_section5:"5. Governing Law",
+        terms_p5:"These Terms are governed by the laws of the State of North Carolina, USA.",
+        terms_section6:"6. Contact",
+        terms_p6:"For any questions about these Terms, email dorissmith@dptaxpreparation.com.",
+        // Footer
+        footer_privacy:"Privacy Policy",
+        footer_terms:"Terms & Conditions",
+        footer_copy:"© 2024 DP Tax Preparation. All rights reserved."
+      },
+      es: {
+        doc_title_terms:"Términos y Condiciones – DP Tax Preparation",
+        nav_home:"Inicio", nav_services:"Servicios", nav_founder:"Fundadora", nav_process:"Proceso",
+        nav_clients:"Clientes", nav_faq:"Preguntas", nav_contact:"Contacto",
+        terms_title:"Términos y Condiciones",
+        terms_intro:"Estos Términos y Condiciones rigen el uso del sitio web y los servicios de DP Tax Preparation LLC.",
+        terms_section1:"1. Uso del Sitio y de los Servicios",
+        terms_p1:"Los servicios de preparación de impuestos se brindan para fines informativos y de cumplimiento. Usted se compromete a proporcionar información veraz, completa y actualizada.",
+        terms_section2:"2. Confidencialidad",
+        terms_p2:"Toda la información y documentos del cliente se manejarán de manera confidencial y se utilizarán exclusivamente para la preparación y presentación de impuestos.",
+        terms_section3:"3. Limitación de Responsabilidad",
+        terms_p3:"DP Tax Preparation LLC no será responsable por sanciones, multas o pérdidas derivadas de información imprecisa o incompleta proporcionada por el cliente.",
+        terms_section4:"4. Cambios en los Términos",
+        terms_p4:"Podemos modificar estos Términos periódicamente. El uso continuo del sitio implica la aceptación de las versiones actualizadas.",
+        terms_section5:"5. Ley Aplicable",
+        terms_p5:"Estos Términos se regirán por las leyes del Estado de Carolina del Norte, EE. UU.",
+        terms_section6:"6. Contacto",
+        terms_p6:"Para consultas sobre estos Términos, escríbenos a dorissmith@dptaxpreparation.com.",
+        footer_privacy:"Política de Privacidad",
+        footer_terms:"Términos y Condiciones",
+        footer_copy:"© 2024 DP Tax Preparation. Todos los derechos reservados."
+      }
+    };
+
+    function applyLanguage(lang){
+      // Cambia textos
+      document.querySelectorAll("[data-i18n]").forEach(el=>{
+        const key = el.getAttribute("data-i18n");
+        if (translations[lang] && translations[lang][key] !== undefined){
+          el.textContent = translations[lang][key];
+        }
+      });
+      // Resalta idioma activo
+      document.getElementById('lang-en')?.classList.toggle('lang-active', lang==='en');
+      document.getElementById('lang-es')?.classList.toggle('lang-active', lang==='es');
+      // <title> y atributo lang del <html>
+      document.title = translations[lang].doc_title_terms || document.title;
+      document.documentElement.setAttribute('lang', lang);
+      // Persistencia
+      localStorage.setItem('site_lang', lang);
+    }
+
+    document.addEventListener('DOMContentLoaded',()=>{
+      const saved = localStorage.getItem('site_lang') || 'es';
+      applyLanguage(saved);
+      document.getElementById('lang-en')?.addEventListener('click',()=>applyLanguage('en'));
+      document.getElementById('lang-es')?.addEventListener('click',()=>applyLanguage('es'));
+    });
+  </script>
+</body>
+</html>
